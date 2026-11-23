@@ -14,6 +14,9 @@
 
 #include <spdlog/sinks/basic_file_sink.h>
 
+#include <format>
+#include <unordered_set>
+
 // Windows API headers must come after CommonLib.
 #include <Windows.h>
 
