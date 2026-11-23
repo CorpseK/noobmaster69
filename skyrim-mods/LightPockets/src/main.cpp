@@ -5,12 +5,13 @@
 //
 // Config: Data/SKSE/Plugins/LightPockets.ini (multipliers, 1.0 = unchanged).
 
-#include <Windows.h>
+#include "RE/Skyrim.h"
+#include "SKSE/SKSE.h"
 
 #include <spdlog/sinks/basic_file_sink.h>
 
-#include "RE/Skyrim.h"
-#include "SKSE/SKSE.h"
+// Windows API headers must come after CommonLib.
+#include <Windows.h>
 
 using namespace std::literals;
 
