@@ -24,16 +24,33 @@ Mở console, click vào NPC, gõ `GetBaseObject` hoặc xem bằng mod More Inf
 Copy `SKSE/Plugins/EasyRecruit.dll` và `SKSE/Plugins/EasyRecruit.ini` vào `Data/`.
 
 ## Cần test in-game
+Bật `bVerboseLog=1` khi test. Mỗi lần nói chuyện, log ghi tên NPC, base FormID và relationship rank.
+
+### Chung (có hay không có RDO đều test)
 - [ ] Log `Documents/My Games/Skyrim Special Edition/SKSE/EasyRecruit.log` có `Registered MenuOpenCloseEvent sink`.
-- [ ] Bật `bVerboseLog=1`. Nói chuyện với NPC bất kỳ → log ghi relationship rank của NPC đó (kiểm tra số có đúng không:
-      console `GetRelationshipRank player` trên NPC phải ra cùng số).
-- [ ] **Aeri:** bán firewood / làm quest mang thư → đóng thoại → log `Aeri ... added to PotentialFollowerFaction`,
-      có thông báo góc màn hình → nói lại → có câu rủ đi theo, NFF nhận làm follower.
-- [ ] NPC mới gặp (Acquaintance) → không được thêm.
+- [ ] Nói chuyện với NPC bất kỳ → rank trong log phải giống `GetRelationshipRank player` trong console (click NPC trước).
+- [ ] NPC mới gặp (Acquaintance, rank 0) → không được thêm.
 - [ ] Follower vanilla (Lydia, Faendal...) → log `already a potential follower`, không đổi gì.
-- [ ] Thử với RDO bật: câu thoại rủ vẫn hiện.
-- [ ] Trẻ em có relationship Friend → không được thêm.
-- [ ] NPC trong `[Exclude]` → không được thêm.
+- [ ] Trẻ em có rank Friend → không được thêm. NPC trong `[Exclude]` → không được thêm.
+- [ ] Follower được thêm qua mod → rủ bằng thoại → NFF nhận (hiện trong MCM NFF), dismiss rồi rủ lại được.
+- [ ] Save → thoát game → load: NPC đã thêm vẫn rủ được.
+
+### Không có RDO (vanilla thoại)
+- [ ] **Aeri:** bán firewood hoặc làm quest mang thư → đóng thoại → thông báo `Aeri can now be recruited...`
+      → nói lại → có câu "Follow me" → cô ấy đi theo.
+- [ ] Vẫn cưới được Aeri sau khi đã làm follower (đeo Amulet of Mara → câu hỏi cưới vẫn hiện).
+- [ ] Thêm 1-2 NPC lên Friend qua favor (vd. chủ quán, NPC nhờ việc) → rủ được.
+
+### Có RDO
+- [ ] **Aeri** như trên: câu rủ đi theo vẫn hiện (RDO sửa nhiều thoại, có thể chen hoặc che câu vanilla).
+- [ ] **NPC RDO chỉ cho rủ sau questline** (Valerica, Knight-Paladin Gelebor...): trong lúc questline **còn đang làm**,
+      nếu rank lên Friend thì mod có thể cho rủ **sớm hơn** RDO định → có thể hỏng quest
+      (NPC bỏ vị trí quest để đi theo). Ghi lại NPC nào bị như vậy và rank lúc đó.
+      Cách xử lý: thêm NPC đó vào `[Exclude]`, đợi RDO tự mở khóa sau quest như cũ.
+- [ ] Làm xong questline → NPC rủ được như RDO vốn cho, không bị lặp 2 câu "Follow me" (một của RDO, một vanilla).
+- [ ] NPC RDO vốn đã rủ được → log `already a potential follower`.
+
+Gặp lỗi thì gửi lại file log + tên NPC + đang có RDO hay không.
 
 ## Lịch sử
 - 0.1.0: bản đầu.
