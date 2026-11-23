@@ -14,6 +14,12 @@ Python thuần (3.9+), không cần cài thêm thư viện. Chạy trên Windows
 python fix_nif_paths.py "D:\MO2\mods\Ten Mod" "D:\MO2\mods\Ten Mod - NIF fixes"
 ```
 
+Có mod resource (SG Hairs, Eyes of Beauty…) thì thêm `--resource` cho từng thư mục, để file của chúng được tính là đã cài (chỉ loose file, file trong .bsa phải giải nén trước):
+
+```bash
+python fix_nif_paths.py "D:\MO2\mods\Ten Mod" "D:\MO2\mods\Ten Mod - NIF fixes" --resource "D:\MO2\mods\SG Hairs" --resource "D:\MO2\mods\The Eyes of Beauty"
+```
+
 - Thư mục mod gốc **chỉ được đọc**, không bị sửa.
 - NIF đã sửa được ghi vào thư mục thứ hai, giữ nguyên đường dẫn → trong MO2 bật nó như một mod riêng, đặt **dưới** mod gốc.
   Muốn bỏ thì tắt mod đó đi.
@@ -35,5 +41,6 @@ Các mục trong report:
 | `facegen-headpart-mismatch` | Head part trong ESP khác với FaceGen | Xuất lại FaceGen trong CK |
 | `facegen-without-npc-record` | Có FaceGen nhưng ESP không có record NPC đó | Dark face, trừ khi plugin khác có record khớp. Xóa FaceGen hoặc thêm record |
 | `missing-texture` | Texture không có ở đâu trong mod | Tìm file từ mod gốc, hoặc trỏ sang file khác |
+| `esp-missing-mesh` / `esp-missing-texture` | ESP (head part, TXST, ARMA) trỏ tới file không có trong mod lẫn resource | Cài mod resource đó, hoặc gửi kèm `--resource` |
 | `needs-<pack>` | Dùng texture của SG Hairs / KS Hairdo's… | Cài pack đó, nếu không sẽ tím |
 | `vanilla-path-with-local-copy` | Trỏ vào texture vanilla trong khi mod có bản cùng tên cạnh mesh | Chỉ là gợi ý, có thể cố ý (hoặc ESP dùng TXST) |
