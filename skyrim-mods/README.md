@@ -17,14 +17,14 @@ GitHub tự build mỗi lần có thay đổi trong `skyrim-mods/`:
 
 ## Tự build trên máy (Windows)
 
-Cần: Visual Studio 2022 (workload *Desktop development with C++*), CMake ≥ 3.24, Git, vcpkg.
+Cần: Visual Studio 2022 trở lên (workload *Desktop development with C++*), CMake ≥ 3.24, Git, vcpkg.
 
 ```bash
 cd skyrim-mods/SpellBuffs
 ```
 
 ```bash
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64 -DCMAKE_TOOLCHAIN_FILE=<đường-dẫn-vcpkg>/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static
+cmake -S . -B build -A x64 -DCMAKE_TOOLCHAIN_FILE=<đường-dẫn-vcpkg>/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static
 ```
 
 ```bash
