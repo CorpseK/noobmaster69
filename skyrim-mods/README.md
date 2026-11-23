@@ -5,6 +5,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 
 | Mod | Mô tả | Trạng thái |
 |---|---|---|
+| [tools](tools/) | Script Python kiểm tra/sửa NIF, FaceGen của mod replacer | dùng được |
 | [SpellBuffs](SpellBuffs/) | Buff các spell vanilla. Paralyze → móc túi 100% | v0.1.0, chưa test in-game |
 | [LightPockets](LightPockets/) | Ingredient, potion, poison, soul gem, lockpick, key, scroll không cân nặng (chỉnh bằng INI) | v0.1.0, chưa test in-game |
 | [GMSTTweaks](GMSTTweaks/) | Đổi Game Setting (GMST) bằng file INI, thay cho ESP chỉ để sửa số | v0.1.0, chưa test in-game |
