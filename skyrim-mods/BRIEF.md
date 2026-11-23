@@ -17,7 +17,7 @@
 - Hook hàm bằng **Microsoft Detours**, địa chỉ lấy qua `RELOCATION_ID(SE, AE)` (Address Library).
 - Plugin khai báo `SKSEPluginInfo(... .RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)`.
 - Máy cloud là Linux, không build được → **GitHub Actions** (`.github/workflows/build-skse.yml`, chạy windows-latest) build mỗi lần push vào `skyrim-mods/**`. DLL tải ở Actions → Artifacts. Mod mới thì thêm job vào workflow này.
-- Ghi chú về CommonLibSSE-NG: không có `IsPlayerRef()`, dùng `== RE::PlayerCharacter::GetSingleton()`. Chuỗi `"..."sv` cần `using namespace std::literals;`.
+- Ghi chú về CommonLibSSE-NG: phải include `Windows.h`/detours **sau** `RE/Skyrim.h` + `SKSE/SKSE.h` (nếu không sẽ lỗi "Windows API detected"). Runner GitHub không còn VS 2022 nên không ghi cứng `-G`. không có `IsPlayerRef()`, dùng `== RE::PlayerCharacter::GetSingleton()`. Chuỗi `"..."sv` cần `using namespace std::literals;`.
 
 ## Mod đã có
 ### SpellBuffs v0.1.0 (`skyrim-mods/SpellBuffs/`): buff spell vanilla
