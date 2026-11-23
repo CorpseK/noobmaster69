@@ -10,6 +10,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | [LightPockets](LightPockets/) | Ingredient, potion, poison, soul gem, lockpick, key, scroll không cân nặng (chỉnh bằng INI) | v0.1.0, chưa test in-game |
 | [GMSTTweaks](GMSTTweaks/) | Đổi Game Setting (GMST) bằng file INI, thay cho ESP chỉ để sửa số | v0.1.0, chưa test in-game |
 | [KillRestore](KillRestore/) | Player giết địch → hồi % Health/Magicka/Stamina | v0.1.0, chưa test in-game |
+| [EasyRecruit](EasyRecruit/) | NPC relationship ≥ Friend (vd. Aeri) rủ làm follower bằng thoại vanilla, không cần MCM | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 

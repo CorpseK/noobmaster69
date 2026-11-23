@@ -14,15 +14,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [SpellBuffs, LightPockets, GMSTTweaks, KillRestore]
+        mod: [SpellBuffs, LightPockets, GMSTTweaks, KillRestore, EasyRecruit]
     env:
       VCPKG_COMMIT: 5d4a3dc90c0b3773f3bac81bf41297b54328f471
+      # Built vcpkg packages are kept between runs (faster, fewer download failures).
+      VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache vcpkg packages
+        uses: actions/cache@v4
+        with:
+          path: vcpkg-bincache
+          key: vcpkg-${{ env.VCPKG_COMMIT }}-${{ hashFiles(format('skyrim-mods/{0}/vcpkg.json', matrix.mod)) }}
+          restore-keys: vcpkg-${{ env.VCPKG_COMMIT }}-
 
       - name: Set up vcpkg
         shell: pwsh
         run: |
+          New-Item -ItemType Directory -Force "$env:VCPKG_DEFAULT_BINARY_CACHE" | Out-Null
           git clone https://github.com/microsoft/vcpkg.git "$env:RUNNER_TEMP\vcpkg"
           git -C "$env:RUNNER_TEMP\vcpkg" checkout $env:VCPKG_COMMIT
           & "$env:RUNNER_TEMP\vcpkg\bootstrap-vcpkg.bat" -disableMetrics
