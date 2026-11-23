@@ -3,13 +3,14 @@
 // Feature 1: Paralysis -> while the target is paralyzed, every pickpocket
 //            attempt on it has a 100% success chance.
 
-#include <Windows.h>
-#include <detours/detours.h>
+#include "RE/Skyrim.h"
+#include "SKSE/SKSE.h"
 
 #include <spdlog/sinks/basic_file_sink.h>
 
-#include "RE/Skyrim.h"
-#include "SKSE/SKSE.h"
+// Windows API headers must come after CommonLib.
+#include <Windows.h>
+#include <detours/detours.h>
 
 using namespace std::literals;
 
