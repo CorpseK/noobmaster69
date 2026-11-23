@@ -11,6 +11,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | [GMSTTweaks](GMSTTweaks/) | Đổi Game Setting (GMST) bằng file INI, thay cho ESP chỉ để sửa số | v0.1.0, chưa test in-game |
 | [KillRestore](KillRestore/) | Player giết địch → hồi % Health/Magicka/Stamina | v0.1.0, chưa test in-game |
 | [EasyRecruit](EasyRecruit/) | NPC relationship ≥ Friend (vd. Aeri) rủ làm follower bằng thoại vanilla, không cần MCM | v0.1.0, chưa test in-game |
+| [GenderShift](GenderShift/) | NPC spawn từ leveled list (bandit, Forsworn...) đổi tỉ lệ nam/nữ; có chế độ cả trại toàn nam hoặc toàn nữ | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 
