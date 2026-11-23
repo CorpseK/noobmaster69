@@ -2,6 +2,10 @@
 
 Usage (Windows, Python 3.9+):
     python fix_nif_paths.py "D:\\MO2\\mods\\My Replacer" "D:\\MO2\\mods\\My Replacer - NIF fixes"
+    python fix_nif_paths.py MOD OUT --resource "D:\\MO2\\mods\\SG Hairs" --resource "D:\\MO2\\mods\\The Eyes of Beauty"
+
+--resource (repeatable): other mod folders whose meshes/textures count as installed
+(loose files only; files inside .bsa archives are not seen - extract them first).
 
 The mod folder is only read. Fixed NIFs are written to the output folder with the
 same relative paths, so the output can be installed as a separate mod that loads
@@ -72,7 +76,27 @@ def find_dir(root, name):
     return None
 
 
-def main(mod, out):
+def index_files(root, sub, ext, into):
+    top = find_dir(root, sub)
+    if not top:
+        return
+    for dp, _, files in os.walk(top):
+        for f in files:
+            if f.lower().endswith(ext):
+                rel = os.path.relpath(os.path.join(dp, f), root).replace("/", "\\")
+                into.setdefault(rel.lower(), rel)
+
+
+ESP_PATHS = {"HDPT": {"MODL": "meshes"}, "TXST": {f"TX0{i}": "textures" for i in range(8)},
+             "ARMA": {"MOD2": "meshes", "MOD3": "meshes", "MOD4": "meshes", "MOD5": "meshes"},
+             "ARMO": {"MOD2": "meshes", "MOD4": "meshes"}}
+
+
+def mesh_is_vanilla(k):
+    return k.startswith("meshes\\actors\\character\\character assets\\") and k.count("\\") <= 5
+
+
+def main(mod, out, resources=()):
     lines = []
     log = lines.append
     tex_root = find_dir(mod, "textures")
@@ -80,25 +104,35 @@ def main(mod, out):
     if not mesh_root:
         sys.exit("No meshes folder in " + mod)
 
-    textures = {}
-    if tex_root:
-        for dp, _, files in os.walk(tex_root):
-            for f in files:
-                if f.lower().endswith(".dds"):
-                    rel = os.path.relpath(os.path.join(dp, f), mod).replace("/", "\\")
-                    textures[rel.lower()] = rel
+    textures, meshes = {}, {}
+    for root in [mod, *resources]:
+        index_files(root, "textures", ".dds", textures)
+        index_files(root, "meshes", (".nif", ".tri"), meshes)
     by_name = collections.defaultdict(list)
     for k in textures:
         by_name[ntpath.basename(k)].append(k)
 
     # --- ESP: NPC records for FaceGen checks --------------------------------
-    npcs, owners_seen = {}, set()
+    npcs, owners_seen, report_esp = {}, set(), []
     for f in os.listdir(mod):
         if not f.lower().endswith((".esp", ".esm", ".esl")):
             continue
         masters, _, recs = load_esp(os.path.join(mod, f))
         owners = masters + [f]
         hdpt = {}
+        for t, fid, _, body in recs:
+            for st, sd in subrecords(body) if t in ESP_PATHS else ():
+                kind = ESP_PATHS[t].get(st)
+                if not kind:
+                    continue
+                p = sd.split(b"\0")[0].decode("cp1252").replace("/", "\\")
+                if not p:
+                    continue
+                k = (kind + "\\" + re.sub(r"^(textures|meshes)\\\\", "", p.lower()))
+                if kind == "meshes" and k not in meshes and not mesh_is_vanilla(k):
+                    report_esp.append(f"esp-missing-mesh|{t} {p}")
+                elif kind == "textures" and k not in textures and category(k) != "vanilla":
+                    report_esp.append(f"esp-missing-texture|{t} {p}")
         for t, fid, _, body in recs:
             if t == "HDPT":
                 for st, sd in subrecords(body):
@@ -223,6 +257,9 @@ def main(mod, out):
                     report["facegen-headpart-mismatch"].append(
                         f"{rel} ({npcs[facegen]['edid']}): ESP has {miss}, FaceGen NIF does not -> re-export FaceGen in CK (Ctrl+F4)")
 
+    for item in sorted(set(report_esp), key=str.lower):
+        cat, text = item.split("|", 1)
+        report[cat].append(text)
     for k, e in npcs.items():
         if k not in facegen_seen and not e["template"]:
             report["npc-without-facegen"].append(f"{k[0]}\\{k[1]:08X} {e['edid']}")
@@ -232,9 +269,9 @@ def main(mod, out):
                 f"{k[0]}\\{k[1]:08X}: FaceGen shipped but no NPC record in the ESP -> dark face unless another plugin provides the matching record")
 
     order = ["fixed", "facegen-tint-needs-ck", "facegen-headpart-mismatch", "facegen-without-npc-record",
-             "npc-without-facegen", "bad-path", "missing-texture", "missing-effect-texture", "unreadable", "facegen-bad-name"]
+             "npc-without-facegen", "bad-path", "missing-texture", "esp-missing-mesh", "esp-missing-texture", "missing-effect-texture", "unreadable", "facegen-bad-name"]
     order += sorted(k for k in report if k not in order)
-    log(f"Mod: {mod}\nNIFs rewritten: {fixed_files} (in {out})\n")
+    log(f"Mod: {mod}\nResources: {list(resources) or 'none'}\nNIFs rewritten: {fixed_files} (in {out})\n")
     for name in order:
         items = report.get(name)
         if not items:
@@ -254,6 +291,10 @@ def main(mod, out):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        sys.exit(__doc__)
-    main(sys.argv[1], sys.argv[2])
+    import argparse
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("mod")
+    ap.add_argument("out")
+    ap.add_argument("--resource", action="append", default=[])
+    a = ap.parse_args()
+    main(a.mod, a.out, a.resource)
