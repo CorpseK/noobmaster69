@@ -20,10 +20,10 @@ jobs:
       # Built vcpkg packages are kept between runs (faster, fewer download failures).
       VCPKG_DEFAULT_BINARY_CACHE: ${{ github.workspace }}/vcpkg-bincache
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Cache vcpkg packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: vcpkg-bincache
           key: vcpkg-${{ env.VCPKG_COMMIT }}-${{ hashFiles(format('skyrim-mods/{0}/vcpkg.json', matrix.mod)) }}
@@ -59,7 +59,7 @@ jobs:
             Copy-Item "skyrim-mods/$mod/$mod.ini" out/SKSE/Plugins/
           }
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: ${{ matrix.mod }}
           path: out
