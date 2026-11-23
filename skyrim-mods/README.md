@@ -13,6 +13,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | [EasyRecruit](EasyRecruit/) | NPC relationship ≥ Friend (vd. Aeri) rủ làm follower bằng thoại vanilla, không cần MCM | v0.1.0, chưa test in-game |
 | [GenderShift](GenderShift/) | NPC spawn từ leveled list (bandit, Forsworn...) đổi tỉ lệ nam/nữ; có chế độ cả trại toàn nam hoặc toàn nữ | v0.1.0, chưa test in-game |
 | [RelicHunter](RelicHunter/) | Loot random (rương, xác, đồ NPC, merchant) dễ ra relic LotD mà The Curator's Companion báo là còn thiếu | v0.1.0, chưa test in-game |
+| [TNGPlayerOnly](TNGPlayerOnly/) | (NSFW) Add-on cho The New Gentleman: chỉ player có addon, NPC giữ skin gốc | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 
