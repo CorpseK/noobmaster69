@@ -18,7 +18,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(CommonLibSSE)
 
 find_path(DETOURS_INCLUDE_DIRS "detours/detours.h")
-find_library(DETOURS_LIBRARY detours REQUIRED)
+# Pick the release/debug detours.lib explicitly: a plain find_library() can grab the
+# debug build, which then fails to link against the release CRT (_CrtDbgReport).
+find_library(DETOURS_LIBRARY_RELEASE NAMES detours
+	PATHS "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/lib" NO_DEFAULT_PATH REQUIRED)
+find_library(DETOURS_LIBRARY_DEBUG NAMES detours
+	PATHS "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/debug/lib" NO_DEFAULT_PATH)
+if(DETOURS_LIBRARY_DEBUG)
+	set(DETOURS_LIBRARY optimized ${DETOURS_LIBRARY_RELEASE} debug ${DETOURS_LIBRARY_DEBUG})
+else()
+	set(DETOURS_LIBRARY ${DETOURS_LIBRARY_RELEASE})
+endif()
 
 add_library(${PROJECT_NAME} SHARED src/main.cpp)
 

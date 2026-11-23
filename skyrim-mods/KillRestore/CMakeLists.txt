@@ -17,12 +17,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(CommonLibSSE)
 
-find_path(DETOURS_INCLUDE_DIRS "detours/detours.h")
-find_library(DETOURS_LIBRARY detours REQUIRED)
-
 add_library(${PROJECT_NAME} SHARED src/main.cpp)
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${DETOURS_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE CommonLibSSE::CommonLibSSE ${DETOURS_LIBRARY})
+target_link_libraries(${PROJECT_NAME} PRIVATE CommonLibSSE::CommonLibSSE)
 target_compile_options(${PROJECT_NAME} PRIVATE /utf-8 /permissive- /Zc:preprocessor)
 target_compile_definitions(${PROJECT_NAME} PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
