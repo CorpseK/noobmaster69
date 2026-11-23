@@ -6,13 +6,16 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | Mod | Mô tả | Trạng thái |
 |---|---|---|
 | [SpellBuffs](SpellBuffs/) | Buff các spell vanilla. Paralyze → móc túi 100% | v0.1.0, chưa test in-game |
+| [LightPockets](LightPockets/) | Ingredient, potion, poison, soul gem, lockpick, key, scroll không cân nặng (chỉnh bằng INI) | v0.1.0, chưa test in-game |
+| [GMSTTweaks](GMSTTweaks/) | Đổi Game Setting (GMST) bằng file INI, thay cho ESP chỉ để sửa số | v0.1.0, chưa test in-game |
+| [KillRestore](KillRestore/) | Player giết địch → hồi % Health/Magicka/Stamina | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 
 GitHub tự build mỗi lần có thay đổi trong `skyrim-mods/`:
 
 1. Vào tab **Actions** của repo → workflow **Build SKSE plugins** → chọn lần chạy mới nhất (dấu tích xanh).
-2. Kéo xuống phần **Artifacts**, tải `SpellBuffs.zip`.
+2. Kéo xuống phần **Artifacts**, tải file zip của mod cần (vd. `SpellBuffs.zip`). Mod nào có INI thì INI nằm sẵn trong zip.
 3. Giải nén vào thư mục `Data` của game (hoặc cài như một mod trong MO2/Vortex).
 
 ## Tự build trên máy (Windows)
@@ -20,7 +23,7 @@ GitHub tự build mỗi lần có thay đổi trong `skyrim-mods/`:
 Cần: Visual Studio 2022 trở lên (workload *Desktop development with C++*), CMake ≥ 3.24, Git, vcpkg.
 
 ```bash
-cd skyrim-mods/SpellBuffs
+cd skyrim-mods/<TênMod>
 ```
 
 ```bash
@@ -31,4 +34,4 @@ cmake -S . -B build -A x64 -DCMAKE_TOOLCHAIN_FILE=<đường-dẫn-vcpkg>/script
 cmake --build build --config Release
 ```
 
-File ra ở `build/Release/SpellBuffs.dll`.
+File ra ở `build/Release/<TênMod>.dll`.

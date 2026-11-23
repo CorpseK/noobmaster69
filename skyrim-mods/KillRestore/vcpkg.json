@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg/master/scripts/vcpkg.schema.json",
+  "name": "killrestore",
+  "version-string": "0.1.0",
+  "builtin-baseline": "5d4a3dc90c0b3773f3bac81bf41297b54328f471",
+  "dependencies": [
+    "spdlog",
+    "rapidcsv",
+    "detours"
+  ]
+}

@@ -8,8 +8,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  spellbuffs:
+  build:
+    name: ${{ matrix.mod }}
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mod: [SpellBuffs, LightPockets, GMSTTweaks, KillRestore]
     env:
       VCPKG_COMMIT: 5d4a3dc90c0b3773f3bac81bf41297b54328f471
     steps:
@@ -24,23 +29,27 @@ jobs:
 
       - name: Configure
         shell: pwsh
-        working-directory: skyrim-mods/SpellBuffs
+        working-directory: skyrim-mods/${{ matrix.mod }}
         run: >
           cmake -S . -B build -A x64
           -DCMAKE_TOOLCHAIN_FILE="$env:RUNNER_TEMP\vcpkg\scripts\buildsystems\vcpkg.cmake"
           -DVCPKG_TARGET_TRIPLET=x64-windows-static
 
       - name: Build
-        working-directory: skyrim-mods/SpellBuffs
+        working-directory: skyrim-mods/${{ matrix.mod }}
         run: cmake --build build --config Release
 
       - name: Package
         shell: pwsh
         run: |
+          $mod = "${{ matrix.mod }}"
           New-Item -ItemType Directory -Force out/SKSE/Plugins | Out-Null
-          Copy-Item skyrim-mods/SpellBuffs/build/Release/SpellBuffs.dll out/SKSE/Plugins/
+          Copy-Item "skyrim-mods/$mod/build/Release/$mod.dll" out/SKSE/Plugins/
+          if (Test-Path "skyrim-mods/$mod/$mod.ini") {
+            Copy-Item "skyrim-mods/$mod/$mod.ini" out/SKSE/Plugins/
+          }
 
       - uses: actions/upload-artifact@v4
         with:
-          name: SpellBuffs
+          name: ${{ matrix.mod }}
           path: out
