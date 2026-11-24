@@ -1,4 +1,4 @@
-// EasyRecruit - SKSE plugin (no ESP): any NPC whose relationship with the
+// ImmersiveRecruit - SKSE plugin (no ESP): any NPC whose relationship with the
 // player reaches Friend (or better) becomes a potential follower, so the
 // vanilla "Follow me" dialogue shows up (and follower frameworks such as NFF
 // pick it up) without opening an MCM.
@@ -7,14 +7,17 @@
 // the player. If it is Friend+ and the NPC is not yet in
 // PotentialFollowerFaction (Skyrim.esm 0005C84D), add them to it (rank 0).
 //
-// Config: Data/SKSE/Plugins/EasyRecruit.ini
+// Config: Data/SKSE/Plugins/ImmersiveRecruit.ini
 
 #include "RE/Skyrim.h"
 #include "SKSE/SKSE.h"
 
 #include <spdlog/sinks/basic_file_sink.h>
 
+#include <chrono>
 #include <format>
+#include <string>
+#include <thread>
 #include <unordered_set>
 
 // Windows API headers must come after CommonLib.
@@ -30,7 +33,7 @@ namespace
 		if (!logDir) {
 			return;
 		}
-		auto path = *logDir / "EasyRecruit.log";
+		auto path = *logDir / "ImmersiveRecruit.log";
 		auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path.string(), true);
 		auto logger = std::make_shared<spdlog::logger>("global", std::move(sink));
 		logger->set_level(spdlog::level::info);
@@ -67,9 +70,18 @@ namespace
 		bool verbose = false;
 		std::unordered_set<RE::FormID> exclude;  // base NPC IDs: never touched
 
+		// [Follower] - applied once an NPC actually follows the player.
+		bool scaleWithPlayer = true;   // same as NFF's "setlevel 1000 0 1 0"
+		int levelMultPercent = 100;    // follower level = player level * this / 100
+		bool keepLevelAsMin = true;    // never drop below the level they had before
+		int maxLevel = 80;             // 0 = no cap
+		bool removeLevelCap = true;    // NPCs that already scale but stop at a low level
+		bool makeProtected = true;     // only the player can kill them
+		bool onlyUnique = true;        // never edit a base shared by many NPCs
+
 		static std::string Path()
 		{
-			return (std::filesystem::current_path() / "Data" / "SKSE" / "Plugins" / "EasyRecruit.ini").string();
+			return (std::filesystem::current_path() / "Data" / "SKSE" / "Plugins" / "ImmersiveRecruit.ini").string();
 		}
 
 		// Section lines look like: AnyName=Plugin.esp|0x00ABCD (load-order independent local form ID).
@@ -127,6 +139,15 @@ namespace
 			skipHostile = GetPrivateProfileIntA("General", "bSkipHostile", skipHostile ? 1 : 0, path.c_str()) != 0;
 			verbose = GetPrivateProfileIntA("General", "bVerboseLog", verbose ? 1 : 0, path.c_str()) != 0;
 			exclude = ReadNPCList("Exclude");
+
+			scaleWithPlayer = GetPrivateProfileIntA("Follower", "bScaleWithPlayer", 1, path.c_str()) != 0;
+			levelMultPercent =
+				std::clamp(static_cast<int>(GetPrivateProfileIntA("Follower", "iLevelMultPercent", 100, path.c_str())), 10, 500);
+			keepLevelAsMin = GetPrivateProfileIntA("Follower", "bKeepCurrentLevelAsMin", 1, path.c_str()) != 0;
+			maxLevel = std::clamp(static_cast<int>(GetPrivateProfileIntA("Follower", "iMaxLevel", 80, path.c_str())), 0, 65535);
+			removeLevelCap = GetPrivateProfileIntA("Follower", "bRemoveLevelCap", 1, path.c_str()) != 0;
+			makeProtected = GetPrivateProfileIntA("Follower", "bProtected", 1, path.c_str()) != 0;
+			onlyUnique = GetPrivateProfileIntA("Follower", "bOnlyUnique", 1, path.c_str()) != 0;
 		}
 	};
 
@@ -142,6 +163,123 @@ namespace
 			rel = RE::BGSRelationship::GetRelationship(a_playerBase, a_npc);
 		}
 		return rel ? ToPapyrusRank(rel->level.get()) : 0;
+	}
+
+	// --- Followers: scale with the player + protected ---------------------------
+	// Ordinary NPCs have a fixed level, so as followers they fall behind quickly.
+	// Same idea as NFF's nfflevel.txt ("setlevel 1000 0 1 0"), done natively when
+	// the NPC is actually following the player. Saved in the save game (base data
+	// change flag), so it stays after the mod is removed.
+	constexpr std::uint32_t kChangeActorBaseData = 1 << 1;  // CHANGE_ACTOR_BASE_DATA
+
+	bool IsFollowingPlayer(RE::Actor* a_actor)
+	{
+		return a_actor && !a_actor->IsDead() && a_actor->IsPlayerTeammate() && g_potentialFollower &&
+		       a_actor->IsInFaction(g_potentialFollower);
+	}
+
+	void StrengthenFollower(RE::Actor* a_actor)
+	{
+		if (!IsFollowingPlayer(a_actor) || (!g_config.scaleWithPlayer && !g_config.makeProtected)) {
+			return;
+		}
+		auto* npc = a_actor->GetActorBase();
+		if (!npc || g_config.exclude.contains(npc->GetFormID())) {
+			return;
+		}
+		if (g_config.onlyUnique && !npc->IsUnique()) {
+			if (g_config.verbose) {
+				SKSE::log::info("{} ({:08X}) not unique - follower stats left alone", a_actor->GetName(), npc->GetFormID());
+			}
+			return;
+		}
+
+		using Flag = RE::ACTOR_BASE_DATA::Flag;
+		auto& data = npc->actorData;
+		bool changed = false;
+
+		// The cap never goes below the NPC's minimum level (a level 90 NPC keeps 90 with a cap of 80).
+		const auto CapFor = [](std::uint16_t a_min) {
+			if (g_config.maxLevel == 0) {
+				return std::uint16_t{ 0 };
+			}
+			return std::max(static_cast<std::uint16_t>(g_config.maxLevel), a_min);
+		};
+		const bool statsFromTemplate =
+			npc->UsesTemplate() && data.templateUseFlags.any(RE::ACTOR_BASE_DATA::TEMPLATE_USE_FLAG::kStats);
+		// Already scales but stops early (e.g. Avrusa Sarethi at 25): lift the cap.
+		const bool capTooLow = data.calcLevelMax != 0 &&
+		                       (g_config.maxLevel == 0 || data.calcLevelMax < g_config.maxLevel);
+
+		if (g_config.scaleWithPlayer && npc->HasPCLevelMult() && g_config.removeLevelCap && capTooLow) {
+			if (statsFromTemplate) {
+				SKSE::log::info("{} ({:08X}) takes stats from a template - cannot change level cap", a_actor->GetName(),
+					npc->GetFormID());
+			} else {
+				const auto oldMax = data.calcLevelMax;
+				data.calcLevelMax = CapFor(data.calcLevelMin);
+				changed = true;
+				SKSE::log::info("{} ({:08X}) level cap {} -> {} (level {}..)", a_actor->GetName(), npc->GetFormID(),
+					oldMax, data.calcLevelMax ? std::to_string(data.calcLevelMax) : "no cap"s, data.calcLevelMin);
+			}
+		} else if (g_config.scaleWithPlayer && !npc->HasPCLevelMult()) {
+			if (statsFromTemplate) {
+				SKSE::log::info("{} ({:08X}) takes stats from a template - cannot scale level", a_actor->GetName(),
+					npc->GetFormID());
+			} else {
+				const auto oldLevel = a_actor->GetLevel();
+				data.actorBaseFlags.set(Flag::kPCLevelMult);
+				data.level = static_cast<std::uint16_t>(g_config.levelMultPercent * 10);  // 1000 = x1.0
+				data.calcLevelMin = static_cast<std::uint16_t>(g_config.keepLevelAsMin ? std::max<std::uint16_t>(oldLevel, 1) : 1);
+				data.calcLevelMax = CapFor(data.calcLevelMin);
+				changed = true;
+				SKSE::log::info("{} ({:08X}) now scales with the player: x{:.2f}, level {}..{} (was fixed {})",
+					a_actor->GetName(), npc->GetFormID(), g_config.levelMultPercent / 100.0, data.calcLevelMin,
+					data.calcLevelMax ? std::to_string(data.calcLevelMax) : "no cap"s, oldLevel);
+			}
+		}
+		if (g_config.makeProtected && !npc->IsEssential() && !npc->IsProtected()) {
+			data.actorBaseFlags.set(Flag::kProtected);
+			changed = true;
+			SKSE::log::info("{} ({:08X}) is now protected", a_actor->GetName(), npc->GetFormID());
+		}
+		if (changed) {
+			npc->AddChange(kChangeActorBaseData);
+			if (g_config.notify) {
+				RE::DebugNotification(std::format("{} will now grow stronger with you.", a_actor->GetName()).c_str());
+			}
+		}
+	}
+
+	// The follow flag is set by the dialogue script after the menu closes.
+	void QueueFollowerCheck(RE::ObjectRefHandle a_handle, std::chrono::milliseconds a_delay)
+	{
+		if (!a_handle) {
+			return;
+		}
+		std::thread([a_handle, a_delay]() {
+			std::this_thread::sleep_for(a_delay);
+			SKSE::GetTaskInterface()->AddTask([a_handle]() {
+				auto ref = a_handle.get();
+				StrengthenFollower(ref ? ref->As<RE::Actor>() : nullptr);
+			});
+		}).detach();
+	}
+
+	// Followers recruited elsewhere (NFF power, before this version...) on game load.
+	void CheckLoadedFollowers()
+	{
+		std::thread([]() {
+			std::this_thread::sleep_for(5s);
+			SKSE::GetTaskInterface()->AddTask([]() {
+				if (auto* lists = RE::ProcessLists::GetSingleton()) {
+					for (auto& handle : lists->highActorHandles) {
+						auto actor = handle.get();
+						StrengthenFollower(actor.get());
+					}
+				}
+			});
+		}).detach();
 	}
 
 	void CheckActor(RE::Actor* a_actor)
@@ -234,6 +372,7 @@ namespace
 			} else {
 				// Quests/favors usually raise the relationship during the conversation.
 				QueueCheck(g_lastSpeaker);
+				QueueFollowerCheck(g_lastSpeaker, 3s);
 				g_lastSpeaker.reset();
 			}
 			return RE::BSEventNotifyControl::kContinue;
@@ -242,6 +381,12 @@ namespace
 
 	void OnMessage(SKSE::MessagingInterface::Message* a_msg)
 	{
+		if (a_msg->type == SKSE::MessagingInterface::kPostLoadGame) {
+			if (g_potentialFollower) {
+				CheckLoadedFollowers();
+			}
+			return;
+		}
 		if (a_msg->type != SKSE::MessagingInterface::kDataLoaded) {
 			return;
 		}
@@ -255,6 +400,10 @@ namespace
 		g_config.Load();
 		SKSE::log::info("Config: minRank={} notify={} skipChildren={} skipHostile={} exclude={}",
 			g_config.minRank, g_config.notify, g_config.skipChildren, g_config.skipHostile, g_config.exclude.size());
+		SKSE::log::info(
+			"Follower: scale={} mult={}% keepLevelAsMin={} maxLevel={} removeLevelCap={} protected={} onlyUnique={}",
+			g_config.scaleWithPlayer, g_config.levelMultPercent, g_config.keepLevelAsMin, g_config.maxLevel,
+			g_config.removeLevelCap, g_config.makeProtected, g_config.onlyUnique);
 
 		if (auto* ui = RE::UI::GetSingleton()) {
 			ui->AddEventSink<RE::MenuOpenCloseEvent>(MenuSink::GetSingleton());
@@ -264,8 +413,8 @@ namespace
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 0, 1, 0, 0 },
-	.Name = "EasyRecruit"sv,
+	.Version = REL::Version{ 1, 0, 0, 0 },
+	.Name = "ImmersiveRecruit"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)
 
@@ -273,7 +422,7 @@ SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
 {
 	SKSE::Init(a_skse);
 	SetupLog();
-	SKSE::log::info("EasyRecruit v0.1.0 loading (game {})", a_skse->RuntimeVersion().string());
+	SKSE::log::info("ImmersiveRecruit v1.0.0 loading (game {})", a_skse->RuntimeVersion().string());
 
 	SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
 	return true;
