@@ -80,10 +80,86 @@ namespace
 			return true;
 		}
 	}
+
+	// --- Hook: TESNPC::Activate / GetActivateText (vtable 0x37 / 0x4C) ----------
+	// The game refuses to activate an actor that is ragdolled by paralysis, so the
+	// pickpocket menu never opens. While the player sneaks, open it ourselves.
+	namespace ActivateHook
+	{
+		bool CanPickpocketParalyzed(RE::Actor* a_target)
+		{
+			auto* player = RE::PlayerCharacter::GetSingleton();
+			return a_target && player && a_target != player && !a_target->IsDead() && IsParalyzed(a_target) &&
+			       player->IsSneaking();
+		}
+
+		RE::Actor* TargetFromArg(RE::TESObjectREFR* a_ref)
+		{
+			auto* player = RE::PlayerCharacter::GetSingleton();
+			if (a_ref && a_ref != player) {
+				return a_ref->As<RE::Actor>();
+			}
+			// Some callers pass the activator; fall back to what the crosshair points at.
+			if (auto* pick = RE::CrosshairPickData::GetSingleton()) {
+				auto ref = pick->target.get();
+				if (!ref) {
+					ref = pick->targetActor.get();
+				}
+				return ref ? ref->As<RE::Actor>() : nullptr;
+			}
+			return nullptr;
+		}
+
+		bool Activate(RE::TESNPC* a_this, RE::TESObjectREFR* a_targetRef, RE::TESObjectREFR* a_activatorRef,
+			std::uint8_t a_arg3, RE::TESBoundObject* a_object, std::int32_t a_targetCount);
+		REL::Relocation<decltype(Activate)> activateFunc;
+
+		bool Activate(RE::TESNPC* a_this, RE::TESObjectREFR* a_targetRef, RE::TESObjectREFR* a_activatorRef,
+			std::uint8_t a_arg3, RE::TESBoundObject* a_object, std::int32_t a_targetCount)
+		{
+			if (a_activatorRef && a_activatorRef == RE::PlayerCharacter::GetSingleton()) {
+				auto* target = a_targetRef ? a_targetRef->As<RE::Actor>() : nullptr;
+				if (CanPickpocketParalyzed(target)) {
+					SKSE::log::info("Pickpocket on paralyzed {:08X} '{}'", target->GetFormID(), target->GetName());
+					target->OpenContainer(static_cast<std::int32_t>(RE::ContainerMenu::ContainerMode::kPickpocket));
+					return true;
+				}
+			}
+			return activateFunc(a_this, a_targetRef, a_activatorRef, a_arg3, a_object, a_targetCount);
+		}
+
+		bool GetActivateText(RE::TESNPC* a_this, RE::TESObjectREFR* a_ref, RE::BSString& a_dst);
+		REL::Relocation<decltype(GetActivateText)> textFunc;
+
+		bool GetActivateText(RE::TESNPC* a_this, RE::TESObjectREFR* a_ref, RE::BSString& a_dst)
+		{
+			const bool res = textFunc(a_this, a_ref, a_dst);
+			if (auto* target = TargetFromArg(a_ref); target && target->GetActorBase() == a_this &&
+			                                         CanPickpocketParalyzed(target)) {
+				const char* label = "Pickpocket";
+				if (auto* gmst = RE::GameSettingCollection::GetSingleton()) {
+					if (auto* s = gmst->GetSetting("sPickpocket"); s && s->GetString() && *s->GetString()) {
+						label = s->GetString();
+					}
+				}
+				a_dst = (std::string(label) + "\n" + target->GetName()).c_str();
+				return true;
+			}
+			return res;
+		}
+
+		void Install()
+		{
+			REL::Relocation<std::uintptr_t> vt{ RE::TESNPC::VTABLE[0] };
+			activateFunc = vt.write_vfunc(0x37, Activate);
+			textFunc = vt.write_vfunc(0x4C, GetActivateText);
+			SKSE::log::info("Hooked TESNPC::Activate / GetActivateText");
+		}
+	}
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 0, 1, 0, 0 },
+	.Version = REL::Version{ 0, 2, 0, 0 },
 	.Name = "SpellBuffs"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)
@@ -92,8 +168,9 @@ SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
 {
 	SKSE::Init(a_skse);
 	SetupLog();
-	SKSE::log::info("SpellBuffs v0.1.0 loading (game {})", a_skse->RuntimeVersion().string());
+	SKSE::log::info("SpellBuffs v0.2.0 loading (game {})", a_skse->RuntimeVersion().string());
 
 	PickpocketHook::Install();
+	ActivateHook::Install();
 	return true;
 }
