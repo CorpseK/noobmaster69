@@ -7,6 +7,7 @@ Python thuần (3.9+), không cần cài thêm thư viện. Chạy trên Windows
 | `fix_nif_paths.py` | Kiểm tra + sửa đường dẫn texture trong NIF của mod replacer, kiểm tra FaceGen với ESP |
 | `niftex.py` | Đọc/ghi NIF Skyrim SE (20.2.0.7): texture set, shape, shader. Ghi lại giống hệt từng byte khi không sửa gì |
 | `esp.py` | Đọc ESP/ESM: master, record (kể cả record nén) |
+| `bsa.py` | Liệt kê / giải nén file trong BSA Skyrim SE (v105, cả file nén LZ4): `py -I bsa.py list <bsa> <regex>`, `py -I bsa.py extract <bsa> <regex> <thư mục ra>` |
 
 ## fix_nif_paths.py
 

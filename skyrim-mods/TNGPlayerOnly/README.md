@@ -24,6 +24,22 @@ SKSE plugin bổ sung cho **The New Gentleman (TNG)**: chỉ **player** có addo
   dùng bình thường.
 - Không lưu gì vào save. Gỡ dll thì TNG trở lại như cũ ở lần load sau.
 
+### Thân vanilla cho NPC (từ 0.2.0)
+TNG thay `MaleBody_0/1.nif` và `MaleFeet_0/1.nif` bằng thân có **lỗ ở háng**, addon lấp vào lỗ đó. Chỉ gỡ addon
+thì NPC bị thủng. Kể cả khi chọn "None" trong MCM, TNG cũng chỉ trả NPC về skin gốc, nên vẫn thủng như vậy.
+Vì thế (`bVanillaBodyForNPCs=1`) mod tạo bản sao các ARMA thân/bàn chân trong skin của NPC, trỏ sang mesh
+**vanilla** (có sẵn quần lót, texture `MaleUnderwear.dds` vanilla). Player vẫn dùng thân TNG.
+- Mesh vanilla là asset của Bethesda nên **không có trong repo/zip**. Phải tự lấy từ `Skyrim - Meshes0.bsa`:
+
+  ```bash
+  py -I ../tools/bsa.py extract "<Skyrim>/Data/Skyrim - Meshes0.bsa" "character assets\\male(body|feet)_[01]\.nif$" out
+  ```
+
+  rồi chép 4 file từ `out/meshes/actors/character/character assets/` vào
+  `<mod>/meshes/actors/character/character assets/TNGPlayerOnly/`. (Hoặc giải nén bằng BAE.)
+- Thiếu 4 file này thì thân NPC nam sẽ **vô hình**. Không muốn dùng thì đặt `bVanillaBodyForNPCs=0`.
+- Texture thân vẫn là texture của TNG (UV giống vanilla), chỉ mesh và quần lót là vanilla.
+
 ### Giới hạn / cần biết
 - Mod dựa vào cách TNG làm ở bản source hiện tại (repo ModiLogist/TheNewGentleman, commit `db688f2`, 08/2026).
   TNG đổi cách phân phát hoặc đổi FormID keyword thì phải sửa lại. Log sẽ báo nếu không tìm thấy keyword.
@@ -52,6 +68,11 @@ Bật `bVerboseLog=1` khi test. Log nằm ở `Documents/My Games/Skyrim Special
 - [ ] Đổi race player bằng `showracemenu` → player vẫn có addon sau khi đóng menu.
 - [ ] Save/load, fast travel, vào/ra cell: không crash, kết quả giữ nguyên.
 - [ ] `bEnabled=0` → mọi thứ như TNG gốc.
+- [ ] (0.2.0) Log có `Vanilla body for NPCs: N body/feet ARMAs copied` (N > 0).
+- [ ] (0.2.0) NPC nam cởi đồ mặc quần lót vanilla, không thủng. Không có khe hở ở cổ chân / cổ tay.
+- [ ] (0.2.0) NPC nam mặc giáp: quần lót không xuyên qua giáp.
+- [ ] (0.2.0) Player vẫn dùng thân TNG + addon, kể cả sau khi đổi addon/size trong MCM.
 
 ## Lịch sử
+- 0.2.0: NPC nam dùng thân vanilla có quần lót (hết bị thủng ở háng). Thêm `bVanillaBodyForNPCs`.
 - 0.1.0: bản đầu.

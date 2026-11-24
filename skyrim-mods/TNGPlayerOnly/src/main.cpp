@@ -18,6 +18,10 @@
 //      its race) ends up with a TNG skin again, revert it and refresh its 3D.
 //   The player is never touched, so TNG (MCM, size, addon choice) works as usual.
 //
+//   3. TNG's MaleBody/MaleFeet meshes have an opening at the groin that the addon fills,
+//      so NPC skins get copies of those ARMAs pointing at the vanilla meshes (vanilla
+//      underwear included), shipped under meshes/.../character assets/TNGPlayerOnly/.
+//
 // The TNG skins are never modified (the player still uses them). Nothing is saved.
 //
 // Config: Data/SKSE/Plugins/TNGPlayerOnly.ini
@@ -28,7 +32,9 @@
 #include <spdlog/sinks/basic_file_sink.h>
 
 #include <algorithm>
+#include <cctype>
 #include <map>
+#include <string>
 #include <mutex>
 #include <unordered_map>
 #include <vector>
@@ -58,7 +64,8 @@ namespace
 	struct Config
 	{
 		bool enabled = true;
-		bool keepPlayer = true;  // make sure the player keeps a TNG skin
+		bool keepPlayer = true;   // make sure the player keeps a TNG skin
+		bool vanillaBody = true;  // NPCs use the vanilla male body (with underwear) instead of TNG's
 		bool verbose = false;
 
 		void Load()
@@ -67,6 +74,7 @@ namespace
 				(std::filesystem::current_path() / "Data" / "SKSE" / "Plugins" / "TNGPlayerOnly.ini").string();
 			enabled = GetPrivateProfileIntA("General", "bEnabled", 1, path.c_str()) != 0;
 			keepPlayer = GetPrivateProfileIntA("General", "bKeepPlayer", 1, path.c_str()) != 0;
+			vanillaBody = GetPrivateProfileIntA("General", "bVanillaBodyForNPCs", 1, path.c_str()) != 0;
 			verbose = GetPrivateProfileIntA("General", "bVerboseLog", 0, path.c_str()) != 0;
 		}
 	};
@@ -138,18 +146,171 @@ namespace
 		return a_npc && a_npc->GetFormID() == 0x7;
 	}
 
+	// --- Vanilla body for NPCs --------------------------------------------------
+	// TNG replaces MaleBody_0/1.nif (and MaleFeet) with a body that has an opening at the
+	// groin, filled by the addon. NPCs without the addon would show that hole, so their
+	// skins get copies of the body/feet ARMAs pointing at the vanilla meshes (with the
+	// vanilla underwear), shipped in meshes/.../character assets/TNGPlayerOnly/.
+	constexpr auto kVanillaDir = "TNGPlayerOnly\\"sv;
+
+	std::unordered_map<RE::TESObjectARMA*, RE::TESObjectARMA*> g_armaSwap;  // TNG-body ARMA -> vanilla copy (or itself)
+	std::unordered_map<RE::TESObjectARMA*, RE::TESObjectARMA*> g_armaBack;  // vanilla copy -> TNG-body ARMA
+	std::unordered_map<RE::TESObjectARMO*, RE::TESObjectARMO*> g_npcSkin;   // skin -> NPC version (or itself)
+
+	std::string Lower(std::string_view a_str)
+	{
+		std::string res(a_str);
+		std::ranges::transform(res, res.begin(), [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+		return res;
+	}
+
+	// "...\Character Assets\MaleBody_1.nif" -> "...\Character Assets\TNGPlayerOnly\MaleBody_1.nif", else "".
+	std::string VanillaPath(std::string_view a_model)
+	{
+		const auto low = Lower(a_model);
+		const auto slash = low.find_last_of("\\/");
+		if (slash == std::string::npos) {
+			return {};
+		}
+		const auto file = std::string_view(low).substr(slash + 1);
+		static constexpr std::string_view kFiles[] = { "malebody_0.nif", "malebody_1.nif", "malefeet_0.nif",
+			"malefeet_1.nif" };
+		if (std::ranges::find(kFiles, file) == std::end(kFiles) ||
+			!std::string_view(low).substr(0, slash).ends_with("character assets")) {
+			return {};
+		}
+		std::string res(a_model.substr(0, slash + 1));
+		res += kVanillaDir;
+		res += a_model.substr(slash + 1);
+		return res;
+	}
+
+	RE::TESObjectARMA* CloneArma(RE::TESObjectARMA* a_src)
+	{
+		RE::TESObjectARMA* aa = nullptr;
+		if (auto* dup = a_src->CreateDuplicateForm(true, nullptr)) {
+			aa = dup->As<RE::TESObjectARMA>();
+		}
+		bool viaFactory = false;
+		if (!aa) {
+			if (auto* factory = RE::IFormFactory::GetConcreteFormFactoryByType<RE::TESObjectARMA>()) {
+				if (auto* form = factory->Create()) {
+					aa = form->As<RE::TESObjectARMA>();
+					viaFactory = true;
+				}
+			}
+		}
+		if (!aa) {
+			return nullptr;
+		}
+		// Copy every field ourselves: the duplicate may not have copied them all.
+		aa->data = a_src->data;
+		aa->race = a_src->race;
+		aa->bipedModelData = a_src->bipedModelData;
+		for (std::uint32_t s = 0; s < RE::SEXES::kTotal; ++s) {
+			aa->bipedModels[s].CopyComponent(&a_src->bipedModels[s]);
+			aa->bipedModel1stPersons[s].CopyComponent(&a_src->bipedModel1stPersons[s]);
+			aa->skinTextures[s] = a_src->skinTextures[s];
+			aa->skinTextureSwapLists[s] = a_src->skinTextureSwapLists[s];
+		}
+		aa->additionalRaces.clear();
+		for (auto* r : a_src->additionalRaces) {
+			aa->additionalRaces.push_back(r);
+		}
+		aa->footstepSet = a_src->footstepSet;
+		aa->artObject = a_src->artObject;
+		if (g_config.verbose) {
+			SKSE::log::info("Cloned ARMA {:08X} -> {:08X} ({})", a_src->GetFormID(), aa->GetFormID(),
+				viaFactory ? "factory" : "duplicate");
+		}
+		return aa;
+	}
+
+	RE::TESObjectARMA* SwapArma(RE::TESObjectARMA* a_aa)
+	{
+		if (!a_aa) {
+			return a_aa;
+		}
+		if (auto it = g_armaSwap.find(a_aa); it != g_armaSwap.end()) {
+			return it->second;
+		}
+		RE::TESObjectARMA* res = a_aa;
+		const char* model = a_aa->bipedModels[RE::SEXES::kMale].GetModel();
+		if (auto path = VanillaPath(model ? model : ""); !path.empty()) {
+			if (auto* clone = CloneArma(a_aa)) {
+				clone->bipedModels[RE::SEXES::kMale].SetModel(path.c_str());
+				g_armaBack[clone] = a_aa;
+				g_armaSwap[clone] = clone;
+				res = clone;
+			} else {
+				SKSE::log::warn("Could not copy ARMA {:08X} - NPCs keep TNG's body for it", a_aa->GetFormID());
+			}
+		}
+		g_armaSwap[a_aa] = res;
+		return res;
+	}
+
+	// The skin NPCs should wear instead of a_skin (a non-TNG skin).
+	RE::TESObjectARMO* NpcSkinFor(RE::TESObjectARMO* a_skin)
+	{
+		if (!a_skin || !g_config.vanillaBody) {
+			return a_skin;
+		}
+		if (auto it = g_npcSkin.find(a_skin); it != g_npcSkin.end()) {
+			return it->second;
+		}
+		RE::TESObjectARMO* res = a_skin;
+		std::vector<RE::TESObjectARMA*> addons;
+		bool swapped = false;
+		for (auto* aa : a_skin->armorAddons) {
+			auto* s = SwapArma(aa);
+			swapped |= s != aa;
+			addons.push_back(s);
+		}
+		if (swapped) {
+			auto* dup = a_skin->CreateDuplicateForm(true, nullptr);
+			if (auto* copy = dup ? dup->As<RE::TESObjectARMO>() : nullptr) {
+				copy->armorAddons.clear();
+				for (auto* aa : addons) {
+					copy->armorAddons.push_back(aa);
+				}
+				// TNG may build its addon skins on top of this one; let OriginalOf find it.
+				g_ogIndex.try_emplace({ copy->race, BodyAddons(copy) }, copy);
+				g_npcSkin[copy] = copy;
+				res = copy;
+			} else {
+				SKSE::log::warn("Could not copy skin {:08X} - NPCs keep TNG's body for it", a_skin->GetFormID());
+			}
+		}
+		g_npcSkin[a_skin] = res;
+		return res;
+	}
+
+	// The skin NPCs should wear instead of a_skin, or nullptr if nothing to do.
+	RE::TESObjectARMO* TargetSkin(RE::TESObjectARMO* a_skin)
+	{
+		if (!a_skin) {
+			return nullptr;
+		}
+		auto* base = IsTngSkin(a_skin) ? OriginalOf(a_skin) : a_skin;
+		auto* res = NpcSkinFor(base);
+		return res != a_skin ? res : nullptr;
+	}
+
 	// Returns true if something changed. Caller holds g_lock.
 	bool StripRace(RE::TESRace* a_race)
 	{
-		if (!a_race || !IsTngSkin(a_race->skin)) {
+		if (!a_race || !a_race->skin) {
 			return false;
 		}
-		auto* og = OriginalOf(a_race->skin);
-		if (!og) {
+		auto* target = TargetSkin(a_race->skin);
+		if (!target) {
 			return false;
 		}
-		g_raceTngSkin[a_race] = a_race->skin;
-		a_race->skin = og;
+		if (IsTngSkin(a_race->skin)) {
+			g_raceTngSkin[a_race] = a_race->skin;
+		}
+		a_race->skin = target;
 		return true;
 	}
 
@@ -159,9 +320,24 @@ namespace
 			return false;
 		}
 		bool changed = StripRace(a_npc->race);
-		if (IsTngSkin(a_npc->skin)) {
-			if (auto* og = OriginalOf(a_npc->skin)) {
-				a_npc->skin = (a_npc->race && og == a_npc->race->skin) ? nullptr : og;
+		if (auto* target = TargetSkin(a_npc->skin)) {
+			a_npc->skin = (a_npc->race && target == a_npc->race->skin) ? nullptr : target;
+			changed = true;
+		}
+		return changed;
+	}
+
+	// TNG may have built the player's addon skin on top of an NPC (vanilla-body) skin,
+	// e.g. after an MCM change. Put TNG's own body back. Returns true if something changed.
+	bool RestorePlayerBody(RE::TESObjectARMO* a_skin)
+	{
+		if (!a_skin || !IsTngSkin(a_skin) || g_armaBack.empty()) {
+			return false;
+		}
+		bool changed = false;
+		for (auto& aa : a_skin->armorAddons) {
+			if (auto it = g_armaBack.find(aa); it != g_armaBack.end()) {
+				aa = it->second;
 				changed = true;
 			}
 		}
@@ -170,12 +346,15 @@ namespace
 
 	bool EnsurePlayer()
 	{
-		if (!g_config.keepPlayer) {
-			return false;
-		}
 		auto* pc = RE::PlayerCharacter::GetSingleton();
 		auto* base = pc ? pc->GetActorBase() : nullptr;
-		if (!base || !base->race || IsTngSkin(base->skin)) {
+		if (!base || !base->race) {
+			return false;
+		}
+		if (IsTngSkin(base->skin)) {
+			return RestorePlayerBody(base->skin);
+		}
+		if (!g_config.keepPlayer) {
 			return false;
 		}
 		auto it = g_raceTngSkin.find(base->race);
@@ -249,6 +428,12 @@ namespace
 			npcs += StripNPC(npc) ? 1 : 0;
 		}
 		SKSE::log::info("Initial pass: reverted {} race skins and {} NPC skins", races, npcs);
+		if (g_config.vanillaBody) {
+			SKSE::log::info("Vanilla body for NPCs: {} body/feet ARMAs copied", g_armaBack.size());
+			if (g_armaBack.empty()) {
+				SKSE::log::warn("No MaleBody/MaleFeet ARMA found - NPCs keep TNG's body (hole at the groin)");
+			}
+		}
 	}
 
 	// --- Hook: Character::Load3D (vtable 0x6A), installed after TNG's -----------
@@ -371,7 +556,7 @@ namespace
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 0, 1, 0, 0 },
+	.Version = REL::Version{ 0, 2, 0, 0 },
 	.Name = "TNGPlayerOnly"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)
@@ -380,10 +565,10 @@ SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
 {
 	SKSE::Init(a_skse);
 	SetupLog();
-	SKSE::log::info("TNGPlayerOnly v0.1.0 loading (game {})", a_skse->RuntimeVersion().string());
+	SKSE::log::info("TNGPlayerOnly v0.2.0 loading (game {})", a_skse->RuntimeVersion().string());
 
 	g_config.Load();
-	SKSE::log::info("Config: enabled={} keepPlayer={} verbose={}", g_config.enabled, g_config.keepPlayer,
+	SKSE::log::info("Config: enabled={} keepPlayer={} vanillaBody={} verbose={}", g_config.enabled, g_config.keepPlayer, g_config.vanillaBody,
 		g_config.verbose);
 	if (!g_config.enabled) {
 		return true;
