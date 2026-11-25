@@ -11,31 +11,32 @@ Mục tiêu: mỗi ứng viên kết hôn nữ **không phải follower** có m�
 - Chỉ chọn đồ **mới, standalone**, không chọn replacer (tránh đè SIB).
 - **NSFW chỉ cho 3 nữ tu Dibella** (Anwen, Orla, Senna). Mọi người khác: SFW, lore-friendly.
 
-## Vòng 2: chọn từ mod adult trên Nexus (đã xem ảnh preview)
-Người dùng thấy bản vòng 1 (Styles of Skyrim, Common Clothing...) quá giống đồ gốc, SIB đã đẹp hơn. Vòng 2 lấy từ
-mod gắn cờ adult (thường đẹp hơn), loại bikini, đồ hiện đại, đồ từ game/phim khác, replacer, bản bắt buộc FSMP.
-Các bộ **COCO** ghi "HDT-SMP hoặc CBPC" nên chạy được với CBPC của 3BA (không cần SMP).
+## Danh sách hiện tại (sau vòng 3, ưu tiên Deze)
+Deze Clothing Set CBBE 3BA (50446) và Deze Armor Set (49318) của ralfetas: đồ theo nghề (Blacksmith, Alchemist,
+Crafter boots, Dealer cho Ysolda, nhiều bộ Mage; giáp Thieves Guild/Steel Plate/Whiterun/Dwemer).
+Cài bản **"without NPCs"** để SPID quyết định. Nếu cài thêm Deze SPIDified (57293) thì nó cũng gán Ysolda: dòng của
+mình phải thắng. Các bộ COCO ghi "HDT-SMP hoặc CBPC" nên chạy với CBPC của 3BA.
 
-| NPC | Base ID | Đề xuất (ID Nexus) | Lý do / mức hở |
+| NPC | Base ID | Bộ đồ (ID Nexus) | Ghi chú |
 |---|---|---|---|
-| Anwen | 00013386 Skyrim.esm | Priestess of First Light 3BA (158302) | Vũ công xanh lá, hợp Redguard. **Hở**. Bản gốc là BHUNP SMP, cần xem file 3BA còn SMP không |
-| Orla | 000133B0 Skyrim.esm | COCO Fairy Queen (82260) | Váy dài trắng/xanh kiểu elf. **Hở** |
-| Senna | 000133B7 Skyrim.esm | **CHỐT: COCO Caress of Venus (68006)** | Bộ Dibella kinh điển, xuyên thấu. **Hở nhất** |
-| Taarie | 000132AB Skyrim.esm | COCO Scarlet Rose (65109, có "Clothing Version") | Đỏ-vàng kiểu elf quý tộc. Hở eo/đùi |
-| Dravynea | 0001365F Skyrim.esm | COCO Snow Queen (94596) | Chủ đề băng, hợp việc giữ lạnh mỏ Steamscorch |
-| Muiri | 0001406B Skyrim.esm | Skyforge Assassins (87465) | Váy ren đen "lore friendly", hợp quá khứ Dark Brotherhood |
-| Avrusa Sarethi | 00019BFE Skyrim.esm | Hott Ildari 3BA (135244) | Đồ Dunmer (Ildari là nhân vật ESO, cùng vũ trụ TES) |
-| Hilund | 01A515 Dragonborn.esm | **CHỐT: Bladedancer's Edge (62751, file CBBE-3BA)** | Giáp tối |
-| Ghorza gra-Bagol | 0001339A Skyrim.esm | Obi's Wyrm Slayer Armor 3BA (103216) | Da + thép, kín, hợp thợ rèn Orc |
-| Morwen | 018FA9 Dragonborn.esm | ELLE Tribal Scout 3BA (95333) | Bộ lạc, hợp Skaal |
-| Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | Áo blouse + corset da, mộc |
-| Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | Blouse trễ vai + váy, cô gái làng |
-| Ysolda | 00013BAB Skyrim.esm | Obi's Common Outfit 3BA (110678) | Áo choàng mũ trùm, lái buôn đi đường |
-| Aeri | 0001360B Skyrim.esm | Deze Clothing Set CBBE 3BA (50446) | Tunic làng quê thời trung cổ, nhiều biến thể |
-| Gilfre | 0001367A Skyrim.esm | Deze Clothing Set CBBE 3BA (50446), biến thể khác Aeri | Như trên |
-| Sylgja | 000C3A3F Skyrim.esm | Deze Armor Set CBBE 3BA (49318) | Giáp da nhẹ kiểu làng, chắc chắn hơn cho thợ mỏ |
-| Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | Áo sơ mi trắng + corset tối + quần, kín, kiểu thị dân |
-| Shahvee | 0001411A Skyrim.esm | **Tạm bỏ qua** | Argonian: đồ 3BA hiếm khi hỗ trợ beast race |
+| Anwen | 00013386 Skyrim.esm | Priestess of First Light 3BA (158302) | NSFW. Bản gốc SMP, kiểm tra bản 3BA |
+| Orla | 000133B0 Skyrim.esm | COCO Fairy Queen (82260) | NSFW |
+| Senna | 000133B7 Skyrim.esm | **COCO Caress of Venus (68006)**, đã chốt | NSFW |
+| Taarie | 000132AB Skyrim.esm | COCO Scarlet Rose (65109) | |
+| Dravynea | 0001365F Skyrim.esm | **Deze Mage** (50446), chọn bộ court wizard/College | Thay Snow Queen |
+| Muiri | 0001406B Skyrim.esm | **Deze Alchemist** + Crafter boots (50446) | Thay Skyforge Assassins |
+| Avrusa Sarethi | 00019BFE Skyrim.esm | **Deze Alchemist** + Crafter boots (50446) | Khác màu/biến thể với Muiri nếu có |
+| Ghorza gra-Bagol | 0001339A Skyrim.esm | **Deze Blacksmith** + Crafter boots (50446) | |
+| Morwen | 018FA9 Dragonborn.esm | **Deze Blacksmith** + Crafter boots (50446) | Học việc thợ rèn |
+| Sylgja | 000C3A3F Skyrim.esm | **Deze Blacksmith/Alchemist apron** + Crafter boots (50446) | Thợ mỏ |
+| Ysolda | 00013BAB Skyrim.esm | **Deze Dealer** (50446) | Tác giả làm riêng cho Ysolda |
+| Hilund | 01A515 Dragonborn.esm | **Bladedancer's Edge (62751)**, đã chốt | Phương án Deze: Steel Plate A (49318) |
+| Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | |
+| Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | |
+| Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | |
+| Aeri | 0001360B Skyrim.esm | **CÒN THIẾU** | Thợ đốn gỗ |
+| Gilfre | 0001367A Skyrim.esm | **CÒN THIẾU** | Chủ xưởng gỗ |
+| Shahvee | 0001411A Skyrim.esm | Tạm bỏ qua | Argonian |
 
 Loại sau khi xem ảnh: Swan, Elven Lake (kiểu bikini); Clothes Pack 4, Wayward Knight, Gothic Babe (hiện đại/anime);
 Obi's Leather Outfit, Shino Tribal Huntress (quá hở). Loại vì bắt buộc SMP: Lady Ritual, Tribal Clothes, Silver Knight,
