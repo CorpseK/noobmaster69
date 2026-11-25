@@ -50,3 +50,30 @@ DD Exquisite Cloth (hiện đại), Vintage Roses, COCO Luscious Lady (anime/h�
 3. Đọc plugin lấy FormID Armor/Outfit. Mod nào không có Outfit thì tạo plugin ESL nhỏ chứa `OTFT`
    (mỗi NPC một Outfit; có thể trỏ vào leveled list để có biến thể).
 4. Viết `SpouseOutfits_DISTR.ini`, lọc theo base ID ở bảng trên.
+
+# Follower nữ (housecarl, hireling, follower lẻ)
+Phạm vi (người dùng chốt): housecarl (có mod AIO đổi **mọi** housecarl thành nữ), hireling nữ, follower lẻ.
+Follower thuộc phe lớn (Companions, College, Dawnguard...) giữ đồng phục phe trong game, không làm.
+Quy tắc như nhóm vợ: 3BA, không SMP (COCO/Daymarr chạy với CBPC), không bikini/hiện đại/crossover, không lặp mod của vợ.
+
+| Follower | Nơi | Đề xuất (ID Nexus) | Ghi chú |
+|---|---|---|---|
+| Lydia | Whiterun | Deze Armor – **Whiterun** bản A (49318) | Tác giả làm cho Irileth (Whiterun) |
+| Argis the Bulwark | Markarth | Deze Armor – **Dwemer** (49318) | Tác giả làm cho Faleen (Markarth) |
+| Iona | Riften | ELLE – Ginnungagap 3BA (97931) | Da tối, mặt nạ, hợp Riften |
+| Jordis the Sword-Maiden | Solitude | COCO Goddess Of War V2 (78335), bản bạc | Imperial Centurion Battle Dress bị loại (SMP skirt) |
+| Calder | Windhelm | Nord Steelheart (110922 + 3BA 111014) | Lông + thép, hợp Eastmarch lạnh |
+| Gregor | Dawnstar | Sovngarde Steel Armor (76115, file 3BA) | Thép Nord |
+| Valdimar | Morthal | Iron Battlemage Armor 3BA (73162) | Valdimar là spellsword (Alteration/Destruction/Restoration) |
+| Rayya | Falkreath (Redguard) | Redguard Noble Armor (59396) / NSFW: Daymarr Yokuda (142696) | Redguard Noble cần kiểm tra hỗ trợ body nữ |
+| Jenassa | Hireling, Whiterun | West Wind – Assault Armor 3BA (128266) | Lính đánh thuê kiểu sát thủ |
+| Mjoll the Lioness | Riften | Daymarr Guardian Goddess (137926) | Paladin vàng-trắng |
+| Uthgerd the Unbroken | Whiterun | Deze Armor – **Steel Plate B** (49318) | Tác giả làm cho Uthgerd |
+| Annekke Crag-Jumper | Darkwater Crossing | Wayward Ranger Armor 3BA, đủ giáp (124246) | Ranger |
+| Eola | Markarth (Namira) | Daymarr Shadow Knight (119080) | Mũ trùm tối, hợp giáo phái |
+| Aranea Ienith | Shrine of Azura | **Chưa có** | Champion of Azura (latex đỏ) bị loại |
+| Illia | Darklight Tower | **Chưa có** | Pháp sư |
+| Serana, Borgakh, Ugor | | **Chờ người dùng quyết** | Serana (Volkihar) / Orc stronghold có tính là phe không |
+
+Loại vòng follower: Daring Tribunal Robes (ngực trần), Brazen Assassin, Dangerous Gladiator, Black Widow,
+Daggerfall Archmage (kiểu bikini/dây), Dovakini (anime), Ebony Armor Kai (SMP), Champion of Azura (latex).
