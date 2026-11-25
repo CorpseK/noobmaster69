@@ -24,17 +24,17 @@ mình phải thắng. Các bộ COCO ghi "HDT-SMP hoặc CBPC" nên chạy với
 | Senna | 000133B7 Skyrim.esm | **COCO Caress of Venus (68006)**, đã chốt | NSFW |
 | Taarie | 000132AB Skyrim.esm | COCO Scarlet Rose (65109) | |
 | Dravynea | 0001365F Skyrim.esm | **Deze Mage** (50446), chọn bộ court wizard/College | Thay Snow Queen |
-| Muiri | 0001406B Skyrim.esm | **Deze Alchemist** + Crafter boots (50446) | Thay Skyforge Assassins |
+| Muiri | 0001406B Skyrim.esm | **CHỐT: Skyforge Assassins (87465)** | Váy ren đen; SMP hoặc CBPC |
 | Avrusa Sarethi | 00019BFE Skyrim.esm | **Deze Alchemist** + Crafter boots (50446) | Khác màu/biến thể với Muiri nếu có |
 | Ghorza gra-Bagol | 0001339A Skyrim.esm | **Deze Blacksmith** + Crafter boots (50446) | |
-| Morwen | 018FA9 Dragonborn.esm | **Deze Blacksmith** + Crafter boots (50446) | Học việc thợ rèn |
+| Morwen | 018FA9 Dragonborn.esm | **CHỐT: ELLE Tribal Scout 3BA (95333)** | Bộ lạc, hợp Skaal |
 | Sylgja | 000C3A3F Skyrim.esm | **Deze Blacksmith/Alchemist apron** + Crafter boots (50446) | Thợ mỏ |
 | Ysolda | 00013BAB Skyrim.esm | **Deze Dealer** (50446) | Tác giả làm riêng cho Ysolda |
 | Hilund | 01A515 Dragonborn.esm | **Deze Armor – Steel Plate A (có váy)** (49318) | Đổi từ Bladedancer's Edge theo yêu cầu |
 | Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | |
 | Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | |
 | Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | |
-| Aeri | 0001360B Skyrim.esm | Wayward Ranger Armor 3BA (124246): chỉ dùng **outfit mặc trong** (6 màu) + mũ trùm + túi đeo, không mặc giáp kim loại | Không SMP. Phương án 2: C5Kev's Flirty In Fur (64072), lông + da, hở eo hơn. Ark Nordic bị loại (giống vanilla quá) |
+| Aeri | 0001360B Skyrim.esm | **CHỐT: C5Kev's Flirty In Fur (64072)** | Áo lông + váy da, hở eo |
 | Gilfre | 0001367A Skyrim.esm | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | Áo khoác da đi đường, kín. Phương án 2: Ark bản xanh (0x12C6 / 0x22F8) |
 | Shahvee | 0001411A Skyrim.esm | Tạm bỏ qua | Argonian |
 
