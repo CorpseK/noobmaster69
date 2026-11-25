@@ -34,7 +34,7 @@ mình phải thắng. Các bộ COCO ghi "HDT-SMP hoặc CBPC" nên chạy với
 | Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | |
 | Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | |
 | Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | |
-| Aeri | 0001360B Skyrim.esm | Ark Female Nordic Clothing 3BA (128883), outfit `Ark_NorseFemaleOutfit` (0x12C7) hoặc `_2` (0x22F7) | Có sẵn OTFT trong plugin. Xóa thư mục SKSE của mod nếu không muốn SkyPatcher chia cho dân Whiterun |
+| Aeri | 0001360B Skyrim.esm | Wayward Ranger Armor 3BA (124246): chỉ dùng **outfit mặc trong** (6 màu) + mũ trùm + túi đeo, không mặc giáp kim loại | Không SMP. Phương án 2: C5Kev's Flirty In Fur (64072), lông + da, hở eo hơn. Ark Nordic bị loại (giống vanilla quá) |
 | Gilfre | 0001367A Skyrim.esm | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | Áo khoác da đi đường, kín. Phương án 2: Ark bản xanh (0x12C6 / 0x22F8) |
 | Shahvee | 0001411A Skyrim.esm | Tạm bỏ qua | Argonian |
 
