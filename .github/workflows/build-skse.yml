@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mod: [SpellBuffs, LightPockets, GMSTTweaks, KillRestore, ImmersiveRecruit, GenderShift, RelicHunter, TNGPlayerOnly]
+        mod: [SpellBuffs, LightPockets, GMSTTweaks, KillRestore, ImmersiveRecruit, GenderShift, RelicHunter, TNGPlayerOnly, DOMTalkGate]
     env:
       VCPKG_COMMIT: 5d4a3dc90c0b3773f3bac81bf41297b54328f471
       # Built vcpkg packages are kept between runs (faster, fewer download failures).

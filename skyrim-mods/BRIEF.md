@@ -49,12 +49,14 @@
 | LightPockets | 0.1.0 | chưa test | Ingredient, potion, poison, soul gem, lockpick, key, scroll không cân nặng (INI) |
 | GMSTTweaks | 0.1.0 | chưa test | Đổi GMST bằng INI, thay ESP chỉ để sửa số |
 | KillRestore | 0.1.0 | chưa test | Player giết địch → hồi % Health/Magicka/Stamina |
+| DOMTalkGate (NSFW) | 0.1.0 | chưa test | Add-on cho Diary of Mine 8.5.6f: thoại DOM với NPC chưa capture chỉ hiện `iWindowSeconds` (30s) sau khi cast Training Info (kéo dài `DOMTrainingInfoEffect` 0x5BD55A + thêm điều kiện `HasMagicEffect` vào 37 dòng mở đầu) |
 
 Ngoài ra `skyrim-mods/tools/` có script Python (NIF, FaceGen, ESP, BSA) chạy trên máy nhà.
 
 Lưu ý: GenderShift và RelicHunter cùng hook `CalculateCurrentFormList`. Detours tự nối hai hook nên dùng chung được.
 
 ## Việc còn lại / ý tưởng
+- Diary of Mine: delay lúc capture có clone (`DOM_SlaveManager.Capture` → `DOM_Core.CloneAndCopyActor`). Cần đo bằng Papyrus log trước khi sửa.
 - Test RelicHunter, LightPockets, GMSTTweaks, KillRestore.
 - SpellBuffs: mở khóa móc đồ đang mặc/cầm khi NPC bị paralyze (vanilla cần perk Misdirection / Perfect Touch,
   perk entry `kCanPickpocketEquippedItem`).

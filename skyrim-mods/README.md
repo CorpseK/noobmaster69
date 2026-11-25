@@ -14,6 +14,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | [GenderShift](GenderShift/) | NPC spawn từ leveled list (bandit, Forsworn...) đổi tỉ lệ nam/nữ; có chế độ cả trại toàn nam hoặc toàn nữ | v0.1.0, đã test in-game |
 | [RelicHunter](RelicHunter/) | Loot random (rương, xác, đồ NPC, merchant) dễ ra relic LotD mà The Curator's Companion báo là còn thiếu | v0.1.0, chưa test in-game |
 | [TNGPlayerOnly](TNGPlayerOnly/) | (NSFW) Add-on cho The New Gentleman: chỉ player có addon, NPC giữ skin gốc | v0.2.0, đã test in-game |
+| [DOMTalkGate](DOMTalkGate/) | (NSFW) Add-on cho Diary of Mine: thoại DOM với NPC chưa capture chỉ hiện 30s sau khi cast spell Training Info | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 
