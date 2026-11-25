@@ -60,7 +60,7 @@ Lưu ý: GenderShift và RelicHunter cùng hook `CalculateCurrentFormList`. Deto
 - Test RelicHunter, LightPockets, GMSTTweaks, KillRestore.
 - SpellBuffs: mở khóa móc đồ đang mặc/cầm khi NPC bị paralyze (vanilla cần perk Misdirection / Perfect Touch,
   perk entry `kCanPickpocketEquippedItem`).
-- Ý tưởng cũ (trade đồ default của follower) nằm trên máy ở nhà → **bỏ**, không làm lại.
+- Ý tưởng cũ (trade đồ default của follower) nằm trên máy ở nhà → **đã xong và chạy tốt**, không làm lại.
 
 ## Yêu cầu cho chat mới
 Làm thêm hoặc sửa mod SKSE (không ESP) theo đúng cấu trúc và cách build ở trên, push lên `main`, xem CI build có
