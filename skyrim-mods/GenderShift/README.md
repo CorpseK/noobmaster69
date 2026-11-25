@@ -33,25 +33,13 @@ Vigilant, Thalmor patrol, mercenary...). Không có ESP.
 ## Cài
 Copy `SKSE/Plugins/GenderShift.dll` và `SKSE/Plugins/GenderShift.ini` vào `Data/`.
 
-## Cần test in-game
-Bật `bVerboseLog=1` khi test. Log nằm ở `Documents/My Games/Skyrim Special Edition/SKSE/GenderShift.log`.
-
-- [ ] Log có `Hooked CalculateCurrentFormList at 0x...` và dòng `Config: ...` đúng với INI.
-- [ ] **Quan trọng nhất:** vào một trại bandit/Forsworn **chưa từng ghé**. Log có dòng
-      `xxxxxxxx 'Forsworn' -> yyyyyyyy 'Forsworn' (female)`. Nếu không có dòng nào thì có thể game không chọn
-      leveled actor qua hàm này → báo lại kèm log.
-- [ ] `iMode=1`, `fFemaleChance=50`: cả trại cùng một giới tính (trừ boss chỉ có một giới, vd. Briarheart).
-      Log có `New group: female/male` mỗi lần vào trại.
-- [ ] `fFemaleChance=100`: trại bandit toàn nữ. `fFemaleChance=0`: toàn nam.
-- [ ] `iMode=0`: trong trại có lẫn cả nam lẫn nữ.
-- [ ] Briarheart vẫn là nam. NPC có tên (Jarl, chủ quán, follower) không đổi.
-- [ ] NPC bị đổi có mặt đúng, không bị **mặt đen/cổ lệch màu** (bản nữ dùng FaceGen vanilla của nó).
-- [ ] Vũ khí/giáp/level của NPC bị đổi hợp lý (bản cung thủ vẫn cầm cung, không mạnh hơn bản gốc).
-- [ ] Động vật (sói, gấu) không bị ảnh hưởng (`bOnlyHumanoid=1`).
-- [ ] Đồ trong rương/loot leveled vẫn bình thường (hook chỉ xử lý leveled list nhân vật).
-- [ ] Save, thoát game, load lại: NPC đã spawn giữ nguyên giới tính.
-- [ ] Gỡ dll giữa chừng: load save không lỗi, các trại mới spawn lại như vanilla.
-- [ ] Để ý FPS/khựng khi vào cell lớn: lần đầu gặp một list, mod duyệt cây list một lần rồi cache lại.
+## Gỡ lỗi
+Đã test in-game (11/2026, AE 1.6.1170). Khi có vấn đề, bật `bVerboseLog=1` rồi xem
+`Documents/My Games/Skyrim Special Edition/SKSE/GenderShift.log`:
+- `Hooked CalculateCurrentFormList at 0x...` → hook đã cài.
+- `New group: female/male` → mỗi lần một nhóm (trại) được tung xúc xắc.
+- `xxxxxxxx '...' -> yyyyyyyy '...' (female)` → một NPC đã được đổi.
+- `kept: no ... counterpart` → list không có bản khác giới, giữ nguyên (vd. Briarheart).
 
 ## Lịch sử
 - 0.1.0: bản đầu.

@@ -53,25 +53,14 @@ Vì thế (`bVanillaBodyForNPCs=1`) mod tạo bản sao các ARMA thân/bàn ch�
 ## Cài
 Copy `SKSE/Plugins/TNGPlayerOnly.dll` và `SKSE/Plugins/TNGPlayerOnly.ini` vào `Data/`. Vẫn giữ TNG như cũ.
 
-## Cần test in-game
-Bật `bVerboseLog=1` khi test. Log nằm ở `Documents/My Games/Skyrim Special Edition/SKSE/TNGPlayerOnly.log`.
-
-- [ ] Log có `Indexed N candidate original skins`, `Initial pass: reverted X race skins and Y NPC skins`
-      (X > 0), `Hooked Character::Load3D`, `TNGPlayerOnly ready`.
-- [ ] Log **không** có (hoặc rất ít) dòng `No original skin found`. Có thì gửi log để xem skin nào.
-- [ ] Player (nam) vẫn có addon. Chỉnh size/addon cho player trong MCM của TNG vẫn ăn.
-- [ ] NPC nam (guard, bandit, NPC race mod như Bretons/Khajiit/Argonian) khi cởi đồ **không** có addon.
-- [ ] NPC có skin riêng (follower mod, vd. có body riêng) vẫn giữ body/skin của họ, chỉ mất addon.
-- [ ] NPC thay đồ / bị lột đồ → không có addon xuất hiện lại (có thể nháy 1 frame).
-- [ ] NPC nữ không có addon "Gentlewoman" (kể cả khi TNG để tỉ lệ ngẫu nhiên 20%).
-- [ ] Dùng hotkey NPC edit của TNG để gắn addon cho một NPC → bị gỡ lại (đúng thiết kế: chỉ player).
-- [ ] Đổi race player bằng `showracemenu` → player vẫn có addon sau khi đóng menu.
-- [ ] Save/load, fast travel, vào/ra cell: không crash, kết quả giữ nguyên.
-- [ ] `bEnabled=0` → mọi thứ như TNG gốc.
-- [ ] (0.2.0) Log có `Vanilla body for NPCs: N body/feet ARMAs copied` (N > 0).
-- [ ] (0.2.0) NPC nam cởi đồ mặc quần lót vanilla, không thủng. Không có khe hở ở cổ chân / cổ tay.
-- [ ] (0.2.0) NPC nam mặc giáp: quần lót không xuyên qua giáp.
-- [ ] (0.2.0) Player vẫn dùng thân TNG + addon, kể cả sau khi đổi addon/size trong MCM.
+## Gỡ lỗi
+Đã test in-game (11/2026, AE 1.6.1170). Khi có vấn đề, bật `bVerboseLog=1` rồi xem
+`Documents/My Games/Skyrim Special Edition/SKSE/TNGPlayerOnly.log`:
+- `Initial pass: reverted X race skins and Y NPC skins` (X > 0) và `TNGPlayerOnly ready` → mod đã chạy.
+- `Vanilla body for NPCs: N body/feet ARMAs copied` (N > 0) → thân vanilla đã gắn. NPC nam bị vô hình thì kiểm tra
+  4 file mesh vanilla (xem mục *Thân vanilla cho NPC*).
+- `No original skin found` → skin đó không tìm được bản gốc, giữ nguyên skin TNG. Gửi log để xem skin nào.
+- `Reverted TNG skin on ...` → TNG vừa gắn lại addon cho NPC và mod đã gỡ.
 
 ## Lịch sử
 - 0.2.0: NPC nam dùng thân vanilla có quần lót (hết bị thủng ở háng). Thêm `bVanillaBodyForNPCs`.
