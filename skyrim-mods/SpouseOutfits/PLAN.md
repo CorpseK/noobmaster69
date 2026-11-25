@@ -30,12 +30,12 @@ mình phải thắng. Các bộ COCO ghi "HDT-SMP hoặc CBPC" nên chạy với
 | Morwen | 018FA9 Dragonborn.esm | **Deze Blacksmith** + Crafter boots (50446) | Học việc thợ rèn |
 | Sylgja | 000C3A3F Skyrim.esm | **Deze Blacksmith/Alchemist apron** + Crafter boots (50446) | Thợ mỏ |
 | Ysolda | 00013BAB Skyrim.esm | **Deze Dealer** (50446) | Tác giả làm riêng cho Ysolda |
-| Hilund | 01A515 Dragonborn.esm | **Bladedancer's Edge (62751)**, đã chốt | Phương án Deze: Steel Plate A (49318) |
+| Hilund | 01A515 Dragonborn.esm | **Deze Armor – Steel Plate A (có váy)** (49318) | Đổi từ Bladedancer's Edge theo yêu cầu |
 | Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | |
 | Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | |
 | Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | |
-| Aeri | 0001360B Skyrim.esm | **CÒN THIẾU** | Thợ đốn gỗ |
-| Gilfre | 0001367A Skyrim.esm | **CÒN THIẾU** | Chủ xưởng gỗ |
+| Aeri | 0001360B Skyrim.esm | Ark Female Nordic Clothing 3BA (128883), outfit `Ark_NorseFemaleOutfit` (0x12C7) hoặc `_2` (0x22F7) | Có sẵn OTFT trong plugin. Xóa thư mục SKSE của mod nếu không muốn SkyPatcher chia cho dân Whiterun |
+| Gilfre | 0001367A Skyrim.esm | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | Áo khoác da đi đường, kín. Phương án 2: Ark bản xanh (0x12C6 / 0x22F8) |
 | Shahvee | 0001411A Skyrim.esm | Tạm bỏ qua | Argonian |
 
 Loại sau khi xem ảnh: Swan, Elven Lake (kiểu bikini); Clothes Pack 4, Wayward Knight, Gothic Babe (hiện đại/anime);
