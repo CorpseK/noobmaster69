@@ -65,15 +65,15 @@ Quy tắc như nhóm vợ: 3BA, không SMP (COCO/Daymarr chạy với CBPC), kh�
 | Calder | Windhelm | Nord Steelheart (110922 + 3BA 111014) | Lông + thép, hợp Eastmarch lạnh |
 | Gregor | Dawnstar | Sovngarde Steel Armor (76115, file 3BA) | Thép Nord |
 | Valdimar | Morthal | Iron Battlemage Armor 3BA (73162) | Valdimar là spellsword (Alteration/Destruction/Restoration) |
-| Rayya | Falkreath (Redguard) | Redguard Noble Armor (59396) / NSFW: Daymarr Yokuda (142696) | Redguard Noble cần kiểm tra hỗ trợ body nữ |
+| Rayya | Falkreath (Redguard) | **CHỐT: Daymarr Yokuda (142696)** | Chủ đề Redguard/Hammerfell; hở; SMP hoặc CBPC |
 | Jenassa | Hireling, Whiterun | West Wind – Assault Armor 3BA (128266) | Lính đánh thuê kiểu sát thủ |
 | Mjoll the Lioness | Riften | Daymarr Guardian Goddess (137926) | Paladin vàng-trắng |
 | Uthgerd the Unbroken | Whiterun | Deze Armor – **Steel Plate B** (49318) | Tác giả làm cho Uthgerd |
 | Annekke Crag-Jumper | Darkwater Crossing | Wayward Ranger Armor 3BA, đủ giáp (124246) | Ranger |
 | Eola | Markarth (Namira) | **Draugr Halloween / "Draugr Wanderer" Outfit** (41883, file 3BAv2) | Vải mục, xương kiểu draugr: hợp Namira (mục rữa, sâu bọ). Phương án 2: Daymarr Shadow Knight (119080) |
-| Aranea Ienith | Shrine of Azura | Telvanni Spellsword Armor SE (15830, file CBBE BodySlide) | Áo choàng-giáp Dunmer. Chỉ có CBBE thường, không phải 3BA riêng |
-| Illia | Darklight Tower | Mage Robes 3BA (23112) | Áo choàng phù thủy, hợp người sống giữa hagraven. Sorceress Armor bị loại (bắt buộc SMP) |
-| Serana | Volkihar | Hunting Grounds Outfit (bản gốc + 3BA 63986) / ELLE Dark Rebel 3BA (102957) | Váy tối thanh lịch kiểu quý tộc săn đêm, không còn "giáp vampire" |
+| Aranea Ienith | Shrine of Azura | Hdm's Warrior of Dusk 3BA (157610) | Azura là thần của hoàng hôn và bình minh: bộ "Dusk" trắng-vàng. Hở. Phương án 2: COCO Twilight Sorceress (102730, hở hơn). Dự phòng kín: Telvanni Spellsword (15830, CBBE) |
+| Illia | Darklight Tower | Forsworn Fashions 3BA (66673), dùng file **Static** (không physics) | Lông, lông vũ, gai: đúng chất Forsworn/hagraven. Phương án 2: Wilderness Witch (gốc 40963 + 3BA 40845), kín hơn |
+| Serana | Volkihar | **CHỐT: ELLE Dark Rebel 3BA (102957)** | Giáp nhẹ + áo khoác tối |
 | Frea | Skaal | Dragonbone Barbarian 3BA (47466, cần bản gốc của Shocky) | Lông + xương rồng, chiến binh phương Bắc thay vì đồ giống cướp |
 | Borgakh the Steel Heart | Mor Khazgur | Orcish Marauder Armor 3BA (64629) | Warrior giáp nặng; vẫn chất Orc nhưng là bộ mới, không phải giáp Orcish vanilla |
 | Ugor | Largashbur | C5Kev's Lacey Ranger Armor 3BA (103426) | Ranger (bắn cung, giáp nhẹ) |
