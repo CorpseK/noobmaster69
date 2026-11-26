@@ -93,6 +93,8 @@ Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com
 trên UESP, món Heavy Armory (HA) / Immersive Weapons (IW) có trang trên wiki LotD. Kỹ năng follower lấy từ UESP
 (Skyrim:Followers). Quy tắc: có One-handed + Block → 1 tay + khiên; Two-handed → 2 tay; có Archery → thêm cung/nỏ;
 pháp sư không có kỹ năng vũ khí → không cầm vũ khí cận chiến. Housecarl cầm khiên lính gác của Hold mình (vanilla).
+Người dùng có **Guards Armor Replacer** (NordwarUA): nó thay hình đồ lính gác theo từng Hold, nên các khiên lính gác này
+sẽ mang kiểu GAR của Hold đó, không cần thêm record. Markarth của GAR làm từ quặng Dwemer, hợp giáp Deze Dwemer của Argis.
 Không dùng đồ unique trưng bày ở museum (Grimsever, vũ khí Thane...).
 Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel Crossbow" của LotD = "Crossbow" (Dawnguard) trên UESP.
 
@@ -118,7 +120,7 @@ Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel 
 | Follower | Kỹ năng chính (UESP) | Vũ khí chính | Khiên | Cung/nỏ |
 |---|---|---|---|---|
 | Lydia (Whiterun) | Heavy, 1H, Archery, Block | Steel Longsword (IW) | Whiterun Guard's Shield | Nord Hero Bow |
-| Argis (Markarth) | Heavy, 1H, Archery, Block | Eastern Dwemer Sword (IW) | Dwarven Shield | Dwarven Crossbow |
+| Argis (Markarth) | Heavy, 1H, Archery, Block | Eastern Dwemer Sword (IW) | Markarth Guard's Shield | Dwarven Crossbow |
 | Iona (Riften) | Heavy, 1H, Archery, Block | Nord Hero Shortsword (HA) | Riften Guard's Shield | Nordic Scrimshaw Bow (IW) |
 | Jordis (Solitude) | Heavy, 1H, Archery, Block | Silver Longsword (IW) | Solitude Guard's Shield | Imperial Bow |
 | Calder (Windhelm) | Heavy, 1H, Archery, Block | Nordic War Axe (vanilla) | Windhelm Guard's Shield | Nordic Bow |
