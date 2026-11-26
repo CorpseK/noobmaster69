@@ -214,3 +214,22 @@ Chưa chọn đồ: chờ người dùng chọn NPC sẽ rủ đi cùng (Immersi
 | Silda the Unseen | Nord | Thief | 00014121 | Windhelm | Quest all Beggars Have |
 | Sybille Stentor | Breton | Destruction Mage | 000132AA | Solitude | Kill the Vampire |
 | Vigdis Salvius | Elder | Farmer | 000133BF | Markarth | Gather Wheat |
+
+## Lọc lại (người dùng: bỏ người đã có chồng/con, bà già, người có việc quan trọng)
+Kiểm tra trên trang NPC của UESP.
+- **Có chồng/con:** Adrianne Avenicci, Alfhild Battle-Born, Beitild, Boti, Grosta, Hert, Hillevi Cruel-Sea, Katla, Olda,
+  Reldith (con nuôi Ennis), Synda Llanith, Dinya Balu, Lami, Arob, Gharol, Shuftharz (con trai Olur), Iddra.
+- **Việc quan trọng:** Wylandriah (court wizard), Idgrod the Younger (con Jarl, chăm Joric), Danica Pure-Spring (trưởng
+  đền Kynareth, trainer), Fanari Strong-Voice (trưởng làng Skaal), Angeline Morrard (chủ tiệm), cả nhóm buôn bán/quán,
+  cả nhóm "cần cân nhắc".
+- **Còn lại (7):**
+
+| NPC | Base ID | Ghi chú |
+|---|---|---|
+| Bolfrida Brandy-Mug | 00014126 | Nông dân Nord, sống một mình với dê và gà gần Windhelm |
+| Ganna Uriel | 0001365D | Imperial, thợ gỗ/thợ mỏ ở Kynesgrove, sống cùng chị Gemma |
+| Voada | 000133C0 | Breton, phụ bếp ở Understone Keep (Markarth), trông chó |
+| Wujeeta | 00013382 | Argonian, làm ở xưởng cá Riften, đang cai skooma |
+| Alessandra | 00013347 | Imperial, nữ tu Arkay một mình trông Hall of the Dead (Riften); con gái Andurs. Ranh giới: không có quest/dịch vụ hỏng nếu cô đi |
+| Bagrak | 00019955 | Orc warrior Mor Khazgur, em gái Chief Larak, góa chồng ("late husband"), không con |
+| Yatul | 0001B077 | Orc ranger Narzulbur, cô của Chief; không chồng con; nghi là kẻ đầu độc các vợ chief |
