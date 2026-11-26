@@ -89,43 +89,50 @@ Daggerfall Archmage (kiểu bikini/dây), Dovakini (anime), Ebony Armor Kai (SMP
 Moon Feather Shaman (quá hở), Volkihar Assassin (FSMP, lại là vampire), Sorceress Armor (SMP), Daring Stormhold Warrior (hở ngực).
 
 # Vũ khí
-Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com): vũ khí vanilla, **Heavy Armory (HA)**
-và **Immersive Weapons (IW)** theo chất liệu. Chọn theo nghề, quê quán, chất liệu bộ giáp.
-Lưu ý: SPID chỉ thêm vũ khí vào túi; NPC tự chọn vũ khí theo kỹ năng/AI, có thể vẫn dùng vũ khí cũ nếu nó mạnh hơn.
-Đưa vũ khí cho follower thì người chơi lấy lại được, và bản đó tính cho phòng Armory của museum.
+Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com), kiểm tra chéo: món vanilla có trang
+trên UESP, món Heavy Armory (HA) / Immersive Weapons (IW) có trang trên wiki LotD. Kỹ năng follower lấy từ UESP
+(Skyrim:Followers). Quy tắc: có One-handed + Block → 1 tay + khiên; Two-handed → 2 tay; có Archery → thêm cung/nỏ;
+pháp sư không có kỹ năng vũ khí → không cầm vũ khí cận chiến. Housecarl cầm khiên lính gác của Hold mình (vanilla).
+Không dùng đồ unique trưng bày ở museum (Grimsever, vũ khí Thane...).
+Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel Crossbow" của LotD = "Crossbow" (Dawnguard) trên UESP.
 
-| Nhân vật | Vũ khí | Nguồn | Lý do |
-|---|---|---|---|
-| Aeri | Iron Hatchet | HA | Rìu nhỏ của thợ đốn gỗ |
-| Gilfre | Iron Double Axe | IW | Rìu hai lưỡi to, chủ xưởng gỗ |
-| Temba Wide-Arm | Iron Hunter's Spear + Hunting Bow | IW + vanilla | Săn gấu |
-| Sylgja | Nordic War Pick | IW | Cuốc chiến cho thợ mỏ |
-| Avrusa Sarethi | Glass Dagger | vanilla | Dunmer, chất liệu Morrowind |
-| Muiri | Forsworn Dagger | HA | Sống ở Markarth (xứ Reach) |
-| Camilla Valerius | Imperial Dagger | HA | Imperial |
-| Ysolda | Iron Shortsword | HA | Lái buôn đi đường |
-| Taarie | Elven Shortsword | HA | Altmer, thanh lịch |
-| Viola Giordano | Imperial Shortsword | HA | Imperial, đi tuần |
-| Ghorza gra-Bagol | Orcish Maul | HA | Thợ rèn Orc |
-| Morwen | Stalhrim Hatchet | HA | Thợ rèn Skaal, chất liệu Solstheim |
-| Hilund | Nordic Long Mace | HA | Gốc dùng chùy Nordic; Nordic là chất liệu Solstheim |
-| Dravynea, Anwen, Orla, Senna | Không | | Pháp sư / nữ tu |
-| Lydia (Whiterun) | Steel Longsword + khiên | IW | Phương án: The Sword of Whiterun (vũ khí Thane của LotD) |
-| Argis (Markarth) | Eastern Dwemer Sword | IW | Hợp giáp Deze Dwemer |
-| Iona (Riften) | Nord Hero Shortsword | HA | Hợp Ginnungagap kiểu Norse |
-| Jordis (Solitude) | Silver Longsword | IW | Hợp giáp bạc |
-| Calder (Windhelm) | Nord Hero Double Axe | IW | Giáp nặng Nord |
-| Gregor (Dawnstar) | Steel Long Mace | HA | Vũ khí Thane của Dawnstar cũng là chùy |
-| Valdimar (Morthal) | Steel Battle Staff | IW | Spellsword / battlemage |
-| Rayya (Falkreath) | Glass Scimitar | IW | Redguard + Yokuda |
-| Jenassa | Elven Hawk Bow + Steel Tanto | IW | Cung thủ, sát thủ |
-| Mjoll | Grimsever (giữ nguyên) | vanilla | Kiếm riêng của cô |
-| Uthgerd | Steel Spiked Club | HA | Dân đấu tay đôi |
-| Annekke Crag-Jumper | Steel War Pick + Hunting Bow | IW + vanilla | Mẹ của Sylgja, dân mỏ + ranger |
-| Eola | Honed Ancient Nord Dagger | HA | Chủ đề draugr/mục rữa |
-| Aranea Ienith | Glass Quarterstaff | IW | Ánh sao của Azura |
-| Illia | Forsworn Staff | vanilla | Hagraven/Forsworn |
-| Serana | Daedric Tanto | IW | Tối màu; tránh Silver (khắc chế vampire) |
-| Frea | Stalhrim Spear | HA | Skaal, Solstheim |
-| Borgakh | Orcish Saber | IW | Kiếm Orc gọn, hợp người rời stronghold |
-| Ugor | Orcish Bow + Orcish Hatchet | vanilla + HA | Ranger |
+## Nhóm vợ (không phải follower, chỉ vũ khí theo nghề; cung chỉ cho người đi săn)
+| Nhân vật | Vũ khí | Nguồn |
+|---|---|---|
+| Aeri | Iron Hatchet | HA |
+| Gilfre | Iron Double Axe | IW |
+| Temba Wide-Arm | Iron Hunter's Spear + Hunting Bow | IW + vanilla |
+| Sylgja | Nordic War Pick | IW |
+| Avrusa Sarethi | Glass Dagger | vanilla |
+| Muiri | Forsworn Dagger | HA |
+| Camilla Valerius | Imperial Dagger | HA |
+| Ysolda | Iron Shortsword | HA |
+| Taarie | Elven Shortsword | HA |
+| Viola Giordano | Imperial Shortsword | HA |
+| Ghorza gra-Bagol | Orcish Maul | HA |
+| Morwen | Stalhrim Hatchet | HA |
+| Hilund | Nordic Long Mace | HA |
+| Dravynea, Anwen, Orla, Senna | Không | |
+
+## Follower
+| Follower | Kỹ năng chính (UESP) | Vũ khí chính | Khiên | Cung/nỏ |
+|---|---|---|---|---|
+| Lydia (Whiterun) | Heavy, 1H, Archery, Block | Steel Longsword (IW) | Whiterun Guard's Shield | Nord Hero Bow |
+| Argis (Markarth) | Heavy, 1H, Archery, Block | Eastern Dwemer Sword (IW) | Dwarven Shield | Dwarven Crossbow |
+| Iona (Riften) | Heavy, 1H, Archery, Block | Nord Hero Shortsword (HA) | Riften Guard's Shield | Nordic Scrimshaw Bow (IW) |
+| Jordis (Solitude) | Heavy, 1H, Archery, Block | Silver Longsword (IW) | Solitude Guard's Shield | Imperial Bow |
+| Calder (Windhelm) | Heavy, 1H, Archery, Block | Nordic War Axe (vanilla) | Windhelm Guard's Shield | Nordic Bow |
+| Gregor (Dawnstar) | Heavy, 1H, Archery, Block | Steel Long Mace (HA) | Pale Guard's Shield | Steel Crossbow |
+| Rayya (Falkreath) | Heavy, 1H, Archery, Block | Glass Scimitar (IW) | Falkreath Guard's Shield | Glass Bow |
+| Valdimar (Morthal) | Heavy, 1H, Alteration, Destruction, Restoration | Honed Ancient Nord War Axe | Không (không có Block) | Không (không có Archery) |
+| Jenassa | Archery, Light, Block, 1H | Steel Tanto (IW) | Elven Shield | Elven Hawk Bow (IW) |
+| Mjoll the Lioness | Heavy, **2H**, Archery, Block | Elven Great Blade (IW) | Không (2 tay) | Elven Bow |
+| Uthgerd the Unbroken | Heavy, 1H, Archery, Block | Steel Spiked Club (HA) | Steel Shield | Ancient Nord Bow |
+| Annekke Crag-Jumper | Archery, Light, Block, 1H | Steel War Pick (IW) | Hide Shield | Hunting Bow |
+| Borgakh the Steel Heart | Heavy, 1H, Archery, Sneak | Orcish Saber (IW) | Không (không có Block) | Ebony Bow |
+| Ugor | Archery, Light, Block, 1H | Orcish Hatchet (HA) | Orcish Shield | Orcish Bow |
+| Eola | Destruction, Sneak, Alteration, 1H | Honed Ancient Nord Dagger (HA) | Không | Không |
+| Serana | Sneak, Conjuration, Light, 1H | Daedric Tanto (IW) | Không | Không |
+| Frea | 1H, Alteration, Light, Restoration | Stalhrim Shortspear (HA, 1 tay) | Không | Không |
+| Aranea Ienith | Destruction, Restoration, Alteration, Conjuration | Không (phép) | Không | Không |
+| Illia | Destruction, Restoration, Alteration, Conjuration | Forsworn Staff (gậy phép vanilla) | Không | Không |
