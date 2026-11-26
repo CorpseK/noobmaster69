@@ -6,14 +6,14 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-# --- CommonLibSSE-NG (pinned commit) -------------------------------------
+# --- CommonLibSSE-NG, maintained fork (alandtse/CommonLibVR, ng branch) -----
 include(FetchContent)
 set(BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(ENABLE_SKYRIM_VR OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
 	CommonLibSSE
-	GIT_REPOSITORY https://github.com/CharmedBaryon/CommonLibSSE-NG.git
-	GIT_TAG b93280e832f263dbef44e44cbe2936622a02f91a
+	GIT_REPOSITORY https://github.com/alandtse/CommonLibVR.git
+	GIT_TAG 7c27a75da3eb0db080c1f1f63f6df1b7cd733c2a # v16.12.0 (maintained CommonLibSSE-NG fork, game 1.7.x support)
 )
 FetchContent_MakeAvailable(CommonLibSSE)
 

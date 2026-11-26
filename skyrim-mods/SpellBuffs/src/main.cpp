@@ -121,7 +121,7 @@ namespace
 				auto* target = a_targetRef ? a_targetRef->As<RE::Actor>() : nullptr;
 				if (CanPickpocketParalyzed(target)) {
 					SKSE::log::info("Pickpocket on paralyzed {:08X} '{}'", target->GetFormID(), target->GetName());
-					target->OpenContainer(static_cast<std::int32_t>(RE::ContainerMenu::ContainerMode::kPickpocket));
+					RE::ContainerMenu::OpenMenu(target, RE::ContainerMenu::ContainerMode::kPickpocket);
 					return true;
 				}
 			}

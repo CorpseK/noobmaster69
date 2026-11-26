@@ -80,7 +80,7 @@ namespace
 			return;
 		}
 		// Restores damage only: never goes above the current maximum.
-		avOwner->RestoreActorValue(RE::ACTOR_VALUE_MODIFIER::kDamage, a_av, max * a_pct / 100.0f);
+		avOwner->ModActorValue(RE::ACTOR_VALUE_MODIFIER::kDamage, a_av, max * a_pct / 100.0f);
 	}
 
 	class DeathSink : public RE::BSTEventSink<RE::TESDeathEvent>

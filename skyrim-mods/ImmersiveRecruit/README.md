@@ -8,11 +8,13 @@ with the vanilla "Follow me" line. Once they follow you, they **level with you**
 ### Recruit your friends
 - The game only offers "Follow me" when an NPC is in `PotentialFollowerFaction` **and** is your Friend.
   Many NPCs (e.g. Aeri in Anga's Mill) become your Friend through quests or favors, but are not in that faction.
-- After every conversation, Immersive Recruit checks the NPC you talked to. If the relationship is at least `iMinRank`
-  (Friend by default), they are added to `PotentialFollowerFaction` and you get a notification.
+- Every time you activate (talk to) an NPC, and again when a conversation closes, Immersive Recruit checks that NPC.
+  If the relationship is at least `iMinRank` (Friend by default), they are added to `PotentialFollowerFaction` and you
+  get a notification.
+- This also works for NPCs that have no dialogue left after their quest and only greet you: activating them is enough.
 - Talk to them again and "Follow me" is there. Works with Nether's Follower Framework and other frameworks that
   use the vanilla follower dialogue.
-- NPCs who were already your Friend before installing: talk once, close the dialogue, talk again.
+- The first activation only makes them recruitable (you see the notification); activate them again and "Follow me" is there.
 - Skipped: dead NPCs, children, hostile NPCs and anyone in `[Exclude]` (all configurable).
 
 ### Followers that keep up with you
@@ -29,7 +31,7 @@ Ordinary NPCs have a fixed level, so they fall behind quickly as followers. Whil
 ## Requirements
 - [SKSE64](https://skse.silverlock.org/)
 - [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
-- Tested on Skyrim AE 1.6.1170. Built with CommonLibSSE-NG (SE and AE), 1.5.97 should work but is untested.
+- Built for SE 1.5.97, AE 1.6.x and AE 1.7.x (1.7.104) with the maintained CommonLibSSE-NG fork (alandtse/CommonLibVR v16.12.0). Needs the Address Library file for your exact game version. Tested in-game on 1.6.1170 only (1.0.0).
 
 ## Installation
 Install with your mod manager, or copy `SKSE/Plugins/ImmersiveRecruit.dll` and `SKSE/Plugins/ImmersiveRecruit.ini` into `Data/`.
@@ -70,6 +72,9 @@ changes stay in your save, the same way console commands such as `setlevel` are 
 ordinary game values. New NPCs are no longer changed.
 
 ## Changelog
+- 1.1.0: Check on activation instead of only when the dialogue menu opens, so NPCs that only greet you (no dialogue
+  left after their quest) can be recruited too.
+- 1.0.1: Build for game 1.7.x (fixes "failed to open address library file" on 1.7.104).
 - 1.0.0: Default level cap 80 (`iMaxLevel`).
 - 0.3.0: Remove the level cap of followers that already level with the player (`bRemoveLevelCap`).
 - 0.2.0: Followers level with the player and become Protected (`[Follower]` section).
