@@ -138,3 +138,79 @@ Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel 
 | Frea | 1H, Alteration, Light, Restoration | Stalhrim Shortspear (HA, 1 tay) | Không | Không |
 | Aranea Ienith | Destruction, Restoration, Alteration, Conjuration | Không (phép) | Không | Không |
 | Illia | Destruction, Restoration, Alteration, Conjuration | Forsworn Staff (gậy phép vanilla) | Không | Không |
+
+# NPC nữ kết bạn được qua favor (UESP Skyrim:Favors)
+Danh sách lấy từ trang Favors và trang từng quest (kể cả bảng Radiant Options của Chop Wood, Gather Wheat, Mine Ore...),
+giới tính/race/class/base ID lấy từ trang NPC trên UESP. Đã bỏ: người đã có trong nhóm vợ/follower, trẻ em (Lucia, Svari).
+Chưa chọn đồ: chờ người dùng chọn NPC sẽ rủ đi cùng (Immersive Recruit).
+
+### Nông dân/thợ (13)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Adrianne Avenicci | Imperial | Blacksmith | 00013BB9 | Whiterun | Greatsword for a Great Man |
+| Alfhild Battle-Born | Nord | Farmer | 00013BB0 | Whiterun | Gather Wheat |
+| Beitild | Nord | Miner | 00013612 | Dawnstar | Mine Ore |
+| Bolfrida Brandy-Mug | Nord | Farmer | 00014126 | Windhelm | Gather Wheat |
+| Boti | Nord | Farmer | 000136BE |  | Gather Wheat |
+| Ganna Uriel | Imperial | Lumberjack | 0001365D |  | Chop Wood |
+| Grosta | Nord | Lumberjack | 00019C00 |  | Chop Wood, Flight or Fight |
+| Hert | Nord | Lumberjack | 0001367C |  | Chop Wood |
+| Hillevi Cruel-Sea | Nord | Farmer | 0001411F | Windhelm | Delivery (Hillevi) |
+| Katla | Nord | Farmer | 00013290 | Solitude | Gather Wheat |
+| Olda | Nord | Lumberjack | 00019A20 |  | Dragon's Breath Mead (quest) |
+| Reldith | High Elf | Farmer | 000136B4 |  | Gather Wheat |
+| Synda Llanith | Dark Elf | Farmer | 000BB2C0 |  | Gather Wheat |
+
+### Buôn bán/quán (9)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Carlotta Valentia | Imperial | Food Vendor | 00013B99 | Whiterun | A Few Words with You |
+| Evette San | Nord | Food Vendor | 00013273 | Solitude | The Spiced Wine |
+| Eydis | Nord | Food Vendor | 00013B77 |  | The Ghost of Old Hroldan |
+| Haran | Nord | Food Vendor | 0001C184 | Winterhold | A Few Words with You |
+| Hulda | Nord | Pawnbroker | 00013BA3 | Whiterun | Chop Wood |
+| Kerah | Redguard | Pawnbroker | 000133A2 | Markarth | Delivery to Calcelmo |
+| Lisbet | Nord | Food Vendor | 000133A5 | Markarth | Lisbet's Missing Shipment |
+| Pantea Ateia | Imperial | Bard | 0001329F | Solitude | Pantea's Flute |
+| Svana Far-Shield | Nord | Food Vendor | 0001337C | Riften | Caught Red Handed |
+
+### Thầy thuốc/tu sĩ/pháp sư (7)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Alessandra | Imperial | Priest | 00013347 | Riften | Pilgrimage |
+| Angeline Morrard | Breton | Apothecary | 00013260 | Solitude | No News is Good News |
+| Danica Pure-Spring | Nord | Priest | 00013BA5 | Whiterun | Delivery |
+| Dinya Balu | Dark Elf | Priest | 00013352 | Riften | Spread the Love |
+| Idgrod the Younger | Nord | Sorcerer | 000135EC | Morthal | Delivery |
+| Lami | Nord | Apothecary | 000135EF | Morthal | Rare Gifts |
+| Wylandriah | Wood Elf | Fire/Frost/Shock Mage | 00019DEF | Riften | Hunt and Gather |
+
+### Orc stronghold (5)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Arob | Orc | Orc Warrior | 00013B7B |  | The Forgemaster's Fingers |
+| Bagrak | Orc | Orc Warrior | 00019955 |  | The Forgemaster's Fingers |
+| Gharol | Orc | Blacksmith | 00013B7C |  | Gharol's Message, Mine Ore |
+| Shuftharz | Orc | Blacksmith | 00019957 |  | Mine Ore |
+| Yatul | Orc | Ranger | 0001B077 |  | The Forgemaster's Fingers |
+
+### Khác (4)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Fanari Strong-Voice | Nord | Dremora | xx018FC5 |  | Kill the Bandit Leader |
+| Iddra | Nord | Citizen | 00013662 |  | A Few Words with You |
+| Voada | Breton | Citizen | 000133C0 | Markarth | Delivery |
+| Wujeeta | Argonian | Citizen | 00013382 | Riften | Helping Hand |
+
+### Cần cân nhắc (9)
+| NPC | Race | Class | Base ID | Thành phố | Favor |
+|---|---|---|---|---|---|
+| Bothela | Breton | Apothecary | 0001338B | Markarth | Bothela's Discreet Delivery |
+| Edda | Imperial | Beggar | 00013356 | Riften | Quest all Beggars Have |
+| Elisif the Fair | Nord | Citizen | 0001326A | Solitude | Elisif's Tribute |
+| Hafjorg | Elder | Apothecary | 00013360 | Riften | Truth Ore Consequences |
+| Inge Six Fingers | Elder | Bard | 0001328A | Solitude | Finn's Lute |
+| Ingun Black-Briar | Nord | Assassin | 00013364 | Riften | Few and Far Between |
+| Silda the Unseen | Nord | Thief | 00014121 | Windhelm | Quest all Beggars Have |
+| Sybille Stentor | Breton | Destruction Mage | 000132AA | Solitude | Kill the Vampire |
+| Vigdis Salvius | Elder | Farmer | 000133BF | Markarth | Gather Wheat |
