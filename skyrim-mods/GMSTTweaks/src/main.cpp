@@ -86,7 +86,7 @@ namespace
 					SKSE::log::info("{}: {} -> {}", a_name, old, a_setting->data.f);
 					return true;
 				}
-			case RE::Setting::Type::kSignedInteger:
+			case RE::Setting::Type::kInteger:
 				{
 					const auto old = a_setting->data.i;
 					a_setting->data.i = static_cast<std::int32_t>(std::stol(a_value));
