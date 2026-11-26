@@ -413,7 +413,7 @@ namespace
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 1, 0, 0, 0 },
+	.Version = REL::Version{ 1, 0, 1, 0 },
 	.Name = "ImmersiveRecruit"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)

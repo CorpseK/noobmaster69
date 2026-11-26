@@ -29,7 +29,7 @@ Ordinary NPCs have a fixed level, so they fall behind quickly as followers. Whil
 ## Requirements
 - [SKSE64](https://skse.silverlock.org/)
 - [Address Library for SKSE Plugins](https://www.nexusmods.com/skyrimspecialedition/mods/32444)
-- Tested on Skyrim AE 1.6.1170. Built with CommonLibSSE-NG (SE and AE), 1.5.97 should work but is untested.
+- Built for SE 1.5.97, AE 1.6.x and AE 1.7.x (1.7.104) with the maintained CommonLibSSE-NG fork (alandtse/CommonLibVR v16.12.0). Needs the Address Library file for your exact game version. Tested in-game on 1.6.1170 only (1.0.0).
 
 ## Installation
 Install with your mod manager, or copy `SKSE/Plugins/ImmersiveRecruit.dll` and `SKSE/Plugins/ImmersiveRecruit.ini` into `Data/`.
