@@ -87,3 +87,45 @@ Quy tắc như nhóm vợ: 3BA, không SMP (COCO/Daymarr chạy với CBPC), kh�
 Loại vòng follower: Daring Tribunal Robes (ngực trần), Brazen Assassin, Dangerous Gladiator, Black Widow,
 Daggerfall Archmage (kiểu bikini/dây), Dovakini (anime), Ebony Armor Kai (SMP), Champion of Azura (latex),
 Moon Feather Shaman (quá hở), Volkihar Assassin (FSMP, lại là vampire), Sorceress Armor (SMP), Daring Stormhold Warrior (hở ngực).
+
+# Vũ khí
+Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com): vũ khí vanilla, **Heavy Armory (HA)**
+và **Immersive Weapons (IW)** theo chất liệu. Chọn theo nghề, quê quán, chất liệu bộ giáp.
+Lưu ý: SPID chỉ thêm vũ khí vào túi; NPC tự chọn vũ khí theo kỹ năng/AI, có thể vẫn dùng vũ khí cũ nếu nó mạnh hơn.
+Đưa vũ khí cho follower thì người chơi lấy lại được, và bản đó tính cho phòng Armory của museum.
+
+| Nhân vật | Vũ khí | Nguồn | Lý do |
+|---|---|---|---|
+| Aeri | Iron Hatchet | HA | Rìu nhỏ của thợ đốn gỗ |
+| Gilfre | Iron Double Axe | IW | Rìu hai lưỡi to, chủ xưởng gỗ |
+| Temba Wide-Arm | Iron Hunter's Spear + Hunting Bow | IW + vanilla | Săn gấu |
+| Sylgja | Nordic War Pick | IW | Cuốc chiến cho thợ mỏ |
+| Avrusa Sarethi | Glass Dagger | vanilla | Dunmer, chất liệu Morrowind |
+| Muiri | Forsworn Dagger | HA | Sống ở Markarth (xứ Reach) |
+| Camilla Valerius | Imperial Dagger | HA | Imperial |
+| Ysolda | Iron Shortsword | HA | Lái buôn đi đường |
+| Taarie | Elven Shortsword | HA | Altmer, thanh lịch |
+| Viola Giordano | Imperial Shortsword | HA | Imperial, đi tuần |
+| Ghorza gra-Bagol | Orcish Maul | HA | Thợ rèn Orc |
+| Morwen | Stalhrim Hatchet | HA | Thợ rèn Skaal, chất liệu Solstheim |
+| Hilund | Nordic Long Mace | HA | Gốc dùng chùy Nordic; Nordic là chất liệu Solstheim |
+| Dravynea, Anwen, Orla, Senna | Không | | Pháp sư / nữ tu |
+| Lydia (Whiterun) | Steel Longsword + khiên | IW | Phương án: The Sword of Whiterun (vũ khí Thane của LotD) |
+| Argis (Markarth) | Eastern Dwemer Sword | IW | Hợp giáp Deze Dwemer |
+| Iona (Riften) | Nord Hero Shortsword | HA | Hợp Ginnungagap kiểu Norse |
+| Jordis (Solitude) | Silver Longsword | IW | Hợp giáp bạc |
+| Calder (Windhelm) | Nord Hero Double Axe | IW | Giáp nặng Nord |
+| Gregor (Dawnstar) | Steel Long Mace | HA | Vũ khí Thane của Dawnstar cũng là chùy |
+| Valdimar (Morthal) | Steel Battle Staff | IW | Spellsword / battlemage |
+| Rayya (Falkreath) | Glass Scimitar | IW | Redguard + Yokuda |
+| Jenassa | Elven Hawk Bow + Steel Tanto | IW | Cung thủ, sát thủ |
+| Mjoll | Grimsever (giữ nguyên) | vanilla | Kiếm riêng của cô |
+| Uthgerd | Steel Spiked Club | HA | Dân đấu tay đôi |
+| Annekke Crag-Jumper | Steel War Pick + Hunting Bow | IW + vanilla | Mẹ của Sylgja, dân mỏ + ranger |
+| Eola | Honed Ancient Nord Dagger | HA | Chủ đề draugr/mục rữa |
+| Aranea Ienith | Glass Quarterstaff | IW | Ánh sao của Azura |
+| Illia | Forsworn Staff | vanilla | Hagraven/Forsworn |
+| Serana | Daedric Tanto | IW | Tối màu; tránh Silver (khắc chế vampire) |
+| Frea | Stalhrim Spear | HA | Skaal, Solstheim |
+| Borgakh | Orcish Saber | IW | Kiếm Orc gọn, hợp người rời stronghold |
+| Ugor | Orcish Bow + Orcish Hatchet | vanilla + HA | Ranger |
