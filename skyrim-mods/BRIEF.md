@@ -2,7 +2,7 @@
 
 ## Về mình
 - Modding Skyrim mức cơ bản: tự sửa mod, sửa navmesh trong Creation Kit, hiểu khác biệt giữa ESP/ESL/ESM.
-- Game: **Skyrim AE 1.6.1170** (cố ý giữ bản này vì ổn định), có SKSE, CPKE (Creation Kit Platform Extended).
+- Game: **Skyrim AE 1.6.1170** (đang giữ bản này; sẽ lên 1.7.x khi ổn định, nên mọi mod build cho cả 1.6 và 1.7), có SKSE, CPKE (Creation Kit Platform Extended).
   Quản lý mod bằng **MO2** (`E:\Skyrim Modding\MO2` ở máy nhà).
 - Mục tiêu: mod dạng **SKSE plugin thuần, không có ESP**, thêm/xóa giữa save lúc nào cũng được.
 - Làm ở công ty (chat cloud, không có game), về nhà test (có thể mở chat Claude Code chạy ngay trên máy nhà).
@@ -19,7 +19,7 @@
   Log ở `Documents/My Games/Skyrim Special Edition/SKSE/<TênMod>.log`.
 
 ## Cách build (đã thiết lập)
-- C++23, **CommonLibSSE-NG** lấy bằng CMake FetchContent, ghim commit `b93280e832f263dbef44e44cbe2936622a02f91a`.
+- C++23, **CommonLibSSE-NG bản fork đang được bảo trì** `alandtse/CommonLibVR` (nhánh ng) lấy bằng CMake FetchContent, ghim tag **v16.12.0** (`7c27a75da3eb0db080c1f1f63f6df1b7cd733c2a`). Bản gốc CharmedBaryon (`b93280e`) dừng ở 2024, coi game 1.7.x là SE → lỗi "failed to open address library file". Fork cần thêm `directxtk` trong `vcpkg.json`.
   Tắt VR và tests.
 - vcpkg manifest (`vcpkg.json`), baseline `5d4a3dc90c0b3773f3bac81bf41297b54328f471`, triplet `x64-windows-static`.
   Thư viện: spdlog, rapidcsv, detours (detours chỉ thêm cho mod nào hook hàm).
@@ -36,6 +36,7 @@
   - Không có `IsPlayerRef()` trên mọi kiểu, dùng `== RE::PlayerCharacter::GetSingleton()`.
   - Chuỗi `"..."sv` cần `using namespace std::literals;`.
   - Source CommonLib ở commit ghim có thể clone vào scratchpad để tra API trước khi viết code.
+  - Fork đổi tên một số API: `RE::DebugNotification` → `RE::SendHUDMessage::ShowHUDMessage` (cùng tham số).
 
 ## Mod đã có
 

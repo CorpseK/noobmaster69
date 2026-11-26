@@ -249,7 +249,7 @@ namespace
 		if (changed) {
 			npc->AddChange(kChangeActorBaseData);
 			if (g_config.notify) {
-				RE::DebugNotification(std::format("{} will now grow stronger with you.", a_actor->GetName()).c_str());
+				RE::SendHUDMessage::ShowHUDMessage(std::format("{} will now grow stronger with you.", a_actor->GetName()).c_str());
 			}
 		}
 	}
@@ -332,7 +332,7 @@ namespace
 		SKSE::log::info("{} ({:08X}) added to PotentialFollowerFaction (relationship rank {})", name, baseID, rank);
 		if (g_config.notify) {
 			const auto msg = std::format("{} can now be recruited as a follower.", name);
-			RE::DebugNotification(msg.c_str());
+			RE::SendHUDMessage::ShowHUDMessage(msg.c_str());
 		}
 	}
 

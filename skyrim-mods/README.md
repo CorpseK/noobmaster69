@@ -1,6 +1,6 @@
 # Skyrim mods (SKSE plugin)
 
-Nhắm tới **Skyrim AE 1.6.1170** + SKSE + Address Library. Mỗi mod chỉ là một file `.dll`
+Nhắm tới **Skyrim AE 1.6.1170** (build được cho cả SE 1.5.97 và AE 1.7.x) + SKSE + Address Library đúng phiên bản game. Mỗi mod chỉ là một file `.dll`
 trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng save không sao.
 
 | Mod | Mô tả | Trạng thái |

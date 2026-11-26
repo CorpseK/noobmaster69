@@ -6,6 +6,7 @@
   "dependencies": [
     "spdlog",
     "rapidcsv",
-    "detours"
+    "detours",
+    "directxtk"
   ]
 }
