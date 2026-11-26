@@ -233,3 +233,14 @@ Kiểm tra trên trang NPC của UESP.
 | Alessandra | 00013347 | Imperial, nữ tu Arkay một mình trông Hall of the Dead (Riften); con gái Andurs. Ranh giới: không có quest/dịch vụ hỏng nếu cô đi |
 | Bagrak | 00019955 | Orc warrior Mor Khazgur, em gái Chief Larak, góa chồng ("late husband"), không con |
 | Yatul | 0001B077 | Orc ranger Narzulbur, cô của Chief; không chồng con; nghi là kẻ đầu độc các vợ chief |
+
+## Chốt nhóm favor (bỏ Wujeeta)
+| NPC | Base ID | Trang phục (ID Nexus) | Vũ khí | Lý do |
+|---|---|---|---|---|
+| Bolfrida Brandy-Mug | 00014126 | Nordic Fur Armor (gốc 26472 + 3BA 169079) | Iron Quarterstaff (HA) | Áo lông kín, sống ngoài trời tuyết gần Windhelm |
+| Ganna Uriel | 0001365D | Fashions of the Huntsmen (75837, file CBBE 3BA) | Steel Hatchet (HA) | Áo da có mũ trùm, thợ gỗ kiêm thợ mỏ |
+| Voada | 000133C0 | Wayward Ranger – **bộ đồ mặc trong** (124246), màu khác Annekke | Iron Dagger | Đồ gọn cho người làm bếp + trông chó. Cùng mod với Annekke nhưng khác món |
+| Alessandra | 00013347 | Pandorable's Lady Arkay (28434) | Silver Mace (HA) | Đồ chủ đề Arkay; chỉ có CBBE thường (không phải 3BA riêng), có CBP physics. Bạc: hợp nữ tu Arkay (chống undead) |
+| Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow | Giáp tối cho chiến binh góa chồng; UESP: cô dùng war axe + cung |
+| Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow | Váy-giáp tối thanh lịch cho ranger hay mưu mô |
+Loại: DX Sexy Cook (apron SMP, kiểu hầu gái), Travelling Priest Robes (chỉ có bản nam trong ảnh, SMP khăn tùy chọn).
