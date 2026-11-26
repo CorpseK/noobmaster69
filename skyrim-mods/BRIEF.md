@@ -57,6 +57,7 @@
 | GMSTTweaks | 0.1.0 | chưa test | Đổi GMST bằng INI, thay ESP chỉ để sửa số |
 | KillRestore | 0.1.0 | chưa test | Player giết địch → hồi % Health/Magicka/Stamina |
 | DOMTalkGate (NSFW) | 0.1.0 | chưa test | Add-on cho Diary of Mine 8.5.6f: thoại DOM với NPC chưa capture chỉ hiện `iWindowSeconds` (30s) sau khi cast Training Info (kéo dài `DOMTrainingInfoEffect` 0x5BD55A + thêm điều kiện `HasMagicEffect` vào 37 dòng mở đầu) |
+| BendWillRecruit | 0.1.0 | chưa test | Shout Bend Will trúng NPC `ActorTypeNPC` → stop combat, relationship Ally, `PotentialFollowerFaction`, gọi Papyrus `DialogueFollowerScript.SetFollower` (quest `DialogueFollower` 0750BA) để NFF nhận. Tìm shout theo tên hoặc INI `sShoutForm` |
 
 Ngoài ra `skyrim-mods/tools/` có script Python (NIF, FaceGen, ESP, BSA) chạy trên máy nhà.
 

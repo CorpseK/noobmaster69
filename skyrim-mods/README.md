@@ -15,6 +15,7 @@ trong `Data/SKSE/Plugins/`, không có ESP/ESL/ESM → thêm/xóa giữa chừng
 | [RelicHunter](RelicHunter/) | Loot random (rương, xác, đồ NPC, merchant) dễ ra relic LotD mà The Curator's Companion báo là còn thiếu | v0.1.0, chưa test in-game |
 | [TNGPlayerOnly](TNGPlayerOnly/) | (NSFW) Add-on cho The New Gentleman: chỉ player có addon, NPC giữ skin gốc | v0.2.0, đã test in-game |
 | [DOMTalkGate](DOMTalkGate/) | (NSFW) Add-on cho Diary of Mine: thoại DOM với NPC chưa capture chỉ hiện 30s sau khi cast spell Training Info | v0.1.0, chưa test in-game |
+| [BendWillRecruit](BendWillRecruit/) | Shout Bend Will biến NPC humanoid trúng shout (kể cả bandit) thành follower, dùng được với NFF | v0.1.0, chưa test in-game |
 
 ## Tải file DLL đã build sẵn
 
