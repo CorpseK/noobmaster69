@@ -3,9 +3,12 @@
 // vanilla "Follow me" dialogue shows up (and follower frameworks such as NFF
 // pick it up) without opening an MCM.
 //
-// How: after every conversation, check the speaker's relationship rank with
-// the player. If it is Friend+ and the NPC is not yet in
-// PotentialFollowerFaction (Skyrim.esm 0005C84D), add them to it (rank 0).
+// How: every time the player activates (talks to) an NPC, and again when a
+// conversation closes, check the NPC's relationship rank with the player. If it
+// is Friend+ and the NPC is not yet in PotentialFollowerFaction
+// (Skyrim.esm 0005C84D), add them to it (rank 0).
+// Activation matters: many NPCs have no dialogue left after their quest and
+// only say a greeting, so the dialogue menu never opens for them.
 //
 // Config: Data/SKSE/Plugins/ImmersiveRecruit.ini
 
@@ -346,6 +349,35 @@ namespace
 		});
 	}
 
+	// Player activates an NPC: fires even when the NPC only greets and no dialogue menu opens.
+	class ActivateSink : public RE::BSTEventSink<RE::TESActivateEvent>
+	{
+	public:
+		static ActivateSink* GetSingleton()
+		{
+			static ActivateSink singleton;
+			return &singleton;
+		}
+
+		RE::BSEventNotifyControl ProcessEvent(const RE::TESActivateEvent* a_event,
+			RE::BSTEventSource<RE::TESActivateEvent>*) override
+		{
+			if (!a_event || !a_event->objectActivated || !a_event->actionRef ||
+				a_event->actionRef.get() != RE::PlayerCharacter::GetSingleton()) {
+				return RE::BSEventNotifyControl::kContinue;
+			}
+			auto* target = a_event->objectActivated.get();
+			if (target->GetFormType() != RE::FormType::ActorCharacter) {
+				return RE::BSEventNotifyControl::kContinue;
+			}
+			if (g_config.verbose) {
+				SKSE::log::info("Player activated {}", target->GetName());
+			}
+			QueueCheck(target->GetHandle());
+			return RE::BSEventNotifyControl::kContinue;
+		}
+	};
+
 	class MenuSink : public RE::BSTEventSink<RE::MenuOpenCloseEvent>
 	{
 	public:
@@ -363,12 +395,10 @@ namespace
 			}
 
 			if (a_event->opening) {
-				// Remember who we are talking to; also catches NPCs that were already
-				// Friend+ before the mod was installed (recruitable on the next talk).
+				// Remember who we are talking to (the activation check already ran).
 				if (auto* topics = RE::MenuTopicManager::GetSingleton()) {
 					g_lastSpeaker = topics->speaker;
 				}
-				QueueCheck(g_lastSpeaker);
 			} else {
 				// Quests/favors usually raise the relationship during the conversation.
 				QueueCheck(g_lastSpeaker);
@@ -409,11 +439,15 @@ namespace
 			ui->AddEventSink<RE::MenuOpenCloseEvent>(MenuSink::GetSingleton());
 			SKSE::log::info("Registered MenuOpenCloseEvent sink");
 		}
+		if (auto* events = RE::ScriptEventSourceHolder::GetSingleton()) {
+			events->AddEventSink<RE::TESActivateEvent>(ActivateSink::GetSingleton());
+			SKSE::log::info("Registered TESActivateEvent sink");
+		}
 	}
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 1, 0, 1, 0 },
+	.Version = REL::Version{ 1, 1, 0, 0 },
 	.Name = "ImmersiveRecruit"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)
@@ -422,7 +456,7 @@ SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
 {
 	SKSE::Init(a_skse);
 	SetupLog();
-	SKSE::log::info("ImmersiveRecruit v1.0.0 loading (game {})", a_skse->RuntimeVersion().string());
+	SKSE::log::info("ImmersiveRecruit v1.1.0 loading (game {})", a_skse->RuntimeVersion().string());
 
 	SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
 	return true;
