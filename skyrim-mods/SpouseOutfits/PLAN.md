@@ -44,6 +44,12 @@ Priestess of Time, Witch Chains Dress, Robe of the Sorceress, Dibella's Grace, Q
 Loại vì là replacer: Icy's 3D Blacksmith/Merchant/Wench. Vòng 3 loại: Goma Fine Clothes (bắt buộc SMP),
 DD Exquisite Cloth (hiện đại), Vintage Roses, COCO Luscious Lady (anime/hầu gái).
 
+## Dọn mod trang phục (chỉ giữ đồ + temper)
+Người dùng chỉ muốn đồ tồn tại trong dữ liệu game và temper được. Mỗi plugin chạy qua
+`tools/strip_outfit_plugin.py` (giữ FormID), đặt bản sạch trong một mod MO2 riêng, ưu tiên cao hơn mod gốc.
+Ngoài ra xóa/ẩn trong MO2 các file chia đồ đi kèm mod: `*_DISTR.ini` (SPID), `*_KID.ini`, `SKSE/Plugins/SkyPatcher/**`,
+file Container Distribution Framework, `*_SWAP.ini`. Deze: chọn bản **without NPCs** khi cài.
+
 ## Việc tiếp theo
 1. Người dùng duyệt danh sách (xem ảnh trên Nexus), chọn bộ cho từng NPC.
 2. Tải mod, up plugin `.esp/.esl` lên Drive.
@@ -71,8 +77,8 @@ Quy tắc như nhóm vợ: 3BA, không SMP (COCO/Daymarr chạy với CBPC), kh�
 | Uthgerd the Unbroken | Whiterun | Deze Armor – **Steel Plate B** (49318) | Tác giả làm cho Uthgerd |
 | Annekke Crag-Jumper | Darkwater Crossing | Wayward Ranger Armor 3BA, đủ giáp (124246) | Ranger |
 | Eola | Markarth (Namira) | **Draugr Halloween / "Draugr Wanderer" Outfit** (41883, file 3BAv2) | Vải mục, xương kiểu draugr: hợp Namira (mục rữa, sâu bọ). Phương án 2: Daymarr Shadow Knight (119080) |
-| Aranea Ienith | Shrine of Azura | Hdm's Warrior of Dusk 3BA (157610) | Azura là thần của hoàng hôn và bình minh: bộ "Dusk" trắng-vàng. Hở. Phương án 2: COCO Twilight Sorceress (102730, hở hơn). Dự phòng kín: Telvanni Spellsword (15830, CBBE) |
-| Illia | Darklight Tower | Forsworn Fashions 3BA (66673), dùng file **Static** (không physics) | Lông, lông vũ, gai: đúng chất Forsworn/hagraven. Phương án 2: Wilderness Witch (gốc 40963 + 3BA 40845), kín hơn |
+| Aranea Ienith | Shrine of Azura | **CHỐT: COCO Twilight Sorceress (102730)** | Chủ đề twilight (Azura = hoàng hôn/bình minh). Hở; SMP hoặc CBPC |
+| Illia | Darklight Tower | **CHỐT: Wilderness Witch** (gốc 40963 + 3BA 40845) | Phù thủy rừng |
 | Serana | Volkihar | **CHỐT: ELLE Dark Rebel 3BA (102957)** | Giáp nhẹ + áo khoác tối |
 | Frea | Skaal | Dragonbone Barbarian 3BA (47466, cần bản gốc của Shocky) | Lông + xương rồng, chiến binh phương Bắc thay vì đồ giống cướp |
 | Borgakh the Steel Heart | Mor Khazgur | Orcish Marauder Armor 3BA (64629) | Warrior giáp nặng; vẫn chất Orc nhưng là bộ mới, không phải giáp Orcish vanilla |
