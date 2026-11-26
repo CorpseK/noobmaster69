@@ -36,7 +36,13 @@
   - Không có `IsPlayerRef()` trên mọi kiểu, dùng `== RE::PlayerCharacter::GetSingleton()`.
   - Chuỗi `"..."sv` cần `using namespace std::literals;`.
   - Source CommonLib ở commit ghim có thể clone vào scratchpad để tra API trước khi viết code.
-  - Fork đổi tên một số API: `RE::DebugNotification` → `RE::SendHUDMessage::ShowHUDMessage` (cùng tham số).
+  - Fork đổi tên một số API (đã gặp khi chuyển):
+    - `RE::DebugNotification` → `RE::SendHUDMessage::ShowHUDMessage` (cùng tham số).
+    - `RE::Setting::Type::kSignedInteger` → `kInteger`.
+    - `ActorValueOwner::RestoreActorValue(modifier, av, value)` → `ModActorValue(modifier, av, value)` (cùng vfunc 06).
+    - `TESObjectREFR::OpenContainer(mode)` → `RE::ContainerMenu::OpenMenu(ref, ContainerMode)`.
+  - Mod mới: copy `CMakeLists.txt` + `vcpkg.json` của một mod có sẵn (đã trỏ tới fork v16.12.0 + `directxtk`),
+    tra API trong header của fork ở commit ghim chứ không phải bản CharmedBaryon cũ.
 
 ## Mod đã có
 
