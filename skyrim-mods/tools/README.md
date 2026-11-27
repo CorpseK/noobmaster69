@@ -10,6 +10,7 @@ Python thuần (3.9+), không cần cài thêm thư viện. Chạy trên Windows
 | `bsa.py` | Liệt kê / giải nén file trong BSA Skyrim SE (v105, cả file nén LZ4): `py -I bsa.py list <bsa> <regex>`, `py -I bsa.py extract <bsa> <regex> <thư mục ra>` |
 | `nexus.py` | Tìm mod Skyrim SE trên Nexus qua API công khai (không cần đăng nhập, có cả mod adult): `py -I nexus.py search <từ khóa> --category Armour --adult any`, `py -I nexus.py info <id>`, `py -I nexus.py files <id>` |
 | `strip_outfit_plugin.py` | Lọc plugin mod trang phục: giữ đồ + công thức temper, bỏ công thức chế, đồ đặt ngoài thế giới, quest phát đồ, mọi chỉnh sửa lên record game/mod khác (giữ FormID). `py -I strip_outfit_plugin.py <plugin> <file ra>`, `--dry-run` để xem trước |
+| `build_spouse_outfits.py` | Tạo `SpouseOutfits.esp` (ESL chỉ chứa OTFT) + `SpouseOutfits_DISTR.ini` (SPID) từ `SpouseOutfits/outfits.json`; kiểm mọi FormID với plugin thật trong MO2, chặn món che tóc. `py -I build_spouse_outfits.py --mo2 <MO2> --data <game Data> --out <thư mục>`, `--check` để chỉ kiểm |
 
 ## fix_nif_paths.py
 

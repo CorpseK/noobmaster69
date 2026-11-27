@@ -12,6 +12,17 @@ lịch sử lựa chọn xem trong git log của file này.
 - Mỗi mod trang phục chạy qua `tools/strip_outfit_plugin.py`: chỉ giữ đồ + công thức temper. Ẩn trong MO2 các file chia
   đồ đi kèm mod (`*_DISTR.ini`, `*_KID.ini`, SkyPatcher, Container Distribution Framework, `*_SWAP.ini`).
   Deze: cài bản **without NPCs**.
+- Temper: chỉ giữ công thức temper có sẵn trong mod; mod nào không có thì thôi, **không thêm** (người dùng quyết 2026-11-27).
+- **Không đồ đội đầu che tóc** (người dùng dùng NPC replacer, muốn thấy tóc): không đưa vào Outfit món nào chiếm slot 30
+  (head), 31 (hair) hoặc 41 (long hair): mũ trùm, mũ giáp, tóc giả. Vòng/vương miện chỉ dùng slot 42 (circlet) thì được.
+  Đã quét plugin trên máy, các món phải bỏ:
+  - Deze Clothing: mọi Hood (Restoration, Apprentice, Journey, Destruction, Court).
+  - C5Kev's Flirty In Fur: 00FlirtySkirtHelm. Nord Steelheart: ArmorSteelHeartHelmet (Crown slot 42 thì được).
+  - COCO Goddess of War V2: GWV2_hair*/hairsmp* (tóc giả), GWV2_helmet01/02 (slot 42 nhưng che tóc, người dùng đã xem).
+  - Iron Battlemage: mọi Helmet/Hood. Wayward Ranger: Hood. Draugr Wanderer: Hood. Obi's Hood and Steel: 1_H&S_Hood.
+  - Dragonbone Barbarian: Helmet. Orcish Marauder: Helmet. Obi's Common Outfit: 1_Obi_CommonHood.
+  - Hunting Grounds: mọi HHHood có tóc/mũ; HHHoodOff (khăn hạ xuống, slot 44) thì được.
+  Mặt nạ (không che tóc nhưng che mặt): Obi's Masquerade Mask (đã bỏ), West Wind AssaultMask: bỏ luôn.
 
 ## Nhóm vợ (ứng viên kết hôn nữ, không phải follower)
 | NPC | Base ID | Trang phục (ID Nexus) | Ghi chú |
@@ -40,26 +51,28 @@ Housecarl: có mod AIO đổi mọi housecarl thành nữ, FormID giữ nguyên.
 Dawnguard...) giữ đồng phục phe.
 | Follower | Base ID | Trang phục (ID Nexus) | Ghi chú |
 |---|---|---|---|
-| Lydia (Whiterun) | | Deze Armor – Whiterun A (49318) | |
-| Argis the Bulwark (Markarth) | | Deze Armor – Dwemer (49318) | |
-| Iona (Riften) | | ELLE – Ginnungagap 3BA (97931) | |
-| Jordis the Sword-Maiden (Solitude) | | COCO Goddess Of War V2 (78335), bản bạc | CBPC |
-| Calder (Windhelm) | | Nord Steelheart (gốc 110922 + 3BA 111014) | |
-| Gregor (Dawnstar) | | Sovngarde Steel Armor (76115, file 3BA) | |
-| Valdimar (Morthal) | | Iron Battlemage Armor 3BA (73162) | |
-| Rayya (Falkreath) | | Daymarr Yokuda (142696) | Hở; CBPC |
-| Jenassa | | West Wind – Assault Armor 3BA (128266) | |
-| Mjoll the Lioness | | Daymarr Guardian Goddess (137926) | CBPC |
-| Uthgerd the Unbroken | | Deze Armor – Steel Plate B (49318) | |
-| Annekke Crag-Jumper | | Wayward Ranger Armor 3BA, đủ giáp (124246) | |
-| Eola | | Draugr Wanderer Outfit (41883, file 3BAv2) | |
-| Aranea Ienith | | Obi's Hood and Steel Armor 3BA (136388) | Tím = Azura. Phương án 2: Ashtoreth Elven Sentinel (79296) bỏ áo choàng |
-| Illia | | Wilderness Witch (gốc 40963 + 3BA 40845) | |
-| Serana | | ELLE Dark Rebel 3BA (102957) | |
-| Frea | | Dragonbone Barbarian 3BA (47466, cần bản gốc) | |
-| Borgakh the Steel Heart | | Orcish Marauder Armor 3BA (64629) | |
-| Ugor | | C5Kev's Lacey Ranger Armor 3BA (103426) | |
-Base ID của follower sẽ lấy từ UESP khi viết SPID.
+| Lydia (Whiterun) | 000A2C8E | Deze Armor – Whiterun A (49318) | |
+| Argis the Bulwark (Markarth) | 000A2C8C | Deze Armor – Dwemer (49318) | |
+| Iona (Riften) | 000A2C91 | ELLE – Ginnungagap 3BA (97931) | |
+| Jordis the Sword-Maiden (Solitude) | 000A2C8F | COCO Goddess Of War V2 (78335), bản bạc | CBPC |
+| Calder (Windhelm) | 000A2C90 | Nord Steelheart (gốc 110922 + 3BA 111014) | |
+| Gregor (Dawnstar) | 00521E (HearthFires.esm) | Sovngarde Steel Armor (76115, file 3BA) | |
+| Valdimar (Morthal) | 00521B (HearthFires.esm) | Iron Battlemage Armor 3BA (73162) | |
+| Rayya (Falkreath) | 005215 (HearthFires.esm) | Daymarr Yokuda (142696) | Hở; CBPC |
+| Jenassa | 000B9982 | West Wind – Assault Armor 3BA (128266) | |
+| Mjoll the Lioness | 0001336B | Daymarr Guardian Goddess (137926) | CBPC |
+| Uthgerd the Unbroken | 000918E2 | Deze Armor – Steel Plate B (49318) | |
+| Annekke Crag-Jumper | 00013666 | Wayward Ranger Armor 3BA, đủ giáp (124246) | |
+| Eola | 0001990F | Draugr Wanderer Outfit (41883, file 3BAv2) | |
+| Aranea Ienith | 00028AD0 | Obi's Hood and Steel Armor 3BA (136388) | Tím = Azura. Phương án 2: Ashtoreth Elven Sentinel (79296) bỏ áo choàng |
+| Illia | 00048C2F | Wilderness Witch (gốc 40963 + 3BA 40845) | |
+| Serana | 002B6C (Dawnguard.esm) | ELLE Dark Rebel 3BA (102957) | |
+| Frea | 017934 (Dragonborn.esm) | Dragonbone Barbarian 3BA (47466, cần bản gốc) | |
+| Borgakh the Steel Heart | 00019959 | Orcish Marauder Armor 3BA (64629) | |
+| Ugor | 00019E1A | C5Kev's Lacey Ranger Armor 3BA (103426) | |
+Knight of The Village (Temba): plugin `Knight of The Village Set.esp` ở mod bản BHUNP (62371), mod 3BA (62364) chỉ có BodySlide.
+Orcish Marauder (Borgakh): BodySlide 3BA tải về có tên "Ominous Shaman Armor 3BBB(3BA) bodyslides 2.0" trong MO2 (cùng trang 64629).
+Base ID đọc trực tiếp từ Skyrim.esm/DLC trên máy (record NPC_). Housecarl Hearthfire nằm trong `HearthFires.esm`.
 
 ## NPC nữ kết bạn qua favor (rủ đi bằng Immersive Recruit)
 Lọc từ UESP Skyrim:Favors: bỏ người có chồng/con, người già, người có việc quan trọng; bỏ Wujeeta (Argonian).
@@ -70,11 +83,22 @@ Alessandra: loại Journeyman Healer Robes (người dùng không ưng), Prieste
 | NPC | Base ID | Trang phục (ID Nexus) | Vũ khí |
 |---|---|---|---|
 | Bolfrida Brandy-Mug | 00014126 | Simple Ancient Nord Dress 3BA (153101) | Iron Quarterstaff (HA) |
-| Ganna Uriel | 0001365D | J3 Elegant Explorer 3BA (126956). Phương án 2: Adventurers Tunic 3BA (gốc 131889 + 3BA 140859) | Steel Hatchet (HA) |
+| Ganna Uriel | 0001365D | **CHỐT: J3 Elegant Explorer 3BA** (126956) | Steel Hatchet (HA) |
 | Voada | 000133C0 | Wayward Ranger – chỉ bộ mặc trong (124246), màu khác Annekke | Iron Dagger |
-| Alessandra | 00013347 | **CHỐT: EGIL Demon Hunter II Templar 3BA** (81705) | Silver Mace (HA) |
+| Alessandra | 00013347 | **CHỐT: EGIL Demon Hunter II Templar 3BA** (81705) | Templar Sword (EGIL, cùng mod) |
 | Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow |
 | Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow |
+
+## NPC mới (thêm 2026-11-27): dễ thương, muốn đi đây đó; chị em của người đã có trong danh sách
+Trang phục đã chốt (2026-11-27). Vũ khí: đề xuất theo kỹ năng, đồ vanilla (2 mod mới không kèm vũ khí theo mô tả Nexus). Vũ khí: chưa chốt, theo kỹ năng trong bảng (đọc từ `DNAM` của NPC_ trong Skyrim.esm).
+| NPC | Base ID | Quan hệ / lý do | Kỹ năng nổi bật | Trang phục | Vũ khí |
+|---|---|---|---|---|---|
+| Erdi | 00013271 | Hầu gái Blue Palace (Solitude), muốn đi khỏi đó | Smithing, 2H, 1H, Light | **Girl's Travel Outfit** (125910) | Steel Dagger |
+| Aduri Sarethi | 00019BFF | Em gái Avrusa Sarethi, muốn đi khám phá | Alchemy, Destruction, Light, Sneak | **Mage's Daily Outfit** (155656, bản không SMP) | Elven Dagger |
+| Gemma Uriel | 00014040 | Chị em với Ganna Uriel | Restoration, Enchanting, 1H, Block, Heavy | **Obi's Traveler's Romper** (176951, đã cài) | Imperial Sword + Imperial Light Shield |
+| Endarie | 0001326F | Chị em với Taarie (Radiant Raiment, Solitude) | Sneak, Speech, Illusion | **Obi's Common Outfit** (110678, đã cài), **bỏ mũ trùm** | Elven Dagger |
+Bỏ qua (người dùng quyết): Bujold (chị em Hilund, có chồng), Bolar (chị em Yatul, wise woman).
+Đã có sẵn trong danh sách: Sylgja là con gái Annekke; Borgakh là con gái Bagrak.
 
 # Vũ khí
 Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com), kiểm tra chéo: món vanilla có trang
@@ -84,14 +108,29 @@ pháp sư không có kỹ năng vũ khí → không cầm vũ khí cận chiến
 Người dùng có **Guards Armor Replacer** (NordwarUA): nó thay hình đồ lính gác theo từng Hold, nên các khiên lính gác này
 sẽ mang kiểu GAR của Hold đó, không cần thêm record. Markarth của GAR làm từ quặng Dwemer, hợp giáp Deze Dwemer của Argis.
 Không dùng đồ unique trưng bày ở museum (Grimsever, vũ khí Thane...).
+**Ưu tiên đồ cùng mod (2026-11-27):** nếu mod trang phục có kèm vũ khí/khiên thì NPC mặc bộ đó dùng vũ khí/khiên của mod
+(vẫn theo quy tắc kỹ năng ở trên); không có thì mới dùng bảng dưới. **Ngoại lệ: housecarl luôn cầm khiên lính gác
+Hold của mình**, không dùng khiên của mod. Đã quét plugin trên máy, chỉ 7 mod có kèm đồ:
+| Mod | Vũ khí/khiên trong plugin (EDID, FormID) | Dùng cho |
+|---|---|---|
+| C5Kev's Flirty In Fur | 0FlirtySkirtSword 000823, 00FlirtySkirtShield 000817 | Aeri: kiếm (thay Iron Hatchet) |
+| [COCO] Goddess of War V2 | GWV2_shield 000862, GWV2_shield2 000864 (chỉ khiên) | Không dùng (housecarl giữ khiên Hold) |
+| Sovngarde Steel Armor | SovngardeSteelSword 000808, ArmorSovngardeSteelShield 000809 | Gregor: kiếm (khiên giữ của Hold) |
+| [Daymarr] Yokuda | Y1HSword 000BE7, Y1HSpear 000C1A, YokudaDagger 000C1F, YokudaWarhammer 000C30, YShield 000C01 + 4 biến thể | Rayya: Y1HSword (khiên giữ của Hold) |
+| Knight of The Village Set (plugin ở bản BHUNP 62371) | AAKoTVSword 000806, AAKoTVSwordb 000824, AAKoTVShield 000803 | Temba: kiếm (thay Iron Hunter's Spear); không khiên (không có Block) |
+| C5Kev's Lacey Ranger Armor 3BA | LaceyRangerBow 000804 | Ugor: cung (thay Orcish Bow) |
+| EGIL Demon Hunter II Templar | EG_DHIITemplarSword 000812 (+ bản Gold/Wallnut), GreatSword, 2 khiên | Alessandra: Templar Sword (thay Silver Mace); không khiên (không có Block) |
+Aeri không có Block nổi bật nên không cho khiên. Plugin EGIL nằm ở mod bản BHUNP (`EGIL DHII Templar.esp`), mod 3BA chỉ có BodySlide.
+Mod **Immersive Weapons Distributed with SPID**: giữ nguyên, người dùng đã chỉnh để chỉ chia cho địch, phe lớn và NPC
+quan trọng, ngoài phạm vi file này.
 Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel Crossbow" của LotD = "Crossbow" (Dawnguard) trên UESP.
 
 ## Nhóm vợ (không phải follower, chỉ vũ khí theo nghề; cung chỉ cho người đi săn)
 | Nhân vật | Vũ khí | Nguồn |
 |---|---|---|
-| Aeri | Iron Hatchet | HA |
+| Aeri | Flirty Skirt Sword | C5Kev's Flirty In Fur (cùng mod) |
 | Gilfre | Iron Double Axe | IW |
-| Temba Wide-Arm | Iron Hunter's Spear + Hunting Bow | IW + vanilla |
+| Temba Wide-Arm | KoTV Sword (Knight of The Village, cùng mod) + Hunting Bow | cùng mod + vanilla |
 | Sylgja | Nordic War Pick | IW |
 | Avrusa Sarethi | Glass Dagger | vanilla |
 | Muiri | Forsworn Dagger | HA |
@@ -112,24 +151,27 @@ Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel 
 | Iona (Riften) | Heavy, 1H, Archery, Block | Nord Hero Shortsword (HA) | Riften Guard's Shield | Nordic Scrimshaw Bow (IW) |
 | Jordis (Solitude) | Heavy, 1H, Archery, Block | Silver Longsword (IW) | Solitude Guard's Shield | Imperial Bow |
 | Calder (Windhelm) | Heavy, 1H, Archery, Block | Nordic War Axe (vanilla) | Windhelm Guard's Shield | Nordic Bow |
-| Gregor (Dawnstar) | Heavy, 1H, Archery, Block | Steel Long Mace (HA) | Pale Guard's Shield | Steel Crossbow |
-| Rayya (Falkreath) | Heavy, 1H, Archery, Block | Glass Scimitar (IW) | Falkreath Guard's Shield | Glass Bow |
+| Gregor (Dawnstar) | Heavy, 1H, Archery, Block | Sovngarde Steel Sword (cùng mod) | Pale Guard's Shield | Steel Crossbow |
+| Rayya (Falkreath) | Heavy, 1H, Archery, Block | Yokuda Sword (Daymarr, cùng mod) | Falkreath Guard's Shield | Glass Bow |
 | Valdimar (Morthal) | Heavy, 1H, Alteration, Destruction, Restoration | Honed Ancient Nord War Axe | Không (không có Block) | Không (không có Archery) |
 | Jenassa | Archery, Light, Block, 1H | Steel Tanto (IW) | Elven Shield | Elven Hawk Bow (IW) |
 | Mjoll the Lioness | Heavy, **2H**, Archery, Block | Elven Great Blade (IW) | Không (2 tay) | Elven Bow |
 | Uthgerd the Unbroken | Heavy, 1H, Archery, Block | Steel Spiked Club (HA) | Steel Shield | Ancient Nord Bow |
 | Annekke Crag-Jumper | Archery, Light, Block, 1H | Steel War Pick (IW) | Hide Shield | Hunting Bow |
 | Borgakh the Steel Heart | Heavy, 1H, Archery, Sneak | Orcish Saber (IW) | Không (không có Block) | Ebony Bow |
-| Ugor | Archery, Light, Block, 1H | Orcish Hatchet (HA) | Orcish Shield | Orcish Bow |
+| Ugor | Archery, Light, Block, 1H | Orcish Hatchet (HA) | Orcish Shield | Lacey Ranger Bow (cùng mod) |
 | Eola | Destruction, Sneak, Alteration, 1H | Honed Ancient Nord Dagger (HA) | Không | Không |
 | Serana | Sneak, Conjuration, Light, 1H | Daedric Tanto (IW) | Không | Không |
 | Frea | 1H, Alteration, Light, Restoration | Stalhrim Shortspear (HA, 1 tay) | Không | Không |
 | Aranea Ienith | Destruction, Restoration, Alteration, Conjuration | Không (phép) | Không | Không |
 | Illia | Destruction, Restoration, Alteration, Conjuration | Forsworn Staff (gậy phép vanilla) | Không | Không |
 
-## Việc tiếp theo
-1. Người dùng tải đủ mod, build BodySlide, up plugin `.esp/.esl/.esm` (đúng bản đang bật) lên Drive, kèm Heavy Armory
-   và Immersive Weapons.
-2. Chạy `strip_outfit_plugin.py` cho từng mod trang phục, trả bản sạch lên Drive.
-3. Đọc FormID; mod nào không có Outfit thì tạo plugin ESL nhỏ chứa `OTFT`.
-4. Viết `SpouseOutfits_DISTR.ini` cho cả 3 nhóm (trang phục + vũ khí).
+## Trạng thái (2026-11-28): XONG, đã test trong game (~20 NPC ổn)
+- Mọi mod đã cài, bật trong MO2. File chia đồ đi kèm mod đã ẩn (`.mohidden`).
+- 35 plugin trang phục đã lọc bằng `strip_outfit_plugin.py`, nằm ở mod MO2 `SpouseOutfits - Clean Plugins` (không đưa lên GitHub).
+- Chọn món cụ thể cho từng NPC: `outfits.json` (FormID nội bộ + tên). Build:
+  `py -I skyrim-mods\tools\build_spouse_outfits.py --mo2 "E:\Skyrim Modding\MO2" --data "<game>\Data" --out "<MO2>\mods\SpouseOutfits"`
+  ra `SpouseOutfits.esp` (ESL, 44 OTFT, không đưa lên GitHub) + `SpouseOutfits_DISTR.ini` (bản copy ở thư mục này).
+  Tool kiểm mọi FormID với plugin thật, chặn món chiếm slot 30/31/41.
+- Tự quyết khi build: Jordis bộ COCO 02 (bạc); Hilund/Uthgerd thêm giày+găng Steel Plate vanilla, Argis giày+găng Dwarven;
+  Camilla/Bolfrida thêm Deze Crafter Boots; bỏ áo choàng SMP và mặt nạ; người dùng cung/nỏ có thêm 30 tên/bolt.
