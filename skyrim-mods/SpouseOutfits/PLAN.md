@@ -18,7 +18,7 @@ lịch sử lựa chọn xem trong git log của file này.
 |---|---|---|---|
 | Anwen | 00013386 | Hezimao 42 Dress (110988) | NSFW. Váy ren xuyên thấu, ngắn |
 | Orla | 000133B0 | Korana Priestess Of Dibella (112973, file 3BA) | NSFW |
-| Senna | 000133B7 | Obi's Eclipse Seductress 3BA (111725) | NSFW |
+| Senna | 000133B7 | Bisquits Pain Bringer (111059, contentcat) | NSFW. Dây xích + trang sức vàng; cùng tác giả với Anwen/Orla. Phương án 2: Sexy Elves Outfit (110890, contentcat, bản không SMP) |
 | Taarie | 000132AB | Obi's Masquerade Outfit 3BA (116474) | **Không dùng mặt nạ** |
 | Dravynea | 0001365F | Deze Clothing – Mage (50446), bộ court wizard/College | |
 | Muiri | 0001406B | Skyforge Assassins (87465) | Váy dài chưa tới gối, không SMP vẫn ổn |
@@ -63,12 +63,14 @@ Base ID của follower sẽ lấy từ UESP khi viết SPID.
 
 ## NPC nữ kết bạn qua favor (rủ đi bằng Immersive Recruit)
 Lọc từ UESP Skyrim:Favors: bỏ người có chồng/con, người già, người có việc quan trọng; bỏ Wujeeta (Argonian).
+Không dùng: Nordic Fur Armor (xấu), Fashions of the Huntsmen (người dùng để dành chia đồ chung), Pandorable's Lady Arkay
+(là mod follower, phải cài follower mới có đồ). Cleric Armours of the Nine Divines (5537, có bản Arkay) chưa rõ có bản nữ.
 | NPC | Base ID | Trang phục (ID Nexus) | Vũ khí |
 |---|---|---|---|
-| Bolfrida Brandy-Mug | 00014126 | Nordic Fur Armor (gốc 26472 + 3BA 169079) | Iron Quarterstaff (HA) |
-| Ganna Uriel | 0001365D | Fashions of the Huntsmen (75837, file CBBE 3BA) | Steel Hatchet (HA) |
+| Bolfrida Brandy-Mug | 00014126 | Simple Ancient Nord Dress 3BA (153101) | Iron Quarterstaff (HA) |
+| Ganna Uriel | 0001365D | J3 Elegant Explorer 3BA (126956). Phương án 2: Adventurers Tunic 3BA (gốc 131889 + 3BA 140859) | Steel Hatchet (HA) |
 | Voada | 000133C0 | Wayward Ranger – chỉ bộ mặc trong (124246), màu khác Annekke | Iron Dagger |
-| Alessandra | 00013347 | Pandorable's Lady Arkay (28434, chỉ CBBE thường) | Silver Mace (HA) |
+| Alessandra | 00013347 | Journeyman Healer Robes 3BA (75867) | Silver Mace (HA) |
 | Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow |
 | Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow |
 
