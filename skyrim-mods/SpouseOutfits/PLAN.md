@@ -72,7 +72,7 @@ Alessandra: loại Journeyman Healer Robes (người dùng không ưng), Prieste
 | Bolfrida Brandy-Mug | 00014126 | Simple Ancient Nord Dress 3BA (153101) | Iron Quarterstaff (HA) |
 | Ganna Uriel | 0001365D | J3 Elegant Explorer 3BA (126956). Phương án 2: Adventurers Tunic 3BA (gốc 131889 + 3BA 140859) | Steel Hatchet (HA) |
 | Voada | 000133C0 | Wayward Ranger – chỉ bộ mặc trong (124246), màu khác Annekke | Iron Dagger |
-| Alessandra | 00013347 | EGIL Demon Hunter II Templar 3BA (81705) – áo tabard trắng + lưới xích + găng vàng. Phương án 2: Obi's Victorian Hunter Attire 3BA (193037) – áo khoác đen có mũ trùm, kiểu tang lễ | Silver Mace (HA) |
+| Alessandra | 00013347 | **CHỐT: EGIL Demon Hunter II Templar 3BA** (81705) | Silver Mace (HA) |
 | Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow |
 | Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow |
 

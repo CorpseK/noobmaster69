@@ -59,7 +59,11 @@
 | DOMTalkGate (NSFW) | 0.1.0 | chưa test | Add-on cho Diary of Mine 8.5.6f: thoại DOM với NPC chưa capture chỉ hiện `iWindowSeconds` (30s) sau khi cast Training Info (kéo dài `DOMTrainingInfoEffect` 0x5BD55A + thêm điều kiện `HasMagicEffect` vào 37 dòng mở đầu) |
 | BendWillRecruit | 0.1.0 | chưa test | Shout Bend Will trúng NPC `ActorTypeNPC` → stop combat, relationship Ally, `PotentialFollowerFaction`, gọi Papyrus `DialogueFollowerScript.SetFollower` (quest `DialogueFollower` 0750BA) để NFF nhận. Tìm shout theo tên hoặc INI `sShoutForm` |
 
-Ngoài ra `skyrim-mods/tools/` có script Python (NIF, FaceGen, ESP, BSA) chạy trên máy nhà.
+Ngoài ra `skyrim-mods/tools/` có script Python chạy trên máy nhà: NIF, FaceGen, ESP, BSA, `nexus.py` (tìm mod trên
+Nexus qua API công khai, có cả mod adult), `strip_outfit_plugin.py` (lọc plugin mod trang phục: giữ đồ + temper).
+
+**SpouseOutfits** (`skyrim-mods/SpouseOutfits/`): trang phục + vũ khí riêng cho NPC nữ (vợ, follower/housecarl, NPC
+kết bạn qua favor), chia bằng SPID. Danh sách CHỐT ở `PLAN.md`; việc tiếp theo làm trên máy nhà theo `LOCAL_BRIEF.md`.
 
 Lưu ý: GenderShift và RelicHunter cùng hook `CalculateCurrentFormList`. Detours tự nối hai hook nên dùng chung được.
 
