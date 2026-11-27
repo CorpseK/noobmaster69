@@ -260,3 +260,11 @@ Loại thêm: Obi's Derketo Priestess (khố vải SMP), Obi's Nocturnal Noir (v
 - Muiri – Skyforge Assassins: "Elegant **SMP Dress**", cùng vấn đề.
 - Mjoll – Daymarr Guardian Goddess: **áo choàng + váy SMP**.
 - Jordis – COCO Goddess of War V2: **áo choàng SMP** (có thể bỏ riêng món áo choàng).
+
+## Chốt sau khi người dùng kiểm tra
+- Skyforge Assassins (Muiri): váy rộng, dài chưa tới gối, không SMP vẫn ổn → **giữ**.
+- Guardian Goddess (Mjoll), Goddess of War V2 (Jordis): có hỗ trợ CBPC → **giữ**.
+- Taarie – Obi's Masquerade Outfit: **không dùng món mặt nạ** (chỉ đưa áo/quần/giày vào Outfit).
+- Aranea: bỏ COCO Twilight Sorceress (váy dài SMP) → **Obi's Hood and Steel Armor 3BA (136388)**: mũ trùm + giáp màu
+  tím (màu gắn với Azura), không có vải rủ, mặt nạ/thắt lưng bỏ được bằng zap. Phương án 2: Ashtoreth Elven Sentinel
+  3BA (79296), bỏ món áo choàng. Loại: Kinnari Armor (vải SMP).
