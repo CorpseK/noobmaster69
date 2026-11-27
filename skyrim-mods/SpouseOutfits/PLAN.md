@@ -1,92 +1,76 @@
-# SpouseOutfits: trang phục riêng cho vợ (nữ, không phải follower)
+# SpouseOutfits: trang phục + vũ khí cho NPC nữ (bản CHỐT)
 
-Mục tiêu: mỗi ứng viên kết hôn nữ **không phải follower** có một bộ đồ hợp phong cách/cốt truyện, chia bằng **SPID**
-(file `_DISTR.ini`, lọc theo base FormID của từng NPC). Đây là bản kế hoạch, chưa có file SPID.
+Chia bằng **SPID** (`SpouseOutfits_DISTR.ini`, lọc theo base FormID của từng NPC). Bảng dưới là bản chốt cuối cùng;
+lịch sử lựa chọn xem trong git log của file này.
 
-## Ràng buộc (đã chốt với người dùng)
-- Body **CBBE 3BA**, **không SMP** (dễ crash khi đánh đông người). Loại mod bắt buộc FSMP.
-- Đã có **Somewhere in Between** của Dayhawk (Armor Replacer 98945 + Clothes Replacer 167530): không đề xuất lại.
-  Vì SIB là replacer mesh vanilla, các mod chỉ **thêm biến thể màu dùng mesh vanilla** (series *Styles of Skyrim*)
-  sẽ tự ăn mesh 3BA của SIB. Đây là lựa chọn tốt nhất cho đồ thường.
-- Chỉ chọn đồ **mới, standalone**, không chọn replacer (tránh đè SIB).
-- **NSFW chỉ cho 3 nữ tu Dibella** (Anwen, Orla, Senna). Mọi người khác: SFW, lore-friendly.
+## Ràng buộc
+- Body **CBBE 3BA**, **không SMP**. Mod bắt buộc FSMP bị loại. Váy/tà dài mềm cũng loại (không SMP thì cứng đờ),
+  trừ các bộ người dùng đã kiểm tra là ổn (Skyforge Assassins, Guardian Goddess, Goddess of War V2: có CBPC).
+- Đã có **Somewhere in Between** (Dayhawk) và **Guards Armor Replacer** (NordwarUA): không đè, không đề xuất lại.
+- Chỉ đồ **mới, standalone**; không replacer. Không bikini, không đồ hiện đại, không đồ từ game/phim khác.
+- **NSFW chỉ cho 3 nữ tu Dibella** (Anwen, Orla, Senna).
+- Mỗi mod trang phục chạy qua `tools/strip_outfit_plugin.py`: chỉ giữ đồ + công thức temper. Ẩn trong MO2 các file chia
+  đồ đi kèm mod (`*_DISTR.ini`, `*_KID.ini`, SkyPatcher, Container Distribution Framework, `*_SWAP.ini`).
+  Deze: cài bản **without NPCs**.
 
-## Danh sách hiện tại (sau vòng 3, ưu tiên Deze)
-Deze Clothing Set CBBE 3BA (50446) và Deze Armor Set (49318) của ralfetas: đồ theo nghề (Blacksmith, Alchemist,
-Crafter boots, Dealer cho Ysolda, nhiều bộ Mage; giáp Thieves Guild/Steel Plate/Whiterun/Dwemer).
-Cài bản **"without NPCs"** để SPID quyết định. Nếu cài thêm Deze SPIDified (57293) thì nó cũng gán Ysolda: dòng của
-mình phải thắng. Các bộ COCO ghi "HDT-SMP hoặc CBPC" nên chạy với CBPC của 3BA.
-
-| NPC | Base ID | Bộ đồ (ID Nexus) | Ghi chú |
+## Nhóm vợ (ứng viên kết hôn nữ, không phải follower)
+| NPC | Base ID | Trang phục (ID Nexus) | Ghi chú |
 |---|---|---|---|
-| Anwen | 00013386 Skyrim.esm | Priestess of First Light 3BA (158302) | NSFW. Bản gốc SMP, kiểm tra bản 3BA |
-| Orla | 000133B0 Skyrim.esm | COCO Fairy Queen (82260) | NSFW |
-| Senna | 000133B7 Skyrim.esm | **COCO Caress of Venus (68006)**, đã chốt | NSFW |
-| Taarie | 000132AB Skyrim.esm | COCO Scarlet Rose (65109) | |
-| Dravynea | 0001365F Skyrim.esm | **Deze Mage** (50446), chọn bộ court wizard/College | Thay Snow Queen |
-| Muiri | 0001406B Skyrim.esm | **CHỐT: Skyforge Assassins (87465)** | Váy ren đen; SMP hoặc CBPC |
-| Avrusa Sarethi | 00019BFE Skyrim.esm | **Deze Alchemist** + Crafter boots (50446) | Khác màu/biến thể với Muiri nếu có |
-| Ghorza gra-Bagol | 0001339A Skyrim.esm | **Deze Blacksmith** + Crafter boots (50446) | |
-| Morwen | 018FA9 Dragonborn.esm | **CHỐT: ELLE Tribal Scout 3BA (95333)** | Bộ lạc, hợp Skaal |
-| Sylgja | 000C3A3F Skyrim.esm | **Deze Blacksmith/Alchemist apron** + Crafter boots (50446) | Thợ mỏ |
-| Ysolda | 00013BAB Skyrim.esm | **Deze Dealer** (50446) | Tác giả làm riêng cho Ysolda |
-| Hilund | 01A515 Dragonborn.esm | **Deze Armor – Steel Plate A (có váy)** (49318) | Đổi từ Bladedancer's Edge theo yêu cầu |
-| Temba Wide-Arm | 000658D2 Skyrim.esm | Knight of The Village 3BA (62364) | |
-| Camilla Valerius | 0001347B Skyrim.esm | Obi's Skirt and Shirt 3BA (128400) | |
-| Viola Giordano | 00014129 Skyrim.esm | DD - Temio Cloth 3BA (125970) | |
-| Aeri | 0001360B Skyrim.esm | **CHỐT: C5Kev's Flirty In Fur (64072)** | Áo lông + váy da, hở eo |
-| Gilfre | 0001367A Skyrim.esm | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | Áo khoác da đi đường, kín. Phương án 2: Ark bản xanh (0x12C6 / 0x22F8) |
-| Shahvee | 0001411A Skyrim.esm | Tạm bỏ qua | Argonian |
+| Anwen | 00013386 | Hezimao 42 Dress (110988) | NSFW. Váy ren xuyên thấu, ngắn |
+| Orla | 000133B0 | Korana Priestess Of Dibella (112973, file 3BA) | NSFW |
+| Senna | 000133B7 | Obi's Eclipse Seductress 3BA (111725) | NSFW |
+| Taarie | 000132AB | Obi's Masquerade Outfit 3BA (116474) | **Không dùng mặt nạ** |
+| Dravynea | 0001365F | Deze Clothing – Mage (50446), bộ court wizard/College | |
+| Muiri | 0001406B | Skyforge Assassins (87465) | Váy dài chưa tới gối, không SMP vẫn ổn |
+| Avrusa Sarethi | 00019BFE | Deze Clothing – Alchemist + Crafter boots (50446) | |
+| Ghorza gra-Bagol | 0001339A | Deze Clothing – Blacksmith + Crafter boots (50446) | |
+| Morwen | 018FA9 (Dragonborn.esm) | ELLE Tribal Scout 3BA (95333) | |
+| Sylgja | 000C3A3F | Deze Clothing – tạp dề (Blacksmith/Alchemist) + Crafter boots (50446) | |
+| Ysolda | 00013BAB | Deze Clothing – Dealer (50446) | Tác giả làm riêng cho Ysolda |
+| Hilund | 01A515 (Dragonborn.esm) | Deze Armor – Steel Plate A, có váy (49318) | |
+| Temba Wide-Arm | 000658D2 | Knight of The Village 3BA (62364) | |
+| Camilla Valerius | 0001347B | Obi's Skirt and Shirt 3BA (128400) | |
+| Viola Giordano | 00014129 | DD – Temio Cloth 3BA (125970) | |
+| Aeri | 0001360B | C5Kev's Flirty In Fur (64072) | |
+| Gilfre | 0001367A | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | |
+| Shahvee | 0001411A | Bỏ qua | Argonian |
 
-Loại sau khi xem ảnh: Swan, Elven Lake (kiểu bikini); Clothes Pack 4, Wayward Knight, Gothic Babe (hiện đại/anime);
-Obi's Leather Outfit, Shino Tribal Huntress (quá hở). Loại vì bắt buộc SMP: Lady Ritual, Tribal Clothes, Silver Knight,
-Priestess of Time, Witch Chains Dress, Robe of the Sorceress, Dibella's Grace, Queen Marika, Elegant Merchant Clothes.
-Loại vì là replacer: Icy's 3D Blacksmith/Merchant/Wench. Vòng 3 loại: Goma Fine Clothes (bắt buộc SMP),
-DD Exquisite Cloth (hiện đại), Vintage Roses, COCO Luscious Lady (anime/hầu gái).
-
-## Dọn mod trang phục (chỉ giữ đồ + temper)
-Người dùng chỉ muốn đồ tồn tại trong dữ liệu game và temper được. Mỗi plugin chạy qua
-`tools/strip_outfit_plugin.py` (giữ FormID), đặt bản sạch trong một mod MO2 riêng, ưu tiên cao hơn mod gốc.
-Ngoài ra xóa/ẩn trong MO2 các file chia đồ đi kèm mod: `*_DISTR.ini` (SPID), `*_KID.ini`, `SKSE/Plugins/SkyPatcher/**`,
-file Container Distribution Framework, `*_SWAP.ini`. Deze: chọn bản **without NPCs** khi cài.
-
-## Việc tiếp theo
-1. Người dùng duyệt danh sách (xem ảnh trên Nexus), chọn bộ cho từng NPC.
-2. Tải mod, up plugin `.esp/.esl` lên Drive.
-3. Đọc plugin lấy FormID Armor/Outfit. Mod nào không có Outfit thì tạo plugin ESL nhỏ chứa `OTFT`
-   (mỗi NPC một Outfit; có thể trỏ vào leveled list để có biến thể).
-4. Viết `SpouseOutfits_DISTR.ini`, lọc theo base ID ở bảng trên.
-
-# Follower nữ (housecarl, hireling, follower lẻ)
-Phạm vi (người dùng chốt): housecarl (có mod AIO đổi **mọi** housecarl thành nữ), hireling nữ, follower lẻ.
-Follower thuộc phe lớn (Companions, College, Dawnguard...) giữ đồng phục phe trong game, không làm.
-Quy tắc như nhóm vợ: 3BA, không SMP (COCO/Daymarr chạy với CBPC), không bikini/hiện đại/crossover, không lặp mod của vợ.
-
-| Follower | Nơi | Đề xuất (ID Nexus) | Ghi chú |
+## Follower (housecarl, hireling, follower lẻ)
+Housecarl: có mod AIO đổi mọi housecarl thành nữ, FormID giữ nguyên. Follower thuộc phe lớn (Companions, College,
+Dawnguard...) giữ đồng phục phe.
+| Follower | Base ID | Trang phục (ID Nexus) | Ghi chú |
 |---|---|---|---|
-| Lydia | Whiterun | Deze Armor – **Whiterun** bản A (49318) | Tác giả làm cho Irileth (Whiterun) |
-| Argis the Bulwark | Markarth | Deze Armor – **Dwemer** (49318) | Tác giả làm cho Faleen (Markarth) |
-| Iona | Riften | ELLE – Ginnungagap 3BA (97931) | Da tối, mặt nạ, hợp Riften |
-| Jordis the Sword-Maiden | Solitude | COCO Goddess Of War V2 (78335), bản bạc | Imperial Centurion Battle Dress bị loại (SMP skirt) |
-| Calder | Windhelm | Nord Steelheart (110922 + 3BA 111014) | Lông + thép, hợp Eastmarch lạnh |
-| Gregor | Dawnstar | Sovngarde Steel Armor (76115, file 3BA) | Thép Nord |
-| Valdimar | Morthal | Iron Battlemage Armor 3BA (73162) | Valdimar là spellsword (Alteration/Destruction/Restoration) |
-| Rayya | Falkreath (Redguard) | **CHỐT: Daymarr Yokuda (142696)** | Chủ đề Redguard/Hammerfell; hở; SMP hoặc CBPC |
-| Jenassa | Hireling, Whiterun | West Wind – Assault Armor 3BA (128266) | Lính đánh thuê kiểu sát thủ |
-| Mjoll the Lioness | Riften | Daymarr Guardian Goddess (137926) | Paladin vàng-trắng |
-| Uthgerd the Unbroken | Whiterun | Deze Armor – **Steel Plate B** (49318) | Tác giả làm cho Uthgerd |
-| Annekke Crag-Jumper | Darkwater Crossing | Wayward Ranger Armor 3BA, đủ giáp (124246) | Ranger |
-| Eola | Markarth (Namira) | **Draugr Halloween / "Draugr Wanderer" Outfit** (41883, file 3BAv2) | Vải mục, xương kiểu draugr: hợp Namira (mục rữa, sâu bọ). Phương án 2: Daymarr Shadow Knight (119080) |
-| Aranea Ienith | Shrine of Azura | **CHỐT: COCO Twilight Sorceress (102730)** | Chủ đề twilight (Azura = hoàng hôn/bình minh). Hở; SMP hoặc CBPC |
-| Illia | Darklight Tower | **CHỐT: Wilderness Witch** (gốc 40963 + 3BA 40845) | Phù thủy rừng |
-| Serana | Volkihar | **CHỐT: ELLE Dark Rebel 3BA (102957)** | Giáp nhẹ + áo khoác tối |
-| Frea | Skaal | Dragonbone Barbarian 3BA (47466, cần bản gốc của Shocky) | Lông + xương rồng, chiến binh phương Bắc thay vì đồ giống cướp |
-| Borgakh the Steel Heart | Mor Khazgur | Orcish Marauder Armor 3BA (64629) | Warrior giáp nặng; vẫn chất Orc nhưng là bộ mới, không phải giáp Orcish vanilla |
-| Ugor | Largashbur | C5Kev's Lacey Ranger Armor 3BA (103426) | Ranger (bắn cung, giáp nhẹ) |
+| Lydia (Whiterun) | | Deze Armor – Whiterun A (49318) | |
+| Argis the Bulwark (Markarth) | | Deze Armor – Dwemer (49318) | |
+| Iona (Riften) | | ELLE – Ginnungagap 3BA (97931) | |
+| Jordis the Sword-Maiden (Solitude) | | COCO Goddess Of War V2 (78335), bản bạc | CBPC |
+| Calder (Windhelm) | | Nord Steelheart (gốc 110922 + 3BA 111014) | |
+| Gregor (Dawnstar) | | Sovngarde Steel Armor (76115, file 3BA) | |
+| Valdimar (Morthal) | | Iron Battlemage Armor 3BA (73162) | |
+| Rayya (Falkreath) | | Daymarr Yokuda (142696) | Hở; CBPC |
+| Jenassa | | West Wind – Assault Armor 3BA (128266) | |
+| Mjoll the Lioness | | Daymarr Guardian Goddess (137926) | CBPC |
+| Uthgerd the Unbroken | | Deze Armor – Steel Plate B (49318) | |
+| Annekke Crag-Jumper | | Wayward Ranger Armor 3BA, đủ giáp (124246) | |
+| Eola | | Draugr Wanderer Outfit (41883, file 3BAv2) | |
+| Aranea Ienith | | Obi's Hood and Steel Armor 3BA (136388) | Tím = Azura. Phương án 2: Ashtoreth Elven Sentinel (79296) bỏ áo choàng |
+| Illia | | Wilderness Witch (gốc 40963 + 3BA 40845) | |
+| Serana | | ELLE Dark Rebel 3BA (102957) | |
+| Frea | | Dragonbone Barbarian 3BA (47466, cần bản gốc) | |
+| Borgakh the Steel Heart | | Orcish Marauder Armor 3BA (64629) | |
+| Ugor | | C5Kev's Lacey Ranger Armor 3BA (103426) | |
+Base ID của follower sẽ lấy từ UESP khi viết SPID.
 
-Loại vòng follower: Daring Tribunal Robes (ngực trần), Brazen Assassin, Dangerous Gladiator, Black Widow,
-Daggerfall Archmage (kiểu bikini/dây), Dovakini (anime), Ebony Armor Kai (SMP), Champion of Azura (latex),
-Moon Feather Shaman (quá hở), Volkihar Assassin (FSMP, lại là vampire), Sorceress Armor (SMP), Daring Stormhold Warrior (hở ngực).
+## NPC nữ kết bạn qua favor (rủ đi bằng Immersive Recruit)
+Lọc từ UESP Skyrim:Favors: bỏ người có chồng/con, người già, người có việc quan trọng; bỏ Wujeeta (Argonian).
+| NPC | Base ID | Trang phục (ID Nexus) | Vũ khí |
+|---|---|---|---|
+| Bolfrida Brandy-Mug | 00014126 | Nordic Fur Armor (gốc 26472 + 3BA 169079) | Iron Quarterstaff (HA) |
+| Ganna Uriel | 0001365D | Fashions of the Huntsmen (75837, file CBBE 3BA) | Steel Hatchet (HA) |
+| Voada | 000133C0 | Wayward Ranger – chỉ bộ mặc trong (124246), màu khác Annekke | Iron Dagger |
+| Alessandra | 00013347 | Pandorable's Lady Arkay (28434, chỉ CBBE thường) | Silver Mace (HA) |
+| Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow |
+| Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow |
 
 # Vũ khí
 Nguồn: trang Armory (SSE) của wiki LotD (legacy-of-the-dragonborn.fandom.com), kiểm tra chéo: món vanilla có trang
@@ -139,132 +123,9 @@ Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel 
 | Aranea Ienith | Destruction, Restoration, Alteration, Conjuration | Không (phép) | Không | Không |
 | Illia | Destruction, Restoration, Alteration, Conjuration | Forsworn Staff (gậy phép vanilla) | Không | Không |
 
-# NPC nữ kết bạn được qua favor (UESP Skyrim:Favors)
-Danh sách lấy từ trang Favors và trang từng quest (kể cả bảng Radiant Options của Chop Wood, Gather Wheat, Mine Ore...),
-giới tính/race/class/base ID lấy từ trang NPC trên UESP. Đã bỏ: người đã có trong nhóm vợ/follower, trẻ em (Lucia, Svari).
-Chưa chọn đồ: chờ người dùng chọn NPC sẽ rủ đi cùng (Immersive Recruit).
-
-### Nông dân/thợ (13)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Adrianne Avenicci | Imperial | Blacksmith | 00013BB9 | Whiterun | Greatsword for a Great Man |
-| Alfhild Battle-Born | Nord | Farmer | 00013BB0 | Whiterun | Gather Wheat |
-| Beitild | Nord | Miner | 00013612 | Dawnstar | Mine Ore |
-| Bolfrida Brandy-Mug | Nord | Farmer | 00014126 | Windhelm | Gather Wheat |
-| Boti | Nord | Farmer | 000136BE |  | Gather Wheat |
-| Ganna Uriel | Imperial | Lumberjack | 0001365D |  | Chop Wood |
-| Grosta | Nord | Lumberjack | 00019C00 |  | Chop Wood, Flight or Fight |
-| Hert | Nord | Lumberjack | 0001367C |  | Chop Wood |
-| Hillevi Cruel-Sea | Nord | Farmer | 0001411F | Windhelm | Delivery (Hillevi) |
-| Katla | Nord | Farmer | 00013290 | Solitude | Gather Wheat |
-| Olda | Nord | Lumberjack | 00019A20 |  | Dragon's Breath Mead (quest) |
-| Reldith | High Elf | Farmer | 000136B4 |  | Gather Wheat |
-| Synda Llanith | Dark Elf | Farmer | 000BB2C0 |  | Gather Wheat |
-
-### Buôn bán/quán (9)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Carlotta Valentia | Imperial | Food Vendor | 00013B99 | Whiterun | A Few Words with You |
-| Evette San | Nord | Food Vendor | 00013273 | Solitude | The Spiced Wine |
-| Eydis | Nord | Food Vendor | 00013B77 |  | The Ghost of Old Hroldan |
-| Haran | Nord | Food Vendor | 0001C184 | Winterhold | A Few Words with You |
-| Hulda | Nord | Pawnbroker | 00013BA3 | Whiterun | Chop Wood |
-| Kerah | Redguard | Pawnbroker | 000133A2 | Markarth | Delivery to Calcelmo |
-| Lisbet | Nord | Food Vendor | 000133A5 | Markarth | Lisbet's Missing Shipment |
-| Pantea Ateia | Imperial | Bard | 0001329F | Solitude | Pantea's Flute |
-| Svana Far-Shield | Nord | Food Vendor | 0001337C | Riften | Caught Red Handed |
-
-### Thầy thuốc/tu sĩ/pháp sư (7)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Alessandra | Imperial | Priest | 00013347 | Riften | Pilgrimage |
-| Angeline Morrard | Breton | Apothecary | 00013260 | Solitude | No News is Good News |
-| Danica Pure-Spring | Nord | Priest | 00013BA5 | Whiterun | Delivery |
-| Dinya Balu | Dark Elf | Priest | 00013352 | Riften | Spread the Love |
-| Idgrod the Younger | Nord | Sorcerer | 000135EC | Morthal | Delivery |
-| Lami | Nord | Apothecary | 000135EF | Morthal | Rare Gifts |
-| Wylandriah | Wood Elf | Fire/Frost/Shock Mage | 00019DEF | Riften | Hunt and Gather |
-
-### Orc stronghold (5)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Arob | Orc | Orc Warrior | 00013B7B |  | The Forgemaster's Fingers |
-| Bagrak | Orc | Orc Warrior | 00019955 |  | The Forgemaster's Fingers |
-| Gharol | Orc | Blacksmith | 00013B7C |  | Gharol's Message, Mine Ore |
-| Shuftharz | Orc | Blacksmith | 00019957 |  | Mine Ore |
-| Yatul | Orc | Ranger | 0001B077 |  | The Forgemaster's Fingers |
-
-### Khác (4)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Fanari Strong-Voice | Nord | Dremora | xx018FC5 |  | Kill the Bandit Leader |
-| Iddra | Nord | Citizen | 00013662 |  | A Few Words with You |
-| Voada | Breton | Citizen | 000133C0 | Markarth | Delivery |
-| Wujeeta | Argonian | Citizen | 00013382 | Riften | Helping Hand |
-
-### Cần cân nhắc (9)
-| NPC | Race | Class | Base ID | Thành phố | Favor |
-|---|---|---|---|---|---|
-| Bothela | Breton | Apothecary | 0001338B | Markarth | Bothela's Discreet Delivery |
-| Edda | Imperial | Beggar | 00013356 | Riften | Quest all Beggars Have |
-| Elisif the Fair | Nord | Citizen | 0001326A | Solitude | Elisif's Tribute |
-| Hafjorg | Elder | Apothecary | 00013360 | Riften | Truth Ore Consequences |
-| Inge Six Fingers | Elder | Bard | 0001328A | Solitude | Finn's Lute |
-| Ingun Black-Briar | Nord | Assassin | 00013364 | Riften | Few and Far Between |
-| Silda the Unseen | Nord | Thief | 00014121 | Windhelm | Quest all Beggars Have |
-| Sybille Stentor | Breton | Destruction Mage | 000132AA | Solitude | Kill the Vampire |
-| Vigdis Salvius | Elder | Farmer | 000133BF | Markarth | Gather Wheat |
-
-## Lọc lại (người dùng: bỏ người đã có chồng/con, bà già, người có việc quan trọng)
-Kiểm tra trên trang NPC của UESP.
-- **Có chồng/con:** Adrianne Avenicci, Alfhild Battle-Born, Beitild, Boti, Grosta, Hert, Hillevi Cruel-Sea, Katla, Olda,
-  Reldith (con nuôi Ennis), Synda Llanith, Dinya Balu, Lami, Arob, Gharol, Shuftharz (con trai Olur), Iddra.
-- **Việc quan trọng:** Wylandriah (court wizard), Idgrod the Younger (con Jarl, chăm Joric), Danica Pure-Spring (trưởng
-  đền Kynareth, trainer), Fanari Strong-Voice (trưởng làng Skaal), Angeline Morrard (chủ tiệm), cả nhóm buôn bán/quán,
-  cả nhóm "cần cân nhắc".
-- **Còn lại (7):**
-
-| NPC | Base ID | Ghi chú |
-|---|---|---|
-| Bolfrida Brandy-Mug | 00014126 | Nông dân Nord, sống một mình với dê và gà gần Windhelm |
-| Ganna Uriel | 0001365D | Imperial, thợ gỗ/thợ mỏ ở Kynesgrove, sống cùng chị Gemma |
-| Voada | 000133C0 | Breton, phụ bếp ở Understone Keep (Markarth), trông chó |
-| Wujeeta | 00013382 | Argonian, làm ở xưởng cá Riften, đang cai skooma |
-| Alessandra | 00013347 | Imperial, nữ tu Arkay một mình trông Hall of the Dead (Riften); con gái Andurs. Ranh giới: không có quest/dịch vụ hỏng nếu cô đi |
-| Bagrak | 00019955 | Orc warrior Mor Khazgur, em gái Chief Larak, góa chồng ("late husband"), không con |
-| Yatul | 0001B077 | Orc ranger Narzulbur, cô của Chief; không chồng con; nghi là kẻ đầu độc các vợ chief |
-
-## Chốt nhóm favor (bỏ Wujeeta)
-| NPC | Base ID | Trang phục (ID Nexus) | Vũ khí | Lý do |
-|---|---|---|---|---|
-| Bolfrida Brandy-Mug | 00014126 | Nordic Fur Armor (gốc 26472 + 3BA 169079) | Iron Quarterstaff (HA) | Áo lông kín, sống ngoài trời tuyết gần Windhelm |
-| Ganna Uriel | 0001365D | Fashions of the Huntsmen (75837, file CBBE 3BA) | Steel Hatchet (HA) | Áo da có mũ trùm, thợ gỗ kiêm thợ mỏ |
-| Voada | 000133C0 | Wayward Ranger – **bộ đồ mặc trong** (124246), màu khác Annekke | Iron Dagger | Đồ gọn cho người làm bếp + trông chó. Cùng mod với Annekke nhưng khác món |
-| Alessandra | 00013347 | Pandorable's Lady Arkay (28434) | Silver Mace (HA) | Đồ chủ đề Arkay; chỉ có CBBE thường (không phải 3BA riêng), có CBP physics. Bạc: hợp nữ tu Arkay (chống undead) |
-| Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow | Giáp tối cho chiến binh góa chồng; UESP: cô dùng war axe + cung |
-| Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow | Váy-giáp tối thanh lịch cho ranger hay mưu mô |
-Loại: DX Sexy Cook (apron SMP, kiểu hầu gái), Travelling Priest Robes (chỉ có bản nam trong ảnh, SMP khăn tùy chọn).
-
-## Sửa: bỏ đồ có váy/tà dài mềm (không có SMP thì cứng đờ)
-Người dùng thấy mấy bộ có váy/tà dài nhẹ trông xấu khi không có SMP. Thay:
-| NPC | Bỏ | Thay bằng (ID Nexus) | Ghi chú |
-|---|---|---|---|
-| Anwen | Priestess of First Light | Hezimao 42 Dress (110988) | Váy ren xuyên thấu, ngắn, có vòng cổ. NSFW |
-| Orla | COCO Fairy Queen | Korana Priestess Of Dibella (112973, file 3BA) | Làm riêng cho Dibella, vàng/bạc. NSFW |
-| Senna | COCO Caress of Venus | Obi's Eclipse Seductress 3BA (111725) | Dây da, rất hở, hợp "sultry". NSFW |
-| Taarie | COCO Scarlet Rose | Obi's Masquerade Outfit 3BA (116474) | Áo khoác thêu vàng, kiểu dạ hội quý tộc |
-Loại thêm: Obi's Derketo Priestess (khố vải SMP), Obi's Nocturnal Noir (vạt váy SMP), Lingerie Set / DD Lingerie (kiểu hiện đại).
-
-**Các bộ khác có phần vải SMP, cần người dùng xem lại:**
-- Aranea – COCO Twilight Sorceress: **váy dài (gown) SMP**, cùng vấn đề.
-- Muiri – Skyforge Assassins: "Elegant **SMP Dress**", cùng vấn đề.
-- Mjoll – Daymarr Guardian Goddess: **áo choàng + váy SMP**.
-- Jordis – COCO Goddess of War V2: **áo choàng SMP** (có thể bỏ riêng món áo choàng).
-
-## Chốt sau khi người dùng kiểm tra
-- Skyforge Assassins (Muiri): váy rộng, dài chưa tới gối, không SMP vẫn ổn → **giữ**.
-- Guardian Goddess (Mjoll), Goddess of War V2 (Jordis): có hỗ trợ CBPC → **giữ**.
-- Taarie – Obi's Masquerade Outfit: **không dùng món mặt nạ** (chỉ đưa áo/quần/giày vào Outfit).
-- Aranea: bỏ COCO Twilight Sorceress (váy dài SMP) → **Obi's Hood and Steel Armor 3BA (136388)**: mũ trùm + giáp màu
-  tím (màu gắn với Azura), không có vải rủ, mặt nạ/thắt lưng bỏ được bằng zap. Phương án 2: Ashtoreth Elven Sentinel
-  3BA (79296), bỏ món áo choàng. Loại: Kinnari Armor (vải SMP).
+## Việc tiếp theo
+1. Người dùng tải đủ mod, build BodySlide, up plugin `.esp/.esl/.esm` (đúng bản đang bật) lên Drive, kèm Heavy Armory
+   và Immersive Weapons.
+2. Chạy `strip_outfit_plugin.py` cho từng mod trang phục, trả bản sạch lên Drive.
+3. Đọc FormID; mod nào không có Outfit thì tạo plugin ESL nhỏ chứa `OTFT`.
+4. Viết `SpouseOutfits_DISTR.ini` cho cả 3 nhóm (trang phục + vũ khí).
