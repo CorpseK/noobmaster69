@@ -244,3 +244,19 @@ Kiểm tra trên trang NPC của UESP.
 | Bagrak | 00019955 | Bladedancer's Edge (62751, file CBBE-3BA) | Orcish War Axe + Dwarven Bow | Giáp tối cho chiến binh góa chồng; UESP: cô dùng war axe + cung |
 | Yatul | 0001B077 | Hunting Grounds Outfit (bản gốc + 3BA 63986) | Orcish Shortsword (HA) + Supple Ancient Nord Bow | Váy-giáp tối thanh lịch cho ranger hay mưu mô |
 Loại: DX Sexy Cook (apron SMP, kiểu hầu gái), Travelling Priest Robes (chỉ có bản nam trong ảnh, SMP khăn tùy chọn).
+
+## Sửa: bỏ đồ có váy/tà dài mềm (không có SMP thì cứng đờ)
+Người dùng thấy mấy bộ có váy/tà dài nhẹ trông xấu khi không có SMP. Thay:
+| NPC | Bỏ | Thay bằng (ID Nexus) | Ghi chú |
+|---|---|---|---|
+| Anwen | Priestess of First Light | Hezimao 42 Dress (110988) | Váy ren xuyên thấu, ngắn, có vòng cổ. NSFW |
+| Orla | COCO Fairy Queen | Korana Priestess Of Dibella (112973, file 3BA) | Làm riêng cho Dibella, vàng/bạc. NSFW |
+| Senna | COCO Caress of Venus | Obi's Eclipse Seductress 3BA (111725) | Dây da, rất hở, hợp "sultry". NSFW |
+| Taarie | COCO Scarlet Rose | Obi's Masquerade Outfit 3BA (116474) | Áo khoác thêu vàng, kiểu dạ hội quý tộc |
+Loại thêm: Obi's Derketo Priestess (khố vải SMP), Obi's Nocturnal Noir (vạt váy SMP), Lingerie Set / DD Lingerie (kiểu hiện đại).
+
+**Các bộ khác có phần vải SMP, cần người dùng xem lại:**
+- Aranea – COCO Twilight Sorceress: **váy dài (gown) SMP**, cùng vấn đề.
+- Muiri – Skyforge Assassins: "Elegant **SMP Dress**", cùng vấn đề.
+- Mjoll – Daymarr Guardian Goddess: **áo choàng + váy SMP**.
+- Jordis – COCO Goddess of War V2: **áo choàng SMP** (có thể bỏ riêng món áo choàng).
