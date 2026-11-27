@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fomod>
+	<Name>Immersive Recruit</Name>
+	<Author>CorpseK</Author>
+	<Version>1.2.0</Version>
+	<Description>Recruit any NPC who becomes your Friend with the vanilla "Follow me" line. Recruited followers level with you and become Protected or Essential. SKSE plugin, no ESP.</Description>
+	<Groups>
+		<element>Gameplay</element>
+		<element>Followers</element>
+	</Groups>
+</fomod>

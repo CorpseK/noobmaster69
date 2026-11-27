@@ -17,6 +17,7 @@
 
 #include <spdlog/sinks/basic_file_sink.h>
 
+#include <array>
 #include <chrono>
 #include <format>
 #include <string>
@@ -79,7 +80,9 @@ namespace
 		bool keepLevelAsMin = true;    // never drop below the level they had before
 		int maxLevel = 80;             // 0 = no cap
 		bool removeLevelCap = true;    // NPCs that already scale but stop at a low level
-		bool makeProtected = true;     // only the player can kill them
+		// 0 = leave as is, 1 = Protected (only the player can kill them),
+		// 2 = Essential (nobody can; vanilla Protected can be bypassed by very strong hits).
+		int protection = 1;
 		bool onlyUnique = true;        // never edit a base shared by many NPCs
 
 		static std::string Path()
@@ -149,7 +152,9 @@ namespace
 			keepLevelAsMin = GetPrivateProfileIntA("Follower", "bKeepCurrentLevelAsMin", 1, path.c_str()) != 0;
 			maxLevel = std::clamp(static_cast<int>(GetPrivateProfileIntA("Follower", "iMaxLevel", 80, path.c_str())), 0, 65535);
 			removeLevelCap = GetPrivateProfileIntA("Follower", "bRemoveLevelCap", 1, path.c_str()) != 0;
-			makeProtected = GetPrivateProfileIntA("Follower", "bProtected", 1, path.c_str()) != 0;
+			// iProtection replaces bProtected (1.1.0 and older); an old INI keeps its choice.
+			const int legacy = GetPrivateProfileIntA("Follower", "bProtected", 1, path.c_str()) != 0 ? 1 : 0;
+			protection = std::clamp(static_cast<int>(GetPrivateProfileIntA("Follower", "iProtection", legacy, path.c_str())), 0, 2);
 			onlyUnique = GetPrivateProfileIntA("Follower", "bOnlyUnique", 1, path.c_str()) != 0;
 		}
 	};
@@ -183,7 +188,7 @@ namespace
 
 	void StrengthenFollower(RE::Actor* a_actor)
 	{
-		if (!IsFollowingPlayer(a_actor) || (!g_config.scaleWithPlayer && !g_config.makeProtected)) {
+		if (!IsFollowingPlayer(a_actor) || (!g_config.scaleWithPlayer && g_config.protection == 0)) {
 			return;
 		}
 		auto* npc = a_actor->GetActorBase();
@@ -241,10 +246,14 @@ namespace
 					data.calcLevelMax ? std::to_string(data.calcLevelMax) : "no cap"s, oldLevel);
 			}
 		}
-		if (g_config.makeProtected && !npc->IsEssential() && !npc->IsProtected()) {
+		if (g_config.protection == 1 && !npc->IsEssential() && !npc->IsProtected()) {
 			data.actorBaseFlags.set(Flag::kProtected);
 			changed = true;
 			SKSE::log::info("{} ({:08X}) is now protected", a_actor->GetName(), npc->GetFormID());
+		} else if (g_config.protection == 2 && !npc->IsEssential()) {
+			data.actorBaseFlags.set(Flag::kEssential);
+			changed = true;
+			SKSE::log::info("{} ({:08X}) is now essential", a_actor->GetName(), npc->GetFormID());
 		}
 		if (changed) {
 			npc->AddChange(kChangeActorBaseData);
@@ -431,9 +440,10 @@ namespace
 		SKSE::log::info("Config: minRank={} notify={} skipChildren={} skipHostile={} exclude={}",
 			g_config.minRank, g_config.notify, g_config.skipChildren, g_config.skipHostile, g_config.exclude.size());
 		SKSE::log::info(
-			"Follower: scale={} mult={}% keepLevelAsMin={} maxLevel={} removeLevelCap={} protected={} onlyUnique={}",
+			"Follower: scale={} mult={}% keepLevelAsMin={} maxLevel={} removeLevelCap={} protection={} onlyUnique={}",
 			g_config.scaleWithPlayer, g_config.levelMultPercent, g_config.keepLevelAsMin, g_config.maxLevel,
-			g_config.removeLevelCap, g_config.makeProtected, g_config.onlyUnique);
+			g_config.removeLevelCap, std::array{ "none", "protected", "essential" }[g_config.protection],
+			g_config.onlyUnique);
 
 		if (auto* ui = RE::UI::GetSingleton()) {
 			ui->AddEventSink<RE::MenuOpenCloseEvent>(MenuSink::GetSingleton());
@@ -447,7 +457,7 @@ namespace
 }
 
 SKSEPluginInfo(
-	.Version = REL::Version{ 1, 1, 0, 0 },
+	.Version = REL::Version{ 1, 2, 0, 0 },
 	.Name = "ImmersiveRecruit"sv,
 	.Author = "CorpseK"sv,
 	.RuntimeCompatibility = SKSE::VersionIndependence::AddressLibrary)
@@ -456,7 +466,7 @@ SKSEPluginLoad(const SKSE::LoadInterface* a_skse)
 {
 	SKSE::Init(a_skse);
 	SetupLog();
-	SKSE::log::info("ImmersiveRecruit v1.1.0 loading (game {})", a_skse->RuntimeVersion().string());
+	SKSE::log::info("ImmersiveRecruit v1.2.0 loading (game {})", a_skse->RuntimeVersion().string());
 
 	SKSE::GetMessagingInterface()->RegisterListener(OnMessage);
 	return true;

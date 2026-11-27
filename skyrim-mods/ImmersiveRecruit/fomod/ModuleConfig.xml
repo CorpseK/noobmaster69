@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://qconsulting.ca/fo3/ModConfig5.0.xsd">
+	<moduleName>Immersive Recruit</moduleName>
+	<requiredInstallFiles>
+		<folder source="Core" destination="" />
+	</requiredInstallFiles>
+	<installSteps order="Explicit">
+		<installStep name="Follower Protection">
+			<optionalFileGroups order="Explicit">
+				<group name="How should recruited followers be protected?" type="SelectExactlyOne">
+					<plugins order="Explicit">
+						<plugin name="Protected (recommended)">
+							<description>Only the player can kill your followers. Anything else only knocks them down.
+
+Vanilla bug: a very strong hit (common on Legendary difficulty) can bypass Protected and kill them anyway. Pick Essential if that bothers you.
+
+You can change this later with iProtection in Data/SKSE/Plugins/ImmersiveRecruit.ini (1 = Protected, 2 = Essential).</description>
+							<files>
+								<folder source="Protected" destination="" />
+							</files>
+							<typeDescriptor>
+								<type name="Recommended" />
+							</typeDescriptor>
+						</plugin>
+						<plugin name="Essential">
+							<description>Nobody can kill your followers, not even you. They only get knocked down and get back up after combat. Not affected by the Protected bug on high difficulties.
+
+NPCs that are already Essential stay Essential either way.
+
+You can change this later with iProtection in Data/SKSE/Plugins/ImmersiveRecruit.ini (1 = Protected, 2 = Essential).</description>
+							<files>
+								<folder source="Essential" destination="" />
+							</files>
+							<typeDescriptor>
+								<type name="Optional" />
+							</typeDescriptor>
+						</plugin>
+					</plugins>
+				</group>
+			</optionalFileGroups>
+		</installStep>
+	</installSteps>
+</config>

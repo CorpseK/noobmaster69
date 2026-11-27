@@ -1,7 +1,8 @@
 # Immersive Recruit
 
 SKSE plugin, no ESP. Any NPC whose relationship with you reaches **Friend** can be recruited as a follower
-with the vanilla "Follow me" line. Once they follow you, they **level with you** and become **Protected**.
+with the vanilla "Follow me" line. Once they follow you, they **level with you** and become **Protected** or
+**Essential** (your choice in the installer).
 
 ## Features
 
@@ -23,7 +24,11 @@ Ordinary NPCs have a fixed level, so they fall behind quickly as followers. Whil
 - **Fixed-level NPCs** level with the player (up to `iMaxLevel`, 80 by default), like NFF's `nfflevel` batch file (`setlevel 1000 0 1 0`),
   but automatic and without making them weaker: their original level becomes the minimum.
 - **NPCs that already level with you but stop early** (e.g. capped at level 25) get their cap raised to `iMaxLevel` (80 by default).
-- **Protected**: only the player can kill them. Essential NPCs stay Essential.
+- **Protection** (`iProtection`, chosen in the installer):
+  - **Protected**: only the player can kill them. Vanilla bug: a very strong hit (common on Legendary difficulty)
+    can bypass Protected and kill them anyway.
+  - **Essential**: nobody can kill them, not even you. They only get knocked down and get back up after combat.
+  - NPCs that are already Essential stay Essential in both cases.
 - Only unique NPCs are changed, so generic NPCs sharing one base record (guards, raised thralls...) are never affected.
 - NPCs that take their stats from a template cannot be changed (logged).
 - Health and other stats may need a cell change or a save reload to update to the new level.
@@ -34,8 +39,12 @@ Ordinary NPCs have a fixed level, so they fall behind quickly as followers. Whil
 - Built for SE 1.5.97, AE 1.6.x and AE 1.7.x (1.7.104) with the maintained CommonLibSSE-NG fork (alandtse/CommonLibVR v16.12.0). Needs the Address Library file for your exact game version. Version 1.1.0 tested in-game on 1.6.1170 and 1.7.104.
 
 ## Installation
-Install with your mod manager, or copy `SKSE/Plugins/ImmersiveRecruit.dll` and `SKSE/Plugins/ImmersiveRecruit.ini` into `Data/`.
-Safe to install mid-playthrough.
+Install with your mod manager. The FOMOD installer asks for the follower protection: **Protected** or **Essential**.
+You can change it later with `iProtection` in the INI. Safe to install mid-playthrough.
+
+Manual install: copy the `SKSE` folder from `Core/`, then the one from `Protected/` or `Essential/`, into `Data/`.
+
+Building the release zip: build the DLL, then run `powershell -File package.ps1` (output in `out/`).
 
 ## Configuration
 Everything is in `SKSE/Plugins/ImmersiveRecruit.ini`; see the comments in the file.
@@ -50,7 +59,7 @@ Everything is in `SKSE/Plugins/ImmersiveRecruit.ini`; see the comments in the fi
 | `bKeepCurrentLevelAsMin` | 1 | Never drop below the original level |
 | `iMaxLevel` | 80 | Level cap, 0 = none. NPCs whose own level is higher keep it |
 | `bRemoveLevelCap` | 1 | Raise the cap of NPCs that already level with you |
-| `bProtected` | 1 | Only the player can kill followers |
+| `iProtection` | 1 | 0 leave as is, 1 Protected (only the player can kill them), 2 Essential (nobody can) |
 | `bOnlyUnique` | 1 | Only change unique NPCs |
 
 ### Excluding NPCs
@@ -67,11 +76,16 @@ Thieves Guild questline ends).
 - No ESP and no edited records, so it does not conflict with other plugins.
 
 ## Uninstalling
-Remove the DLL and INI. NPCs that were already made recruitable stay recruitable, and the level and Protected
-changes stay in your save, the same way console commands such as `setlevel` are stored. Nothing breaks: they are
+Remove the DLL and INI. NPCs that were already made recruitable stay recruitable, and the level and
+Protected/Essential changes stay in your save, the same way console commands such as `setlevel` are stored. Nothing breaks: they are
 ordinary game values. New NPCs are no longer changed.
 
+Switching from Essential back to Protected does not remove Essential from followers that already got it: the mod
+cannot tell them apart from NPCs that were Essential in the first place.
+
 ## Changelog
+- 1.2.0: Choose Protected or Essential for followers (`iProtection`, replaces `bProtected`; old INIs keep working).
+  FOMOD installer.
 - 1.1.0: Check on activation instead of only when the dialogue menu opens, so NPCs that only greet you (no dialogue
   left after their quest) can be recruited too.
 - 1.0.1: Build for game 1.7.x (fixes "failed to open address library file" on 1.7.104).

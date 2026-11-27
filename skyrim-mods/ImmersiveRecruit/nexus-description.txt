@@ -1,0 +1,62 @@
+[size=5][b]Immersive Recruit[/b][/size]
+SKSE plugin, no ESP. Make friends, recruit them, and they grow with you.
+
+[size=4][b]Features[/b][/size]
+[b]Recruit your friends[/b]
+[list]
+[*]Any NPC whose relationship with you reaches [b]Friend[/b] (configurable) can be recruited with the vanilla "Follow me" line.
+[*]The game normally also requires the NPC to be in PotentialFollowerFaction. Many NPCs (e.g. Aeri in Anga's Mill) become your Friend through quests or favors but can never follow you. Now they can.
+[*]Every time you talk to or activate an NPC, the mod checks them. This includes NPCs who only greet you because they have no dialogue left after their quest.
+[*]You get a notification when someone becomes recruitable. Talk to them again and "Follow me" is there.
+[*]Children, hostile and dead NPCs are skipped. You can exclude any NPC in the INI.
+[/list]
+
+[b]Followers that keep up with you[/b]
+Ordinary NPCs have a fixed level, so as followers they fall behind fast. While a recruitable NPC is following you:
+[list]
+[*][b]Fixed-level NPCs level with you[/b] (up to level 80 by default), like NFF's nfflevel batch file (setlevel 1000 0 1 0), but automatic. Their original level becomes the minimum, so they never get weaker.
+[*][b]NPCs that already level with you but stop early[/b] (e.g. capped at 25) get their cap raised to 80 (configurable, or no cap at all).
+[*]Only unique NPCs are changed, so guards, raised thralls and other generic NPCs are never affected.
+[/list]
+Applied a few seconds after recruiting, and on every save load, so followers you already have are covered too.
+
+[b]Protected or Essential: your choice[/b]
+The installer asks how your followers should be protected:
+[list]
+[*][b]Protected[/b] (recommended): only you can kill them, anything else only knocks them down. Note the vanilla bug: a very strong hit (common on Legendary difficulty) can bypass Protected and kill them anyway.
+[*][b]Essential[/b]: nobody can kill them, not even you. They get knocked down and get back up after combat. Not affected by the Protected bug.
+[/list]
+NPCs that are already Essential stay Essential either way. You can switch later with iProtection in the INI.
+
+[size=4][b]Requirements[/b][/size]
+[list]
+[*]SKSE64
+[*]Address Library for SKSE Plugins (the file for your game version)
+[/list]
+Supports Skyrim SE 1.5.97, AE 1.6.x and AE 1.7.x. Tested on 1.6.1170 and 1.7.104.
+
+[size=4][b]Installation[/b][/size]
+Install with your mod manager and pick Protected or Essential in the installer. Safe to install mid-playthrough.
+
+[b]Updating from 1.1.0 or older[/b]: just install over it. Your old INI keeps working (bProtected=1 counts as Protected). Switching from Essential back to Protected does not remove Essential from followers that already got it.
+
+[size=4][b]Configuration[/b][/size]
+Data/SKSE/Plugins/ImmersiveRecruit.ini, every option is commented: minimum relationship rank, level multiplier, level cap, Protected / Essential / off, notifications, exclusions.
+
+[size=4][b]Compatibility[/b][/size]
+[list]
+[*][b]Relationship Dialogue Overhaul[/b]: compatible. NPCs RDO already made recruitable are left alone.
+[*][b]Nether's Follower Framework[/b]: compatible.
+[*]No ESP, no edited records: no conflicts.
+[*]Tip: exclude NPCs with important quest roles until their questline is done (e.g. Brynjolf).
+[/list]
+
+[size=4][b]Uninstalling[/b][/size]
+Remove the files. NPCs that were made recruitable stay recruitable, and level/Protected/Essential changes stay in your save (the same way console commands are stored). Nothing breaks.
+
+[size=4][b]Changelog[/b][/size]
+[list]
+[*][b]1.2.0[/b]: Choose Protected or Essential for followers in the new FOMOD installer (iProtection in the INI).
+[*][b]1.1.0[/b]: NPCs are also checked on activation, so NPCs with no dialogue left can be recruited. Support for game 1.7.x.
+[*][b]1.0.0[/b]: First release.
+[/list]
