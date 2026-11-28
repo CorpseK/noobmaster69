@@ -15,6 +15,7 @@ import json
 import os
 import struct
 import sys
+import zlib
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import esp  # noqa: E402
@@ -114,6 +115,11 @@ def record(t, formid, data, flags=0):
 
 
 ARMOR_LIGHT, ARMOR_HEAVY = 0x06BBD3, 0x06BBD2  # Skyrim.esm keywords
+# Outfit fix for saves where another mod already called SetOutfit (SPID then keeps that outfit): SPID gives every NPC
+# a hidden ability; its script calls SetOutfit with the planned outfit once per NPC (PapyrusUtil StorageUtil marker,
+# version = checksum of the NPC -> outfit table, so any change runs it again). Fixed FormIDs, kept clear of the OTFT range 0x800...
+FIX_MGEF, FIX_SPEL = 0xF00, 0xF01
+FIX_SCRIPT = "SpouseOutfitsFixEffect"
 FORMID_SUBS = {"KWDA", "MODL", "EITM", "ETYP", "BIDS", "BAMT", "YNAM", "ZNAM", "RNAM", "TNAM"}
 
 
@@ -194,10 +200,34 @@ def build_plugin(outfits, masters, overrides=()):
         inam = b"".join(struct.pack("<I", (midx[p.lower()] << 24) | local) for p, local in pieces)
         recs += record("OTFT", fid, sub("EDID", zstr(edid)) + sub("INAM", inam))
         ids.append(0x800 + i)
-    grup = b"GRUP" + struct.pack("<I", 24 + len(recs)) + b"OTFT" + struct.pack("<iHHI", 0, 0, 0, 0) + recs
+    def group(label, data):
+        return b"GRUP" + struct.pack("<I", 24 + len(data)) + label.encode() + struct.pack("<iHHI", 0, 0, 0, 0) + data
+
+    # hidden constant-effect ability (given by SPID) whose script sets the NPC's outfit once (see FIX_* below)
+    own = len(masters) << 24
+    vmad = struct.pack("<hhH", 5, 2, 1) + struct.pack("<H", len(FIX_SCRIPT)) + FIX_SCRIPT.encode() + struct.pack("<BH", 0, 0)
+    data = bytearray(152)
+    struct.pack_into("<I", data, 0, 0x8000 | 0x200 | 0x400 | 0x800 | 0x8000000 | 0x10000000)  # hide in UI, no
+    # duration/magnitude/area, no hit effect, no death dispel
+    struct.pack_into("<ii", data, 12, -1, -1)  # magic skill, resist value: none
+    struct.pack_into("<Ii", data, 64, 1, -1)  # archetype Script, actor value none
+    struct.pack_into("<II", data, 80, 0, 0)  # casting type constant, delivery self
+    struct.pack_into("<i", data, 88, -1)  # second actor value none
+    struct.pack_into("<f", data, 104, 1.0)  # skill usage mult
+    struct.pack_into("<f", data, 112, 1.0)  # dual casting scale
+    mgef = record("MGEF", own | FIX_MGEF, sub("EDID", zstr("SO_FixOutfitEffect")) + sub("VMAD", vmad)
+                  + sub("FULL", zstr("SpouseOutfits outfit fix")) + sub("DATA", bytes(data)) + sub("SNDD", b"")
+                  + sub("DNAM", zstr("")))
+    spit = struct.pack("<IIIfIIffI", 0, 0, 4, 0.0, 0, 0, 0.0, 0.0, 0)  # type Ability, constant, self
+    spel = record("SPEL", own | FIX_SPEL, sub("EDID", zstr("SO_FixOutfitAbility")) + sub("OBND", bytes(12))
+                  + sub("FULL", zstr("SpouseOutfits outfit fix")) + sub("DESC", zstr("")) + sub("SPIT", spit)
+                  + sub("EFID", struct.pack("<I", own | FIX_MGEF)) + sub("EFIT", struct.pack("<fII", 0.0, 0, 0)))
+
+    grup = group("MGEF", mgef) + group("SPEL", spel)
     if armo:
-        grup = b"GRUP" + struct.pack("<I", 24 + len(armo)) + b"ARMO" + struct.pack("<iHHI", 0, 0, 0, 0) + armo + grup
-    hedr = struct.pack("<fiI", 1.71, len(outfits) + len(overrides), 0x800 + len(outfits))
+        grup += group("ARMO", armo)
+    grup += group("OTFT", recs)
+    hedr = struct.pack("<fiI", 1.71, len(outfits) + len(overrides) + 2, FIX_SPEL + 1)
     head = sub("HEDR", hedr) + sub("CNAM", zstr("SpouseOutfits"))
     head += sub("SNAM", zstr("Outfits for female NPCs, distributed by SpouseOutfits_DISTR.ini (SPID)."))
     for m in masters:
@@ -281,6 +311,8 @@ def main():
         print("WARNING: not in load order (plugins.txt): " + ", ".join(missing))
     # keep the master's own spelling from disk
     masters = [os.path.basename(paths[m.lower()]) for m in masters]
+    if 0x800 + len(outfits) > FIX_MGEF:
+        raise SystemExit("too many outfits for the fixed FIX_MGEF/FIX_SPEL FormIDs")
     data, ids = build_plugin(outfits, masters, list(heavy.values()))
 
     def ref(plugin, local):
@@ -303,6 +335,9 @@ def main():
         for (p, l, edid), label, count in e["items"]:
             ini += [f";   {label}", f"Item = {ref(p, l)}|NONE|{ref(np_, nl)}|NONE|NONE|{count}"]
         ini.append("")
+    targets = ",".join(ref(*e["npc"][:2]) for e in lines if e["outfit"])
+    ini += ["; Hidden ability: its script re-applies the outfit once when another mod already changed it (SetOutfit).",
+            f"Spell = {ref(out_plugin, FIX_SPEL)}|NONE|{targets}", ""]
 
     print(f"{len(outfits)} outfits, {sum(len(e['items']) for e in lines)} item lines, "
           f"{len(heavy)} pieces made heavy, {len(masters)} masters:")
@@ -313,6 +348,49 @@ def main():
     open(os.path.join(a.out, out_plugin), "wb").write(data)
     open(os.path.join(a.out, "SpouseOutfits_DISTR.ini"), "w", encoding="utf-8", newline="\r\n").write("\n".join(ini))
     print(f"written {out_plugin} ({len(data)} bytes) and SpouseOutfits_DISTR.ini to {a.out}")
+
+    # Outfit fix scripts (see FIX_* at the top). Compile both .psc with the Creation Kit's PapyrusCompiler
+    # into <out>\Scripts (imports: SKSE sources, PapyrusUtil sources, vanilla sources).
+    pairs = []
+    for e in lines:
+        if not e["outfit"]:
+            continue
+        np_, nl, _ = e["npc"]
+        if e["outfit"][0] == "new":
+            op, ol = out_plugin, ids[e["outfit"][1]]
+        else:
+            op, ol, _ = e["outfit"][1]
+        pairs.append((e["name"], np_, nl, op, ol))
+    # version = checksum of the NPC -> outfit table: any change re-applies the outfits once on every NPC
+    version = zlib.crc32(repr([(np_, nl, op, ol) for _, np_, nl, op, ol in pairs]).encode()) & 0x7FFFFFFF
+    util = ["Scriptname SpouseOutfitsUtil Hidden",
+            "; Generated by skyrim-mods/tools/build_spouse_outfits.py. Edit outfits.json, not this file.",
+            "",
+            "Outfit Function OutfitFor(ActorBase b) global"]
+    for i, (name, np_, nl, op, ol) in enumerate(pairs):
+        util += [f"	{'If' if i == 0 else 'ElseIf'} b == Game.GetFormFromFile(0x{nl:X}, \"{np_}\")  ; {name}",
+                 f"		Return Game.GetFormFromFile(0x{ol:X}, \"{op}\") as Outfit"]
+    util += ["	EndIf", "	Return None", "EndFunction", ""]
+    effect = [f"Scriptname {FIX_SCRIPT} extends ActiveMagicEffect",
+              "; Generated by skyrim-mods/tools/build_spouse_outfits.py. On the hidden ability SO_FixOutfitAbility (SPID).",
+              "; Sets the planned outfit once per NPC, also when another mod (follower framework) changed it with SetOutfit.",
+              "",
+              "Event OnEffectStart(Actor akTarget, Actor akCaster)",
+              f"	If !akTarget || StorageUtil.GetIntValue(akTarget, \"SpouseOutfits.FixVersion\") == {version}",
+              "		Return",
+              "	EndIf",
+              "	Outfit o = SpouseOutfitsUtil.OutfitFor(akTarget.GetActorBase())",
+              "	If o",
+              "		akTarget.SetOutfit(o)",
+              "	EndIf",
+              f"	StorageUtil.SetIntValue(akTarget, \"SpouseOutfits.FixVersion\", {version})",
+              "EndEvent",
+              ""]
+    src = os.path.join(a.out, "Scripts", "Source")
+    os.makedirs(src, exist_ok=True)
+    for name, body in (("SpouseOutfitsUtil", util), (FIX_SCRIPT, effect)):
+        open(os.path.join(src, name + ".psc"), "w", encoding="utf-8", newline="\r\n").write("\n".join(body))
+    print(f"written Scripts\\Source\\SpouseOutfitsUtil.psc, {FIX_SCRIPT}.psc (compile with PapyrusCompiler)")
 
     ob = spec.get("obody")
     if ob:
