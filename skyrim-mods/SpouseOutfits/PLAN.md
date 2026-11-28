@@ -173,5 +173,9 @@ Lưu ý: SPID chỉ thêm vào túi; NPC tự chọn theo kỹ năng/AI. "Steel 
   `py -I skyrim-mods\tools\build_spouse_outfits.py --mo2 "E:\Skyrim Modding\MO2" --data "<game>\Data" --out "<MO2>\mods\SpouseOutfits"`
   ra `SpouseOutfits.esp` (ESL, 44 OTFT, không đưa lên GitHub) + `SpouseOutfits_DISTR.ini` (bản copy ở thư mục này).
   Tool kiểm mọi FormID với plugin thật, chặn món chiếm slot 30/31/41.
+- OBody NG (2026-11-28): NPC không có faction bị random vào preset quá to (gói H4NK 311–968), đồ build kèm morph nên bị
+  kéo giãn. Build tool ghi thêm `SKSE\Plugins\OBody\obody_includes\SpouseOutfits_OBody.json` (bản copy ở thư mục này):
+  gán theo npcFormID cho 44 NPC một nhóm 14 preset vừa phải (khóa `obody` trong `outfits.json`); Serana, Frea giữ preset
+  faction; Aduri dùng preset nhỏ (CBBE Slim (Outfit), CBBE Athletic) vì Mage's Daily Outfit clip/kéo giãn với preset to (khóa  của NPC). Không đụng config OBody chính của người dùng, giữ nguyên gói H4NK. NPC đã có body: Re-roll từng người trong menu.
 - Tự quyết khi build: Jordis bộ COCO 02 (bạc); Hilund/Uthgerd thêm giày+găng Steel Plate vanilla, Argis giày+găng Dwarven;
   Camilla/Bolfrida thêm Deze Crafter Boots; bỏ áo choàng SMP và mặt nạ; người dùng cung/nỏ có thêm 30 tên/bolt.

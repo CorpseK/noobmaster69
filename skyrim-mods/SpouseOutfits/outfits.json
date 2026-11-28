@@ -1,6 +1,14 @@
 {
   "_doc": "Nguồn cho tools/build_spouse_outfits.py. Mỗi NPC: base ID, trang phục (danh sách món, hoặc dùng OTFT có sẵn của mod), vũ khí/khiên/tên. ID là FormID nội bộ (hex, không có byte plugin). Tên chỉ để đọc.",
   "plugin": "SpouseOutfits.esp",
+  "obody": {
+    "_doc": "OBody NG: gán thẳng (npcFormID, ưu tiên cao nhất) nhóm preset vừa phải cho mọi NPC ở dưới, trừ 'skip' (giữ preset faction). Nhóm random/Tinraa có nhiều preset quá to làm đồ (build kèm morph) bị kéo giãn.",
+    "include_file": "SpouseOutfits_OBody.json",
+    "presets": ["[r1]BodyB v1.1", "Demonic Body", "Demonic Clothes", "Sawira", "CBBE Big & Strong", "TNB Models body 1.0",
+                "samsbodypresetnude", "Voluptuous Body", "Lovely Lady v6 (Clothed)", "The Tinraa Body edits A-C Screens",
+                "The Tinraa Body edits SoftER", "CustomPreset Lena", "THE P3ACH [clothing]", "(SDZ21) My Majestic Body (Outfit)"],
+    "skip": ["Serana", "Frea"]
+  },
   "npcs": [
     {"name": "Anwen", "npc": "Skyrim.esm:013386", "outfit": [
       ["Hezimao42Dress.esp:000801", "Hezimao 42 Dress"], ["Hezimao42Dress.esp:000D6A", "Hezimao 42 Panty"]]},
@@ -196,7 +204,7 @@
       ["Girl's Travel Outfit.esp:000803", "Girl's Travel Outfit"], ["Girl's Travel Outfit.esp:000805", "Gloves"],
       ["Girl's Travel Outfit.esp:000804", "Boots"], ["Girl's Travel Outfit.esp:00080D", "Choker"]],
       "items": [["Skyrim.esm:013986", "Steel Dagger"]]},
-    {"name": "Aduri Sarethi", "npc": "Skyrim.esm:019BFF", "outfit": [
+    {"name": "Aduri Sarethi", "npc": "Skyrim.esm:019BFF", "obody_presets": ["CBBE Slim (Outfit)", "CBBE Athletic"], "_obody_note": "Mage's Daily Outfit (áo + khăn choàng) bị clip/kéo giãn với mọi preset to hơn mặc định: dùng preset nhỏ.", "outfit": [
       ["Mage's Daily Outfit.esp:000800", "Mage's Daily Outfit"], ["Mage's Daily Outfit.esp:000801", "Shawl"],
       ["Mage's Daily Outfit.esp:000802", "Boots"], ["Mage's Daily Outfit.esp:000803", "Choker"]],
       "items": [["Skyrim.esm:01399E", "Elven Dagger"]]},

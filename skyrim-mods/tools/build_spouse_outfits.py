@@ -164,7 +164,7 @@ def main():
     for npc in spec["npcs"]:
         name = npc["name"]
         nref = check(npc["npc"], {"NPC_"}, name)
-        entry = {"name": name, "npc": nref, "outfit": None, "items": []}
+        entry = {"name": name, "npc": nref, "outfit": None, "items": [], "obody": npc.get("obody_presets")}
         if "outfit" in npc:
             pieces = [check(r, {"ARMO"}, name, True) for r, _ in npc["outfit"]]
             edid = "SO_" + "".join(c for c in name.title() if c.isalnum()) + "Outfit"
@@ -226,6 +226,22 @@ def main():
     open(os.path.join(a.out, out_plugin), "wb").write(data)
     open(os.path.join(a.out, "SpouseOutfits_DISTR.ini"), "w", encoding="utf-8", newline="\r\n").write("\n".join(ini))
     print(f"written {out_plugin} ({len(data)} bytes) and SpouseOutfits_DISTR.ini to {a.out}")
+
+    ob = spec.get("obody")
+    if ob:
+        # OBody NG include file: npcFormID wins over faction/random rules
+        table = {}
+        for e in lines:
+            if e["name"] in ob.get("skip", []):
+                continue
+            p, l, _ = e["npc"]
+            table.setdefault(os.path.basename(paths[p.lower()]), {})[f"{l:08X}"] = list(e["obody"] or ob["presets"])
+        inc = os.path.join(a.out, "SKSE", "Plugins", "OBody", "obody_includes")
+        os.makedirs(inc, exist_ok=True)
+        with open(os.path.join(inc, ob["include_file"]), "w", encoding="utf-8") as f:
+            json.dump({"npcFormID": table}, f, ensure_ascii=False, indent=2)
+        print(f"written OBody include {ob['include_file']}: {sum(len(v) for v in table.values())} NPCs, "
+              f"{len(ob['presets'])} presets")
 
 
 if __name__ == "__main__":
