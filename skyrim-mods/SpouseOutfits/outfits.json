@@ -2,33 +2,32 @@
   "_doc": "Nguồn cho tools/build_spouse_outfits.py. Mỗi NPC: base ID, trang phục (danh sách món, hoặc dùng OTFT có sẵn của mod), vũ khí/khiên/tên. ID là FormID nội bộ (hex, không có byte plugin). Tên chỉ để đọc.",
   "plugin": "SpouseOutfits.esp",
   "obody": {
-    "_doc": "OBody NG: gán thẳng (npcFormID, ưu tiên cao nhất) nhóm preset vừa phải cho mọi NPC ở dưới, trừ 'skip' (giữ preset faction). Nhóm random/Tinraa có nhiều preset quá to làm đồ (build kèm morph) bị kéo giãn.",
-    "include_file": "SpouseOutfits_OBody.json",
-    "presets": ["[r1]BodyB v1.1", "Demonic Body", "Demonic Clothes", "Sawira", "CBBE Big & Strong", "TNB Models body 1.0",
-                "samsbodypresetnude", "Voluptuous Body", "Lovely Lady v6 (Clothed)", "The Tinraa Body edits A-C Screens",
-                "The Tinraa Body edits SoftER", "CustomPreset Lena", "THE P3ACH [clothing]", "(SDZ21) My Majestic Body (Outfit)"],
-    "skip": ["Serana", "Frea"]
+    "_doc": "OBody NG include (npcFormID, ưu tiên cao nhất): chỉ NPC có 'obody_presets' riêng mới được gán. Những người khác dùng config OBody của người dùng (2026-11-28). Thêm khóa 'presets' ở đây nếu muốn gán một nhóm chung cho mọi NPC.",
+    "include_file": "SpouseOutfits_OBody.json"
   },
   "npcs": [
     {"name": "Anwen", "npc": "Skyrim.esm:013386", "outfit": [
-      ["Hezimao42Dress.esp:000801", "Hezimao 42 Dress"], ["Hezimao42Dress.esp:000D6A", "Hezimao 42 Panty"]]},
+      ["Hezimao42Dress.esp:000801", "Hezimao 42 Dress"], ["Hezimao42Dress.esp:000D6A", "Hezimao 42 Panty"]],
+      "items": [["PrvtI_HeavyArmory.esp:000801", "Polished Silver Dagger"]]},
     {"name": "Orla", "npc": "Skyrim.esm:0133B0", "outfit": [
       ["Priestess of Dibella.esp:000800", "Top"], ["Priestess of Dibella.esp:000801", "Panty"],
-      ["Priestess of Dibella.esp:000802", "Armbands"], ["Priestess of Dibella.esp:000803", "Calves"]]},
+      ["Priestess of Dibella.esp:000802", "Armbands"], ["Priestess of Dibella.esp:000803", "Calves"]],
+      "items": [["PrvtI_HeavyArmory.esp:00EB92", "Silver Dagger"]]},
     {"name": "Senna", "npc": "Skyrim.esm:0133B7", "outfit": [
       ["Bisquits Pain Bringer.esp:000800", "Pain Bringer All (gold)"], ["Bisquits Pain Bringer.esp:000801", "Gloves"],
-      ["Bisquits Pain Bringer.esp:00081A", "Thigh Cuffs"], ["Bisquits Pain Bringer.esp:00081B", "Leg Cuffs"]]},
+      ["Bisquits Pain Bringer.esp:00081A", "Thigh Cuffs"], ["Bisquits Pain Bringer.esp:00081B", "Leg Cuffs"]],
+      "items": [["PrvtI_HeavyArmory.esp:012733", "Nord Hero Dagger"]]},
     {"name": "Taarie", "npc": "Skyrim.esm:0132AB", "outfit": [
       ["Obi's Masquerade.esp:000D69", "Jacket"], ["Obi's Masquerade.esp:000D68", "Pants"],
       ["Obi's Masquerade.esp:000D67", "Shoes"], ["Obi's Masquerade.esp:000D6B", "Collar"]],
       "items": [["PrvtI_HeavyArmory.esp:000D6D", "Elven Shortsword"]]},
     {"name": "Dravynea", "npc": "Skyrim.esm:01365F", "outfit": [
       ["ralfetas-deze-clothing.esp:000C68", "Court Bodysuit"], ["ralfetas-deze-clothing.esp:000C66", "Court Boots"],
-      ["ralfetas-deze-clothing.esp:000C6C", "Court Gloves"]]},
-    {"name": "Muiri", "npc": "Skyrim.esm:01406B", "outfit": [
-      ["Assassins Dress.esp:000800", "Dress"], ["Assassins Dress.esp:00080B", "Upper"], ["Assassins Dress.esp:00080F", "Underwear"],
-      ["Assassins Dress.esp:000804", "Stocking"], ["Assassins Dress.esp:000806", "Heels"], ["Assassins Dress.esp:000801", "Bracelet"],
-      ["Assassins Dress.esp:000818", "Armlet"], ["Assassins Dress.esp:00080D", "Earrings"]],
+      ["ralfetas-deze-clothing.esp:000C6C", "Court Gloves"]],
+      "items": [["Skyrim.esm:0139B6", "Ebony Dagger"]]},
+    {"name": "Muiri", "npc": "Skyrim.esm:01406B", "_note": "Assassins Dress: váy và bông tai là SMP (không có FSMP thì dính xuống sàn), đổi sang Obi's Abyss Armor.", "outfit": [
+      ["Obi's Abyss Armor.esp:000D66", "Abyss Top"], ["Obi's Abyss Armor.esp:000D67", "Abyss Arms"],
+      ["Obi's Abyss Armor.esp:000D65", "Abyss Boots"]],
       "items": [["PrvtI_HeavyArmory.esp:0147D5", "Forsworn Dagger"]]},
     {"name": "Avrusa Sarethi", "npc": "Skyrim.esm:019BFE", "outfit": [
       ["ralfetas-deze-clothing.esp:000BD4", "Alchemist Apron"], ["ralfetas-deze-clothing.esp:000BD8", "Alchemist Gloves"],
@@ -45,8 +44,11 @@
       ["ralfetas-deze-clothing.esp:000BCE", "Blacksmith Apron"], ["ralfetas-deze-clothing.esp:000BD0", "Blacksmith Gloves"],
       ["ralfetas-deze-clothing.esp:000BD2", "Crafter Boots"]],
       "items": [["Immersive Weapons.esp:084B83", "Nordic War Pick"]]},
-    {"name": "Ysolda", "npc": "Skyrim.esm:013BAB", "outfit": [
-      ["ralfetas-deze-clothing.esp:000BDA", "Dealer"], ["ralfetas-deze-clothing.esp:000BD2", "Crafter Boots"]],
+    {"name": "Ysolda", "npc": "Skyrim.esm:013BAB", "_note": "Tavern Maid: Ysolda muốn mua lại Bannered Mare.", "outfit": [
+      ["[ELLE] Tavern Maid.esp:000806", "Top 1"], ["[ELLE] Tavern Maid.esp:000801", "Corset 1"],
+      ["[ELLE] Tavern Maid.esp:000805", "Shorts 1"], ["[ELLE] Tavern Maid.esp:000807", "Stockings 1"],
+      ["[ELLE] Tavern Maid.esp:000800", "Boots 1"], ["[ELLE] Tavern Maid.esp:000804", "Gloves 1"],
+      ["[ELLE] Tavern Maid.esp:000803", "Necklace"], ["[ELLE] Tavern Maid.esp:000802", "Earrings"]],
       "items": [["PrvtI_HeavyArmory.esp:000D6F", "Iron Shortsword"]]},
     {"name": "Hilund", "npc": "Dragonborn.esm:01A515", "outfit": [
       ["ralfetas-deze-armor.esp:000BC5", "Deze Steel Plate Armor-A"], ["Skyrim.esm:01395B", "Steel Plate Boots"],
@@ -76,8 +78,13 @@
       "items": [["Immersive Weapons.esp:33100E", "Iron Double Axe"]]},
 
     {"name": "Lydia", "npc": "Skyrim.esm:0A2C8E", "outfit": [
-      ["ralfetas-deze-armor.esp:000BD9", "Whiterun Cuirass 1"], ["ralfetas-deze-armor.esp:000BCE", "Whiterun Boots"],
-      ["ralfetas-deze-armor.esp:000BCF", "Whiterun Gauntlets"]],
+      ["[ELLE] Warrior.esp:000DE1", "Top 1"], ["[ELLE] Warrior.esp:000DD7", "Shorts 1"],
+      ["[ELLE] Warrior.esp:000DAE", "Belt 1"], ["[ELLE] Warrior.esp:000DBD", "Chest Armour 1"],
+      ["[ELLE] Warrior.esp:000DCD", "Pauldron 1"], ["[ELLE] Warrior.esp:000DC2", "Glove 1"],
+      ["[ELLE] Warrior.esp:000DC7", "Glove Armour 1"], ["[ELLE] Warrior.esp:000DB3", "Boots 1"],
+      ["[ELLE] Warrior.esp:000DB8", "Boots Armour 1"], ["[ELLE] Warrior.esp:000DA9", "Bandages 1"],
+      ["[ELLE] Warrior.esp:000DDC", "Thighband 1"], ["[ELLE] Warrior.esp:000DD2", "Scarf 1"]],
+      "heavy": ["[ELLE] Warrior.esp:000DE1", "[ELLE] Warrior.esp:000DC2", "[ELLE] Warrior.esp:000DB3"],
       "items": [["Immersive Weapons.esp:0747AD", "Steel Longsword"], ["Skyrim.esm:0214E0", "Whiterun Guard's Shield"],
                 ["Skyrim.esm:068C57", "Nord Hero Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Argis the Bulwark", "npc": "Skyrim.esm:0A2C8C", "outfit": [
@@ -109,29 +116,32 @@
       ["Imp_Iron Battlemage.esp:000D62", "Iron Battlemage Armor"], ["Imp_Iron Battlemage.esp:000D64", "Boots"],
       ["Imp_Iron Battlemage.esp:000D65", "Gloves"]],
       "items": [["Skyrim.esm:05BF15", "Honed Ancient Nord War Axe"]]},
-    {"name": "Rayya", "npc": "HearthFires.esm:005215", "outfit": [
-      ["[Daymarr] Yokuda.esp:000800", "Top I"], ["[Daymarr] Yokuda.esp:000BD9", "Belt I"], ["[Daymarr] Yokuda.esp:000BDD", "Underwear"],
-      ["[Daymarr] Yokuda.esp:000BDC", "Leg Armor"], ["[Daymarr] Yokuda.esp:000BD8", "Armband"], ["[Daymarr] Yokuda.esp:000BDE", "Wristband"],
-      ["[Daymarr] Yokuda.esp:000BDA", "Choker"], ["[Daymarr] Yokuda.esp:000BDB", "Circlet"]],
-      "items": [["[Daymarr] Yokuda.esp:000BE7", "Yokuda Sword"], ["Skyrim.esm:0214ED", "Falkreath Guard's Shield"],
+    {"name": "Rayya", "npc": "HearthFires.esm:005215", "_note": "Yokuda: mọi biến thể Belt là SMP, đổi sang Obi's Leather Outfit. Legs V1 kèm giày.", "outfit": [
+      ["Obi's Leather Outfit.esp:000D69", "Bra & Jacket"], ["Obi's Leather Outfit.esp:000D6C", "Legs V1"],
+      ["Obi's Leather Outfit.esp:000D71", "Stomach"], ["Obi's Leather Outfit.esp:000D7B", "Belt"],
+      ["Obi's Leather Outfit.esp:000D67", "Gauntlets"], ["Obi's Leather Outfit.esp:000D63", "Collar"]],
+      "heavy": ["Obi's Leather Outfit.esp:000D69", "Obi's Leather Outfit.esp:000D67", "Obi's Leather Outfit.esp:000D6C"],
+      "items": [["Immersive Weapons.esp:0747DA", "Steel Scimitar"], ["Skyrim.esm:0214ED", "Falkreath Guard's Shield"],
                 ["Skyrim.esm:0139A5", "Glass Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Jenassa", "npc": "Skyrim.esm:0B9982", "outfit": [
-      ["WestWindAssault.esp:000D81", "Torso Militant"], ["WestWindAssault.esp:000D8B", "Pants Dark"],
-      ["WestWindAssault.esp:000D87", "Boots Oiled"], ["WestWindAssault.esp:000D63", "Bracers"],
-      ["WestWindAssault.esp:000D77", "Pauldron"], ["WestWindAssault.esp:000D79", "Scarf Dirty"],
-      ["WestWindAssault.esp:000D75", "Dust Straps"]],
+      ["[ELLE] Elven Assasin.esp:000815", "Dress 1"], ["[ELLE] Elven Assasin.esp:000813", "Belt 1"],
+      ["[ELLE] Elven Assasin.esp:000814", "Boots 1"], ["[ELLE] Elven Assasin.esp:000816", "Gloves 1"],
+      ["[ELLE] Elven Assasin.esp:000817", "Shoulders 1"]],
       "items": [["Immersive Weapons.esp:0747D6", "Steel Tanto"], ["Skyrim.esm:01391E", "Elven Shield"],
                 ["Immersive Weapons.esp:009977", "Elven Hawk Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
-    {"name": "Mjoll the Lioness", "npc": "Skyrim.esm:01336B", "outfit": [
-      ["[Daymarr] Guardian Goddess.esp:000800", "Top I"], ["[Daymarr] Guardian Goddess.esp:000B4A", "Skirt I"],
-      ["[Daymarr] Guardian Goddess.esp:000B4C", "Panties I"], ["[Daymarr] Guardian Goddess.esp:000B42", "Shoulder Pads I"],
-      ["[Daymarr] Guardian Goddess.esp:000B45", "Forearm Guard I"], ["[Daymarr] Guardian Goddess.esp:000B4E", "Heels I"],
-      ["[Daymarr] Guardian Goddess.esp:000B44", "Crown I"]],
-      "items": [["Immersive Weapons.esp:022C96", "Elven Great Blade"], ["Skyrim.esm:01399D", "Elven Bow"],
+    {"name": "Mjoll the Lioness", "npc": "Skyrim.esm:01336B", "_note": "Guardian Goddess: Skirt/Cloak là SMP, đổi sang Wayward Knight (bỏ mũ và crest).", "outfit": [
+      ["ahzWaywardKnight.esp:000801", "Armor"], ["ahzWaywardKnight.esp:000815", "Skirt"],
+      ["ahzWaywardKnight.esp:000816", "Tassets"], ["ahzWaywardKnight.esp:000819", "Pauldrons"],
+      ["ahzWaywardKnight.esp:000818", "Rerebraces"], ["ahzWaywardKnight.esp:000817", "Couters"],
+      ["ahzWaywardKnight.esp:000811", "Gauntlets"], ["ahzWaywardKnight.esp:000812", "Sabatons"],
+      ["ahzWaywardKnight.esp:000814", "Legguards"], ["ahzWaywardKnight.esp:00081B", "Gorget"],
+      ["ahzWaywardKnight.esp:00083D", "Innerwear"]],
+      "items": [["Immersive Weapons.esp:331006", "Viking Double Axe"], ["Skyrim.esm:01399D", "Elven Bow"],
                 ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Uthgerd the Unbroken", "npc": "Skyrim.esm:0918E2", "outfit": [
-      ["ralfetas-deze-armor.esp:000BC7", "Deze Steel Plate Armor-B"], ["Skyrim.esm:01395B", "Steel Plate Boots"],
-      ["Skyrim.esm:01395D", "Steel Plate Gauntlets"]],
+      ["[ELLE] Knight Winds.esp:000D69", "Top Black"], ["[ELLE] Knight Winds.esp:000D66", "Pants Black"],
+      ["[ELLE] Knight Winds.esp:000D68", "Gloves Black"], ["[ELLE] Knight Winds.esp:000D67", "Boots Black"]],
+      "heavy": ["[ELLE] Knight Winds.esp:000D69", "[ELLE] Knight Winds.esp:000D68", "[ELLE] Knight Winds.esp:000D67"],
       "items": [["PrvtI_HeavyArmory.esp:0089C4", "Steel Spiked Club"], ["Skyrim.esm:013955", "Steel Shield"],
                 ["Skyrim.esm:0302CA", "Ancient Nord Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Annekke Crag-Jumper", "npc": "Skyrim.esm:013666", "outfit": [
@@ -142,17 +152,16 @@
       "items": [["Immersive Weapons.esp:010E64", "Steel War Pick"], ["Skyrim.esm:013914", "Hide Shield"],
                 ["Skyrim.esm:013985", "Hunting Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Eola", "npc": "Skyrim.esm:01990F", "outfit": [
-      ["Draugr Wanderer Outfit.esp:000D6B", "Cuirass"], ["Draugr Wanderer Outfit.esp:000D6C", "Skirt"],
-      ["Draugr Wanderer Outfit.esp:000D6F", "Legs"], ["Draugr Wanderer Outfit.esp:000D6E", "Pauldrons"],
-      ["Draugr Wanderer Outfit.esp:000D71", "Hands"], ["Draugr Wanderer Outfit.esp:000D72", "Feet"],
-      ["Draugr Wanderer Outfit.esp:000D70", "Necklace"], ["Draugr Wanderer Outfit.esp:000D6D", "Accessoires"]],
+      ["[ELLE] Wicked Corruption.esp:000805", "Suit 1"], ["[ELLE] Wicked Corruption.esp:00080B", "Sleeve 1"],
+      ["[ELLE] Wicked Corruption.esp:000D83", "Boots 1"]],
       "items": [["PrvtI_HeavyArmory.esp:012732", "Honed Ancient Nord Dagger"]]},
     {"name": "Aranea Ienith", "npc": "Skyrim.esm:028AD0", "outfit": [
       ["Obi's Hood&Steel.esp:000D69", "Armor"], ["Obi's Hood&Steel.esp:000D67", "Shoulder"],
       ["Obi's Hood&Steel.esp:000D6B", "Gloves"], ["Obi's Hood&Steel.esp:000D6D", "Boots"]]},
     {"name": "Illia", "npc": "Skyrim.esm:048C2F", "outfit": [
-      ["wilderness_witch.esp:00083F", "Wilderness Witch Outfit"]],
-      "items": [["Skyrim.esm:0FA2C1", "Forsworn Staff"]]},
+      ["[ELLE] Sparrows Mage.esp:000D68", "Top"], ["[ELLE] Sparrows Mage.esp:000D69", "Pants"],
+      ["[ELLE] Sparrows Mage.esp:000D6A", "Jacket"], ["[ELLE] Sparrows Mage.esp:000D6B", "Gloves"],
+      ["[ELLE] Sparrows Mage.esp:000D67", "Boots"]]},
     {"name": "Serana", "npc": "Dawnguard.esm:002B6C", "outfit": [
       ["[ELLE] Dark Rebel.esp:000834", "Bodysuit Black"], ["[ELLE] Dark Rebel.esp:00086C", "Jacket Black"],
       ["[ELLE] Dark Rebel.esp:000899", "Belt Black"], ["[ELLE] Dark Rebel.esp:000880", "Kneepads Black"],
@@ -216,6 +225,26 @@
     {"name": "Endarie", "npc": "Skyrim.esm:01326F", "outfit": [
       ["ObiCommonOutfit.esp:000D66", "Common Top"], ["ObiCommonOutfit.esp:000D67", "Common Pants"],
       ["ObiCommonOutfit.esp:000801", "Common Boots"]],
-      "items": [["Skyrim.esm:01399E", "Elven Dagger"]]}
+      "items": [["Skyrim.esm:01399E", "Elven Dagger"]]},
+    {"name": "Adelaisa Vendicci", "npc": "Skyrim.esm:01411D", "_note": "Thuyền trưởng East Empire Company, không phải lính Imperial.", "outfit": [
+      ["[ELLE] Wayfarer Navi.esp:000809", "Bodysuit"], ["[ELLE] Wayfarer Navi.esp:00080A", "Boots"],
+      ["[ELLE] Wayfarer Navi.esp:00080B", "Bracers"], ["[ELLE] Wayfarer Navi.esp:000808", "Belt"],
+      ["[ELLE] Wayfarer Navi.esp:000807", "Armband"], ["[ELLE] Wayfarer Navi.esp:00080C", "Kneepads"],
+      ["[ELLE] Wayfarer Navi.esp:00080D", "Mantle"]],
+      "items": [["Immersive Weapons.esp:0747C9", "Steel Cutlass"]]},
+    {"name": "Brelyna Maryon", "npc": "Skyrim.esm:01C196", "outfit": [
+      ["wilderness_witch.esp:00083F", "Wilderness Witch Outfit"]]},
+    {"name": "Faralda", "npc": "Skyrim.esm:01C197", "_note": "Bỏ Mageali Belt (SMP).", "outfit": [
+      ["[ELLE] Mageali.esp:000802", "Bra 1"], ["[ELLE] Mageali.esp:000803", "Corset 1"],
+      ["[ELLE] Mageali.esp:000805", "Skirt 1"], ["[ELLE] Mageali.esp:000804", "Shawl 1"],
+      ["[ELLE] Mageali.esp:000801", "Boots 1"], ["[ELLE] Mageali.esp:000806", "Stockings 1"],
+      ["[ELLE] Mageali.esp:000807", "Thighband 1"], ["[ELLE] Mageali.esp:000808", "Wrist Wraps 1"]]},
+    {"name": "Colette Marence", "npc": "Skyrim.esm:01C19A", "_note": "Bỏ Lastriem Belt và Necklace (SMP).", "outfit": [
+      ["[ELLE] Lastriem.esp:00080C", "Top"], ["[ELLE] Lastriem.esp:00080A", "Pants"],
+      ["[ELLE] Lastriem.esp:000801", "Boots"], ["[ELLE] Lastriem.esp:000802", "Gloves"],
+      ["[ELLE] Lastriem.esp:00080B", "Thighband"]]},
+    {"name": "Mirabelle Ervine", "npc": "Skyrim.esm:01C1A0", "outfit": [
+      ["ralfetas-deze-clothing.esp:000BE7", "Master Dress of Restoration"], ["ralfetas-deze-clothing.esp:000BEE", "Mage Boots"],
+      ["ralfetas-deze-clothing.esp:000BF2", "Restoration Gloves"]]}
   ]
 }

@@ -4,6 +4,8 @@ from skyrim-mods/SpouseOutfits/outfits.json.
 Every reference in the JSON is checked against the real plugin found through MO2 (enabled mods,
 highest priority wins, then the game's Data folder): it must exist, outfit pieces must be ARMO,
 items must be WEAP/ARMO/AMMO, and no outfit piece may take a head/hair slot (30, 31, 41).
+An NPC's optional "heavy" list names outfit pieces to turn into heavy armor: the plugin then also carries an
+override of those ARMO records (armor type Heavy, keyword ArmorLight -> ArmorHeavy, nothing else changed).
 
   py -I build_spouse_outfits.py --mo2 "E:\\Skyrim Modding\\MO2" --data "<game>\\Data" --out "<folder>"
   (--check only validates and prints, writes nothing)
@@ -111,9 +113,80 @@ def record(t, formid, data, flags=0):
     return t.encode() + struct.pack("<IIIHHHH", len(data), flags, formid, 0, 0, 44, 0) + data
 
 
-def build_plugin(outfits, masters):
-    """outfits: list of (edid, [(plugin, local)]). Returns plugin bytes."""
+ARMOR_LIGHT, ARMOR_HEAVY = 0x06BBD3, 0x06BBD2  # Skyrim.esm keywords
+FORMID_SUBS = {"KWDA", "MODL", "EITM", "ETYP", "BIDS", "BAMT", "YNAM", "ZNAM", "RNAM", "TNAM"}
+
+
+def heavy_override(path, local):
+    """Read ARMO `local` from the plugin at `path` and return (masters, flags, subrecords) changed to
+    heavy armor: BOD2 armor type -> Heavy, keyword ArmorLight -> ArmorHeavy. Everything else unchanged.
+    FormIDs inside still use the source plugin's master indexes (remapped in build_plugin)."""
+    masters, _, recs = esp.load(path)
+    for t, fid, flags, body in recs:
+        if t == "ARMO" and fid & 0xFFFFFF == local and fid >> 24 == len(masters):
+            break
+    else:
+        raise SystemExit(f"heavy: ARMO {local:06X} not found in {path}")
+    subs = []
+    for st, d in esp.subrecords(body):
+        if st == "VMAD":
+            raise SystemExit(f"heavy: {path} {local:06X} has scripts (VMAD), not supported")
+        if st == "BOD2":
+            d = d[:4] + struct.pack("<I", 1) + d[8:]
+        subs.append([st, d])
+    sky = next((i for i, m in enumerate(masters) if m.lower() == "skyrim.esm"), None)
+    if sky is None:
+        raise SystemExit(f"heavy: {path} does not have Skyrim.esm as master")
+    kw = next((s for s in subs if s[0] == "KWDA"), None)
+    ids = list(struct.unpack(f"<{len(kw[1]) // 4}I", kw[1])) if kw else []
+    ids = [x for x in ids if x != (sky << 24 | ARMOR_LIGHT) and x != (sky << 24 | ARMOR_HEAVY)]
+    ids.append(sky << 24 | ARMOR_HEAVY)
+    if kw:
+        kw[1] = struct.pack(f"<{len(ids)}I", *ids)
+        for s in subs:
+            if s[0] == "KSIZ":
+                s[1] = struct.pack("<I", len(ids))
+    else:
+        # field order: ... RNAM, KSIZ, KWDA, DESC, MODL, DATA ...
+        i = next((i for i, s in enumerate(subs) if s[0] in ("DESC", "MODL", "DATA")), len(subs))
+        subs[i:i] =[["KSIZ", struct.pack("<I", 1)], ["KWDA", struct.pack("<I", ids[0])]]
+    return masters, flags & ~0x40000, subs
+
+
+def remap_subs(subs, src_masters, src_plugin, midx):
+    """Rewrite every FormID in the ARMO subrecords from the source plugin's master list to ours."""
+    def fix(fid):
+        if fid == 0:
+            return 0
+        i = fid >> 24
+        name = src_masters[i] if i < len(src_masters) else src_plugin
+        return (midx[name.lower()] << 24) | (fid & 0xFFFFFF)
+
+    out = b""
+    for st, d in subs:
+        if st in FORMID_SUBS and len(d) % 4 == 0 and not (st == "MODL" and len(d) != 4):
+            d = b"".join(struct.pack("<I", fix(x)) for x in struct.unpack(f"<{len(d) // 4}I", d))
+        elif st in ("MO2S", "MO3S", "MO4S", "MO5S"):  # alternate textures: count, (len, name, TXST, index)*
+            n, = struct.unpack_from("<I", d)
+            p, nd = 4, bytearray(d)
+            for _ in range(n):
+                ln, = struct.unpack_from("<I", d, p)
+                p += 4 + ln
+                struct.pack_into("<I", nd, p, fix(struct.unpack_from("<I", d, p)[0]))
+                p += 8
+            d = bytes(nd)
+        out += sub(st, d)
+    return out
+
+
+def build_plugin(outfits, masters, overrides=()):
+    """outfits: list of (edid, [(plugin, local)]); overrides: [(plugin, local, (masters, flags, subs))].
+    Returns plugin bytes."""
     midx = {m.lower(): i for i, m in enumerate(masters)}
+    armo = b""
+    for plugin, local, (src_masters, flags, subs) in overrides:
+        fid = (midx[plugin.lower()] << 24) | local
+        armo += record("ARMO", fid, remap_subs(subs, src_masters, plugin, midx), flags)
     recs = b""
     ids = []
     for i, (edid, pieces) in enumerate(outfits):
@@ -122,7 +195,9 @@ def build_plugin(outfits, masters):
         recs += record("OTFT", fid, sub("EDID", zstr(edid)) + sub("INAM", inam))
         ids.append(0x800 + i)
     grup = b"GRUP" + struct.pack("<I", 24 + len(recs)) + b"OTFT" + struct.pack("<iHHI", 0, 0, 0, 0) + recs
-    hedr = struct.pack("<fiI", 1.71, len(outfits), 0x800 + len(outfits))
+    if armo:
+        grup = b"GRUP" + struct.pack("<I", 24 + len(armo)) + b"ARMO" + struct.pack("<iHHI", 0, 0, 0, 0) + armo + grup
+    hedr = struct.pack("<fiI", 1.71, len(outfits) + len(overrides), 0x800 + len(outfits))
     head = sub("HEDR", hedr) + sub("CNAM", zstr("SpouseOutfits"))
     head += sub("SNAM", zstr("Outfits for female NPCs, distributed by SpouseOutfits_DISTR.ini (SPID)."))
     for m in masters:
@@ -160,11 +235,18 @@ def main():
         used.add(plugin.lower())
         return plugin, local, edid
 
-    outfits, lines = [], []
+    outfits, lines, heavy = [], [], {}
     for npc in spec["npcs"]:
         name = npc["name"]
         nref = check(npc["npc"], {"NPC_"}, name)
         entry = {"name": name, "npc": nref, "outfit": None, "items": [], "obody": npc.get("obody_presets")}
+        for r in npc.get("heavy", []):
+            # make an outfit piece heavy armor (override record in our plugin)
+            if r not in [o[0] for o in npc.get("outfit", [])]:
+                errors.append(f"{name}: heavy piece {r} is not in the outfit")
+            elif r not in heavy:
+                p, l = parse_ref(r)
+                heavy[r] = (p, l, heavy_override(paths[p.lower()], l))
         if "outfit" in npc:
             pieces = [check(r, {"ARMO"}, name, True) for r, _ in npc["outfit"]]
             edid = "SO_" + "".join(c for c in name.title() if c.isalnum()) + "Outfit"
@@ -188,14 +270,18 @@ def main():
 
     order = load_order(a.mo2, a.profile)
     out_plugin = spec["plugin"]
-    masters = sorted({p for _, pcs in outfits for p, _ in pcs},
-                     key=lambda m: order.index(m.lower()) if m.lower() in order else 10_000)
+    needed = {p for _, pcs in outfits for p, _ in pcs}
+    for p, _, (src_masters, _, _) in heavy.values():
+        needed |= {p, *src_masters}
+    # one spelling per plugin (case-insensitive)
+    needed = list({m.lower(): m for m in needed}.values())
+    masters = sorted(needed, key=lambda m: order.index(m.lower()) if m.lower() in order else 10_000)
     missing = [m for m in masters if m.lower() not in order]
     if missing:
         print("WARNING: not in load order (plugins.txt): " + ", ".join(missing))
     # keep the master's own spelling from disk
     masters = [os.path.basename(paths[m.lower()]) for m in masters]
-    data, ids = build_plugin(outfits, masters)
+    data, ids = build_plugin(outfits, masters, list(heavy.values()))
 
     def ref(plugin, local):
         return f"0x{local:X}~{plugin}"
@@ -218,7 +304,8 @@ def main():
             ini += [f";   {label}", f"Item = {ref(p, l)}|NONE|{ref(np_, nl)}|NONE|NONE|{count}"]
         ini.append("")
 
-    print(f"{len(outfits)} outfits, {sum(len(e['items']) for e in lines)} item lines, {len(masters)} masters:")
+    print(f"{len(outfits)} outfits, {sum(len(e['items']) for e in lines)} item lines, "
+          f"{len(heavy)} pieces made heavy, {len(masters)} masters:")
     print("  " + ", ".join(masters))
     if a.check or not a.out:
         return
@@ -229,19 +316,20 @@ def main():
 
     ob = spec.get("obody")
     if ob:
-        # OBody NG include file: npcFormID wins over faction/random rules
+        # OBody NG include file: npcFormID wins over faction/random rules. NPCs with their own "obody_presets"
+        # always get them; the others get the shared "presets" list only if one is given (else OBody's own config).
         table = {}
         for e in lines:
-            if e["name"] in ob.get("skip", []):
+            presets = e["obody"] or ob.get("presets")
+            if not presets or e["name"] in ob.get("skip", []):
                 continue
             p, l, _ = e["npc"]
-            table.setdefault(os.path.basename(paths[p.lower()]), {})[f"{l:08X}"] = list(e["obody"] or ob["presets"])
+            table.setdefault(os.path.basename(paths[p.lower()]), {})[f"{l:08X}"] = list(presets)
         inc = os.path.join(a.out, "SKSE", "Plugins", "OBody", "obody_includes")
         os.makedirs(inc, exist_ok=True)
         with open(os.path.join(inc, ob["include_file"]), "w", encoding="utf-8") as f:
             json.dump({"npcFormID": table}, f, ensure_ascii=False, indent=2)
-        print(f"written OBody include {ob['include_file']}: {sum(len(v) for v in table.values())} NPCs, "
-              f"{len(ob['presets'])} presets")
+        print(f"written OBody include {ob['include_file']}: {sum(len(v) for v in table.values())} NPCs")
 
 
 if __name__ == "__main__":
