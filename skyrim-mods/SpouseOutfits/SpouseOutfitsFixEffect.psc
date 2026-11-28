@@ -3,12 +3,12 @@ Scriptname SpouseOutfitsFixEffect extends ActiveMagicEffect
 ; Sets the planned outfit once per NPC, also when another mod (follower framework) changed it with SetOutfit.
 
 Event OnEffectStart(Actor akTarget, Actor akCaster)
-	If !akTarget || StorageUtil.GetIntValue(akTarget, "SpouseOutfits.FixVersion") == 2105249728
+	If !akTarget || StorageUtil.GetIntValue(akTarget, "SpouseOutfits.FixVersion") == 1189134908
 		Return
 	EndIf
 	Outfit o = SpouseOutfitsUtil.OutfitFor(akTarget.GetActorBase())
 	If o
 		akTarget.SetOutfit(o)
 	EndIf
-	StorageUtil.SetIntValue(akTarget, "SpouseOutfits.FixVersion", 2105249728)
+	StorageUtil.SetIntValue(akTarget, "SpouseOutfits.FixVersion", 1189134908)
 EndEvent

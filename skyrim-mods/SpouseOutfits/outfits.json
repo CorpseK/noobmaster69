@@ -75,11 +75,11 @@
       ["DD - Temio Cloth.esp:000D62", "Pants"], ["DD - Temio Cloth.esp:000D63", "Boots"]],
       "items": [["PrvtI_HeavyArmory.esp:003E14", "Imperial Shortsword"], ["Skyrim.esm:013841", "Imperial Bow"],
                 ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
-    {"name": "Aeri", "npc": "Skyrim.esm:01360B", "outfit": [
-      ["C5Kev's Flirty Skirt Armor 3BA.esp:000801", "Cuirass"], ["C5Kev's Flirty Skirt Armor 3BA.esp:000807", "Skirt"],
-      ["C5Kev's Flirty Skirt Armor 3BA.esp:000820", "Thong"], ["C5Kev's Flirty Skirt Armor 3BA.esp:00080A", "Bracers"],
-      ["C5Kev's Flirty Skirt Armor 3BA.esp:00081C", "Pauldrons"], ["C5Kev's Flirty Skirt Armor 3BA.esp:000804", "Shoes"]],
-      "items": [["C5Kev's Flirty Skirt Armor 3BA.esp:000823", "Flirty Skirt Sword"], ["Skyrim.esm:013985", "Hunting Bow"],
+    {"name": "Aeri", "npc": "Skyrim.esm:01360B", "_note": "TERA Leather Archer (2026-11-28): giày Flirty In Fur nâng 11. Bỏ Glamourfists (vũ khí đấm, trùng slot găng). Bỏ Flirty Skirt Sword: không giữ mod giáp chỉ để lấy 1 vũ khí.", "outfit": [
+      ["[Rand] TERA Leather Archer Set.esp:000802", "Top"], ["[Rand] TERA Leather Archer Set.esp:00080A", "Pants"],
+      ["[Rand] TERA Leather Archer Set.esp:000801", "Gloves"], ["[Rand] TERA Leather Archer Set.esp:000800", "Boots"],
+      ["[Rand] TERA Leather Archer Set.esp:000808", "Necklace"]],
+      "items": [["PrvtI_HeavyArmory.esp:015D92", "Nord Hero Hatchet"], ["Skyrim.esm:013985", "Hunting Bow"],
                 ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Gilfre", "npc": "Skyrim.esm:01367A", "outfit": [
       ["toughened_traveler.esp:000801", "Toughened Traveler Outfit"], ["toughened_traveler.esp:00080A", "Boots"],
@@ -164,9 +164,9 @@
       ["[ELLE] Wicked Corruption.esp:000805", "Suit 1"], ["[ELLE] Wicked Corruption.esp:00080B", "Sleeve 1"],
       ["[ELLE] Wicked Corruption.esp:000D83", "Boots 1"]],
       "items": [["PrvtI_HeavyArmory.esp:012732", "Honed Ancient Nord Dagger"]]},
-    {"name": "Aranea Ienith", "npc": "Skyrim.esm:028AD0", "outfit": [
-      ["Obi's Hood&Steel.esp:000D69", "Armor"], ["Obi's Hood&Steel.esp:000D67", "Shoulder"],
-      ["Obi's Hood&Steel.esp:000D6B", "Gloves"], ["Obi's Hood&Steel.esp:000D6D", "Boots"]],
+    {"name": "Aranea Ienith", "npc": "Skyrim.esm:028AD0", "_note": "Obi's Common Outfit, bỏ mũ (2026-11-28): giày Hood & Steel nâng 12.", "outfit": [
+      ["ObiCommonOutfit.esp:000D66", "Common Top"], ["ObiCommonOutfit.esp:000D67", "Common Pants"],
+      ["ObiCommonOutfit.esp:000801", "Common Boots"]],
       "items": [["Skyrim.esm:0139B6", "Ebony Dagger"]]},
     {"name": "Illia", "npc": "Skyrim.esm:048C2F", "outfit": [
       ["[ELLE] Sparrows Mage.esp:000D68", "Top"], ["[ELLE] Sparrows Mage.esp:000D69", "Pants"],
@@ -239,9 +239,9 @@
       ["Traveler's Romper Outfit 3BA.esp:000D64", "Boots"], ["Traveler's Romper Outfit 3BA.esp:000D6F", "Shemagh"]],
       "items": [["Skyrim.esm:0135B8", "Imperial Sword"], ["Skyrim.esm:013AB2", "Imperial Light Shield"],
                 ["Immersive Weapons.esp:0058CE", "Colovian Dark Composite Bow"], ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
-    {"name": "Endarie", "npc": "Skyrim.esm:01326F", "outfit": [
-      ["ObiCommonOutfit.esp:000D66", "Common Top"], ["ObiCommonOutfit.esp:000D67", "Common Pants"],
-      ["ObiCommonOutfit.esp:000801", "Common Boots"]],
+    {"name": "Endarie", "npc": "Skyrim.esm:01326F", "_note": "Eclipse Seductress (2026-11-28), bỏ Hood và Blindfold. Mod không có giày.", "outfit": [
+      ["EclipseSeductress.esp:000D65", "Top"], ["EclipseSeductress.esp:000D66", "Pants"],
+      ["Obi's Masquerade.esp:000D67", "Masquerade Shoes (giày bệt, giống Taarie)"]],
       "items": [["Skyrim.esm:01399E", "Elven Dagger"], ["Immersive Weapons.esp:00B9D7", "Silver Hawk Bow"],
                 ["Skyrim.esm:01397F", "Steel Arrow", 30]]},
     {"name": "Adelaisa Vendicci", "npc": "Skyrim.esm:01411D", "_note": "Thuyền trưởng East Empire Company, không phải lính Imperial.", "outfit": [

@@ -45,7 +45,7 @@ lịch sử lựa chọn xem trong git log của file này.
 | Temba Wide-Arm | 000658D2 | Knight of The Village 3BA (62364) | |
 | Camilla Valerius | 0001347B | Obi's Skirt and Shirt 3BA (128400) | |
 | Viola Giordano | 00014129 | DD – Temio Cloth 3BA (125970) | |
-| Aeri | 0001360B | C5Kev's Flirty In Fur (64072) | |
+| Aeri | 0001360B | **TERA Leather Archer Set 3BA** (143500), bỏ Glamourfists. Bỏ Flirty In Fur (2026-11-28): giày nâng 11, cao ngổng khi đứng | Nord Hero Hatchet (HA, tiều phu người Nord); bỏ Flirty Skirt Sword |
 | Gilfre | 0001367A | Toughened Traveler Outfit (gốc 54471 + 3BA 54584) | |
 | Shahvee | 0001411A | Bỏ qua | Argonian |
 
@@ -66,7 +66,7 @@ Housecarl: có mod AIO đổi mọi housecarl thành nữ, FormID giữ nguyên.
 | Uthgerd the Unbroken | 000918E2 | ELLE Knight Winds (89980), màu đen | Áo/găng/giày đổi sang giáp nặng |
 | Annekke Crag-Jumper | 00013666 | Wayward Ranger Armor 3BA, đủ giáp (124246) | |
 | Eola | 0001990F | ELLE Wicked Corruption (108088) | Người dùng chọn 2026-11-28 |
-| Aranea Ienith | 00028AD0 | Obi's Hood and Steel Armor 3BA (136388) | Tím = Azura. Phương án 2: Ashtoreth Elven Sentinel (79296) bỏ áo choàng |
+| Aranea Ienith | 00028AD0 | **Obi's Common Outfit** (110678), bỏ mũ. Bỏ Hood and Steel (2026-11-28): giày nâng 12; đã tắt mod | |
 | Illia | 00048C2F | ELLE Sparrows Mage (96211) | Dremorn Witch: váy SMP, đã bỏ |
 | Serana | 002B6C (Dawnguard.esm) | ELLE Dark Rebel 3BA (102957) | |
 | Frea | 017934 (Dragonborn.esm) | Dragonbone Barbarian 3BA (47466, cần bản gốc) | |
@@ -100,7 +100,7 @@ Trang phục đã chốt (2026-11-27). Vũ khí: đề xuất theo kỹ năng, �
 | Erdi | 00013271 | Hầu gái Blue Palace (Solitude), muốn đi khỏi đó | Smithing, 2H, 1H, Light | **Girl's Travel Outfit** (125910) | Steel Dagger |
 | Aduri Sarethi | 00019BFF | Em gái Avrusa Sarethi, muốn đi khám phá | Alchemy, Destruction, Light, Sneak | **Mage's Daily Outfit** (155656, bản không SMP) | Elven Dagger |
 | Gemma Uriel | 00014040 | Chị em với Ganna Uriel | Restoration, Enchanting, 1H, Block, Heavy | **Obi's Traveler's Romper** (176951, đã cài) | Imperial Sword + Imperial Light Shield |
-| Endarie | 0001326F | Chị em với Taarie (Radiant Raiment, Solitude) | Sneak, Speech, Illusion | **Obi's Common Outfit** (110678, đã cài), **bỏ mũ trùm** | Elven Dagger |
+| Endarie | 0001326F | Chị em với Taarie (Radiant Raiment, Solitude) | Sneak, Speech, Illusion | **Obi's Eclipse Seductress** (Top + Pants, bỏ Hood và Blindfold) + Masquerade Shoes (mod không có giày; giày bệt giống Taarie). Đổi 2026-11-28, Common Outfit chuyển cho Aranea | Elven Dagger |
 Bỏ qua (người dùng quyết): Bujold (chị em Hilund, có chồng), Bolar (chị em Yatul, wise woman).
 Đã có sẵn trong danh sách: Sylgja là con gái Annekke; Borgakh là con gái Bagrak.
 
@@ -136,7 +136,7 @@ Không dùng đồ unique trưng bày ở museum (Grimsever, vũ khí Thane...).
 Hold của mình**, không dùng khiên của mod. Đã quét plugin trên máy, các mod đang dùng có kèm đồ:
 | Mod | Vũ khí/khiên trong plugin (EDID, FormID) | Dùng cho |
 |---|---|---|
-| C5Kev's Flirty In Fur | 0FlirtySkirtSword 000823, 00FlirtySkirtShield 000817 | Aeri: kiếm (thay Iron Hatchet) |
+| C5Kev's Flirty In Fur | 0FlirtySkirtSword 000823, 00FlirtySkirtShield 000817 | Không dùng nữa (2026-11-28) |
 | [COCO] Goddess of War V2 | GWV2_shield 000862, GWV2_shield2 000864 (chỉ khiên) | Không dùng (housecarl giữ khiên Hold) |
 | Sovngarde Steel Armor | SovngardeSteelSword 000808, ArmorSovngardeSteelShield 000809 | Không dùng: Gregor là 2H (USSEP) |
 | Knight of The Village Set (plugin ở bản BHUNP 62371) | AAKoTVSword 000806, AAKoTVSwordb 000824, AAKoTVShield 000803 | Temba: kiếm (thay Iron Hunter's Spear); không khiên (không có Block) |
@@ -173,7 +173,7 @@ Muiri, Avrusa, Valdimar, Eola, Serana, Alessandra, nhóm mage) giữ nguyên. Fr
 ## Nhóm vợ (không phải follower, vũ khí theo nghề; cung/nỏ xem bảng ở trên)
 | Nhân vật | Vũ khí | Nguồn |
 |---|---|---|
-| Aeri | Flirty Skirt Sword | C5Kev's Flirty In Fur (cùng mod) |
+| Aeri | Nord Hero Hatchet | HA (bỏ Flirty Skirt Sword 2026-11-28) |
 | Gilfre | Iron Double Axe | IW |
 | Temba Wide-Arm | KoTV Sword (Knight of The Village, cùng mod) + Hunting Bow | cùng mod + vanilla |
 | Sylgja | Nordic War Pick | IW |
@@ -217,6 +217,9 @@ Muiri, Avrusa, Valdimar, Eola, Serana, Alessandra, nhóm mage) giữ nguyên. Fr
 | Brelyna / Faralda / Colette / Mirabelle | Phép | Steel Dagger (học trò) / Elven Dagger / Silver Dagger (HA) / Imperial Dagger (HA) | Không | Không |
 Pháp sư (2026-11-28): không gậy phép, không cung (rồng hiếm khi vào tầm phép nên magicka kịp hồi), nhưng có dao găm làm vũ
 khí phụ: level thấp hết magicka thì đấm tay không.
+**Giày cao gót (2026-11-28):** RaceMenu nâng cả người theo `HH_OFFSET`/`SDTA` trong mesh giày. Khi ngồi người dùng dùng
+Heels Fix (Nexus 64442, NPC qua SPID, không dùng dạng cloak vì sai vị trí ở xa và nặng hơn). Giày nâng >10 vẫn cao ngổng khi
+đứng: ưu tiên giày phẳng. Đo bằng NiFloatExtraData `HH_OFFSET` (không phân biệt hoa thường) và NiStringExtraData `SDTA`.
 Vũ khí theo xuất thân (2026-11-28): chỉ số gốc không quan trọng (người dùng temper), ưu tiên hợp chủng tộc/cốt truyện.
 
 ## Trạng thái (2026-11-28)
